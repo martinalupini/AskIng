@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.view.NewQuestionController">
+   <children>
+      <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label layoutX="51.0" layoutY="35.0" text="FAI UNA DOMANDA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox fx:id="menuLayout" layoutX="20.0" layoutY="573.0" prefHeight="48.0" prefWidth="294.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.600000000000023" />
+   </children>
+</AnchorPane>

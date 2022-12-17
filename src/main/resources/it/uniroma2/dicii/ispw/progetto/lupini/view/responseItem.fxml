@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="244.0" style="-fx-background-color: #c1cbcf; -fx-background-radius: 20; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.view.ResponseItemController">
+   <children>
+      <HBox prefHeight="22.0" prefWidth="210.0">
+         <children>
+            <Label fx:id="userLabel">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets right="20.0" />
+         </VBox.margin>
+      </HBox>
+      <Line endX="156.09286499023438" endY="-0.4710526168346405" startX="-45.34232711791992" startY="0.3290565311908722" />
+      <Label fx:id="textLabel" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="200.0" textOverrun="WORD_ELLIPSIS">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </Label>
+   </children>
+   <padding>
+      <Insets left="7.0" right="20.0" top="5.0" />
+   </padding>
+</VBox>
