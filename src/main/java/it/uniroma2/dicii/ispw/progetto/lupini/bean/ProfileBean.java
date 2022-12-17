@@ -7,6 +7,8 @@ public class ProfileBean {
     private String username;
     private int badBehaviour;
     private int points;
+
+    private boolean logged = false;
     private static ProfileBean profileInstance = null;
 
     protected ProfileBean(String username, String email ){

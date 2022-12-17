@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class NewModController {
+public class NewModController extends EmptyScreen{
 
     @FXML
     private TextField requestInserted;
@@ -22,31 +22,7 @@ public class NewModController {
 
     }
 
-    @FXML
-    void exit(ActionEvent event) {
-        MenuItemController mc = new MenuItemController();
-        mc.exit(event);
 
-    }
-
-    @FXML
-    void goToForum(ActionEvent event){
-        MenuItemController mc = new MenuItemController();
-        mc.goToForum(event);
-    }
-
-    @FXML
-    void goToHomepage(ActionEvent event){
-        MenuItemController mc = new MenuItemController();
-        mc.goToHomepage(event);
-
-    }
-
-    @FXML
-    void goToProfile(ActionEvent event) {
-        MenuItemController mc = new MenuItemController();
-        mc.goToProfile(event);
-    }
 
 }
 

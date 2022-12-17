@@ -4,27 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 
-public class ProfileController {
+public class ProfileController extends EmptyScreen{
 
-        @FXML
-        void exit(ActionEvent event) {
-            MenuItemController mc = new MenuItemController();
-            mc.exit(event);
+    @Override
+    @FXML
+    public void goToProfile(ActionEvent e){}  //This method is empty because is not needed to change screen
 
-        }
 
-        @FXML
-        void goToForum(ActionEvent event){
-            MenuItemController mc = new MenuItemController();
-            mc.goToForum(event);
-        }
-
-        @FXML
-        void goToHomepage(ActionEvent event){
-            MenuItemController mc = new MenuItemController();
-            mc.goToHomepage(event);
-
-        }
 
 
     }

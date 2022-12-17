@@ -1,6 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.Exceptions.KeywordsException;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class QuestionBean {
     }
 
     public void checkKeywords(List<String> keywords)  throws KeywordsException{
-        if(keywords.size() == 0){
+        if(keywords.isEmpty()){
             throw new KeywordsException("Inserire almeno una keyword");
         }
         if(keywords.size()>3){

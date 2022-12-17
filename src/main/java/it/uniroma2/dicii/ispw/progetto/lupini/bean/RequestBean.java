@@ -1,6 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.Exceptions.TextException;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 
 import java.util.StringTokenizer;
 
@@ -20,7 +20,7 @@ public class RequestBean {
 
     public void  checkText() throws TextException{
         StringTokenizer strTok = new StringTokenizer(text, " ");
-        if(text == ""){
+        if(text.isEmpty()){
             throw new TextException("Inserire il testo");
         }
 

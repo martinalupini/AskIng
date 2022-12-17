@@ -1,13 +1,14 @@
-package it.uniroma2.dicii.ispw.progetto.lupini.Exceptions;
+package it.uniroma2.dicii.ispw.progetto.lupini.exceptions;
 
 public class TextException extends Exception{
 
-    private String message;
+    private final String message;
 
     public TextException(String message){
         this.message = message;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
