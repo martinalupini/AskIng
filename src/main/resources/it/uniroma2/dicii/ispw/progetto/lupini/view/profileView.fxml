@@ -27,7 +27,7 @@
             </ImageView>
          </children>
       </Pane>
-      <TextField editable="false" layoutX="34.0" layoutY="265.0" prefHeight="25.0" prefWidth="267.0" style="-fx-background-color: #c1cbcf; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" text="\@lucia1234">
+      <TextField editable="false" layoutX="34.0" layoutY="266.0" prefHeight="25.0" prefWidth="267.0" style="-fx-background-color: #c1cbcf; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" text="\@lucia1234">
          <font>
             <Font size="14.0" />
          </font>
@@ -72,9 +72,10 @@
             <Image url="@abstract-user-flat-4.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="27.0" layoutY="563.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="270.0" style="-fx-background-color: white;">
+      <AnchorPane layoutX="27.0" layoutY="563.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="270.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="23.799999999999997" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="37.60000000000002" />
+      <AnchorPane layoutX="47.0" layoutY="583.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="249.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="70.0">
          <children>
-            <HBox layoutY="-4.0" prefHeight="58.0" prefWidth="273.0" spacing="25.0" style="-fx-background-color: white;">
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="219.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="48.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
                      <graphic>
@@ -88,7 +89,7 @@
                         <Insets left="1.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                  <Button mnemonicParsing="false" onAction="#goToForum" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
                      <graphic>
                         <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -100,23 +101,11 @@
                         <Insets top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #c1cbcf;" textOverrun="CLIP">
+                  <Button mnemonicParsing="false" onAction="#goToProfile" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
                      <graphic>
                         <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@user-solid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#exit" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@right-from-bracket-solid.png" />
                            </image>
                         </ImageView>
                      </graphic>

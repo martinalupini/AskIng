@@ -18,5 +18,7 @@ public class LoginController extends EmptyScreen {
     }
 
 
+    @Override
+    public void goToProfile(ActionEvent event){}
 }
 

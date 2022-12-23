@@ -2,7 +2,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SectionController implements Initializable {
+public class SectionController extends EmptyScreen implements Initializable {
 
     @FXML
     private ListView<?> questionList;
@@ -30,21 +29,6 @@ public class SectionController implements Initializable {
 
     @FXML
     void clickSearch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void exit(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToHomepage(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToProfile(ActionEvent event) {
 
     }
 

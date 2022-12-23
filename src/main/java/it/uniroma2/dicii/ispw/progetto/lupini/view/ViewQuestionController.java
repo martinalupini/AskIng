@@ -13,29 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ViewQuestionController implements Initializable {
+public class ViewQuestionController extends EmptyScreen implements Initializable {
 
     @FXML
     private VBox responseLayout;
 
-
     @FXML
-    void exit(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goBack(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToHomepage(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToProfile(ActionEvent event) {
+    public void replyToQuestion(ActionEvent event) {
 
     }
 

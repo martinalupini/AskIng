@@ -41,9 +41,9 @@
             <Image url="@magnifying-glass-solid.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="37.0" layoutY="573.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="270.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="23.799999999999997" AnchorPane.leftAnchor="27.0">
+      <AnchorPane layoutX="37.0" layoutY="573.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="238.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="70.0">
          <children>
-            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="273.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="2.8000000000000043" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-6.2000000000000455">
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="230.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="37.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
                      <graphic>
@@ -74,18 +74,6 @@
                         <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@user-solid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#exit" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@right-from-bracket-solid.png" />
                            </image>
                         </ImageView>
                      </graphic>

@@ -1,16 +1,11 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class NewQuestionView extends Application {
     public void start(Stage stage) throws IOException {

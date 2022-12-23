@@ -18,11 +18,6 @@ public class EmptyScreen {
 
 
     @FXML
-    public void exit(ActionEvent event) {
-
-    }
-
-    @FXML
     public void goToForum(ActionEvent event){
         try {
             root = FXMLLoader.load(getClass().getResource("forum.fxml"));
