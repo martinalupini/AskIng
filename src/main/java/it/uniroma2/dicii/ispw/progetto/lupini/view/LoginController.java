@@ -1,10 +1,19 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.LoginControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginController extends EmptyScreen {
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     private TextField passwordField;
@@ -13,8 +22,17 @@ public class LoginController extends EmptyScreen {
     private TextField usernameField;
 
     @FXML
-    void clickLogin(ActionEvent event) {
-
+    public void clickLogin(ActionEvent event) {
+        /*since the activation of the same use case needs a new instance of application controller I create a new instance everytime
+        I want to log*/
+        LoginControllerAppl logctl = new LoginControllerAppl(this);
+        try{
+            logctl.login(usernameField.getText(), passwordField.getText());
+        } catch (DBNotAvailable e) {
+            errorLabel.setText(e.getMessage());
+        } catch (ItemNotFound e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
 

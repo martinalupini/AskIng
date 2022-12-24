@@ -2,7 +2,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
 public class ProfileBean {
 
-    private String pfpURL;
     private String email;
     private String username;
     private int badBehaviour;
@@ -32,9 +31,7 @@ public class ProfileBean {
         this.badBehaviour = badBehaviour;
     }
 
-    public void setPfpURL(String pfpURL) {
-        this.pfpURL = pfpURL;
-    }
+
 
     public void setPoints(int points) {
         this.points = points;
@@ -56,9 +53,6 @@ public class ProfileBean {
         return email;
     }
 
-    public String getPfpURL() {
-        return pfpURL;
-    }
 
 
 }

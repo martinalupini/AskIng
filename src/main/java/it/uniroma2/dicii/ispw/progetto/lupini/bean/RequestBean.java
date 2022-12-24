@@ -5,8 +5,12 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 import java.util.StringTokenizer;
 
 public class RequestBean {
-    String username = "";
-    String text = "";
+    private String username = "";
+
+    private int badBehaviour;
+
+    private int points;
+    private String text = "";
 
     public RequestBean(String user){
         this.username = user;

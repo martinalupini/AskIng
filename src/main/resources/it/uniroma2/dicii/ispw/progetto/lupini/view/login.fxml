@@ -93,5 +93,6 @@
             </HBox>
          </children>
       </AnchorPane>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="94.0" layoutY="203.0" textFill="RED" />
    </children>
 </AnchorPane>
