@@ -1,10 +1,9 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ProfileBean;
+
 import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.LoginControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -22,7 +21,7 @@ public class LoginController extends EmptyScreen {
     private TextField usernameField;
 
     @FXML
-    public void clickLogin(ActionEvent event) {
+    public void clickLogin() {
         /*since the activation of the same use case needs a new instance of application controller I create a new instance everytime
         I want to log*/
         LoginControllerAppl logctl = new LoginControllerAppl(this);
@@ -38,5 +37,6 @@ public class LoginController extends EmptyScreen {
 
     @Override
     public void goToProfile(ActionEvent event){}
+
 }
 

@@ -32,10 +32,17 @@ public class LoginControllerAppl {
        }catch (ItemNotFound e){
            throw new ItemNotFound("Username o password errati. Riprovare. ");
        }
-       catch(Exception e){
+       catch(ClassNotFoundException e){
            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi tecnici. Riprovare più tardi");
        }
-    }
+       catch(Exception e){
+           e.printStackTrace();
+       }
 
+        /*ActionEvent event = new ActionEvent();
+       viewCtl.goToHomepage(event);*/
+    }
+    
+    
 
 }

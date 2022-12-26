@@ -9,7 +9,7 @@ public class DBMSConnection {
     private static final String USER = "root";
     private static final String PASS = "Marrari11!";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ispwdatabase";
-    private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
     private Connection conn = null;
     private static DBMSConnection instanceConnection = null;
 
@@ -23,18 +23,18 @@ public class DBMSConnection {
         return instanceConnection;
     }
 
-    public Connection getConnection() throws Exception {
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
 
         if(conn == null) {
-            try {
+
                 Class.forName(DRIVER_CLASS_NAME);
 
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            } catch (SQLException e) {
+            /*} catch (SQLException e) {
                 throw new Exception("Error in opening of connection");
             } catch (ClassNotFoundException e) {
                 throw new Exception("Error in loading of driver");
-            }
+            }*/
         }
 
         return conn;

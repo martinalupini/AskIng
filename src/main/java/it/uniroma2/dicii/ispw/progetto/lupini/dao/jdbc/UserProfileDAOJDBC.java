@@ -12,6 +12,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserProfileDAOJDBC implements UserProfileDAO {
 
@@ -22,9 +23,10 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
     }
 
     @Override
-    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws Exception {
+    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, ClassNotFoundException {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-        UserProfile userProfile;
+        UserProfile userProfile = null ;
+        Role role;
         try {
             //opening of connection and query
             Connection connDB = getConn.getConnection();
@@ -40,25 +42,26 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
             //if the result set is not empty it is formed by one element
             String email = rs.getString("email");
-            String role = rs.getString("role");
+            String roleName = rs.getString("role");
 
             //I check the role first in order to instantiate the correct role
-            if(role.equals("moderator")){
-                Role moderator = new Moderator();
-                userProfile = new UserProfile(username, email, moderator);
+            if(roleName.equals("moderator")){
+                role = new Moderator();
+
             }else{
                 int points = rs.getInt("points");
                 int badBehaviour = rs.getInt("bad_behaviour");
-                Role regUser = new RegularUser(points, badBehaviour);
-                userProfile = new UserProfile(username, email, regUser);
+                role = new RegularUser(points, badBehaviour);
             }
+            userProfile = new UserProfile(username, email, role);
 
 
-        }catch (ItemNotFound e){
-            throw e;
         }
-        catch(Exception e){
+        catch(ClassNotFoundException e){
             throw e;
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return userProfile;
