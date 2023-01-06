@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.view.ViewRequestController">
+   <children>
+      <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label fx:id="sectionName" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="89.0" prefWidth="323.0" text="RICHIESTA" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="65.0" layoutY="582.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="242.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="23.799999999999997" AnchorPane.leftAnchor="70.0">
+         <children>
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="222.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="45.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@house-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="1.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToForum" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@comments-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToProfile" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@user-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Label layoutX="54.0" layoutY="145.0" text="USERNAME:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="174.0" text="EMAIL:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="200.0" text="CURRENT POINTS:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="231.0" text="BAD BEHAVIOUR:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel" layoutX="135.0" layoutY="144.0" prefHeight="18.0" prefWidth="183.0" />
+      <Label fx:id="emailLabel" layoutX="135.0" layoutY="173.0" prefHeight="18.0" prefWidth="183.0" />
+      <Label fx:id="pointsLabel" layoutX="135.0" layoutY="199.0" prefHeight="18.0" prefWidth="183.0" />
+      <Label fx:id="behaviourLabel" layoutX="135.0" layoutY="230.0" prefHeight="18.0" prefWidth="183.0" />
+      <Label fx:id="requestText" alignment="TOP_LEFT" layoutX="24.0" layoutY="293.0" prefHeight="157.0" prefWidth="286.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+      </Label>
+      <Button layoutX="213.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 15;" text="ACCETTA">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="43.0" layoutY="497.0" mnemonicParsing="false" onAction="#declineRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="RIFIUTA">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
