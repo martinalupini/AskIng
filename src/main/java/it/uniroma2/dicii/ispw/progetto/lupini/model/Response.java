@@ -23,6 +23,12 @@ public class Response {
     }*/
 
 
+    public Response cloneResponse(){
+
+        Response clone = new Response(this.responseText, this.author);
+        return clone;
+    }
+
     //getters
     public String getResponseText() {
         return responseText;

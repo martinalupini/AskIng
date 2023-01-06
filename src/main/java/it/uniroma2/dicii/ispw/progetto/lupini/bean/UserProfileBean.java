@@ -1,26 +1,30 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
-public class ProfileBean {
+public class UserProfileBean {
 
-    private String email;
-    private String username;
-    private int badBehaviour;
-    private int points;
+    private String email = "";
+    private String username = "";
+    private int badBehaviour = 0;
+    private int points = 0;
 
-    private boolean logged = false;
-    private static ProfileBean profileInstance = null;
+    private String role = "";
 
-    protected ProfileBean(String username, String email ){
+
+
+    public UserProfileBean(String username, String email,String role ){
         this.username = username;
         this.email = email;
+        this.role = role;
 
     }
 
-    public static ProfileBean getProfileInstance(String username, String email) {
-        if(ProfileBean.profileInstance ==null){
-            ProfileBean.profileInstance = new ProfileBean(username, email);
-        }
-        return profileInstance;
+    public UserProfileBean(String username, String email, String role, int points, int badBehaviour){
+        this.username = username;
+        this.email = email;
+        this.points = points;
+        this.badBehaviour = badBehaviour;
+        this.role = role;
+
     }
 
     public void setUsername(String username) {
@@ -53,6 +57,7 @@ public class ProfileBean {
         return email;
     }
 
-
-
+    public String getRole() {
+        return role;
+    }
 }

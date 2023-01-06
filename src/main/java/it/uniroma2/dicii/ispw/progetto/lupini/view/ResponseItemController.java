@@ -17,6 +17,8 @@ public class ResponseItemController implements Initializable {
     private Label userLabel;
 
 
+
+
     public void setResponse(ResponseBean res){
         userLabel.setText(res.getUsername());
         textLabel.setText(res.getText());

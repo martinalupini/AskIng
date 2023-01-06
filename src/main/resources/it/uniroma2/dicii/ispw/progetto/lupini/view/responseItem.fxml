@@ -9,7 +9,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="244.0" style="-fx-background-color: #c1cbcf; -fx-background-radius: 20; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.view.ResponseItemController">
    <children>
-      <HBox prefHeight="22.0" prefWidth="210.0">
+      <HBox fx:id="usernameLabel" prefHeight="22.0" prefWidth="210.0">
          <children>
             <Label fx:id="userLabel">
                <font>

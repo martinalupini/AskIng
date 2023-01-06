@@ -30,11 +30,6 @@ public class DBMSConnection {
                 Class.forName(DRIVER_CLASS_NAME);
 
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            /*} catch (SQLException e) {
-                throw new Exception("Error in opening of connection");
-            } catch (ClassNotFoundException e) {
-                throw new Exception("Error in loading of driver");
-            }*/
         }
 
         return conn;

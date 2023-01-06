@@ -1,0 +1,71 @@
+package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
+
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ForumSectionDAOJDBC {
+
+    public List<Question>  retrieveQuestionOfSection( String sectionName){
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+        List<Question>  list = new ArrayList<Question>();
+
+        try {
+            Connection connDB = getConn.getConnection();
+            PreparedStatement stmt = connDB.prepareStatement("select * from questions where section = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1,sectionName);
+            ResultSet rs = stmt.executeQuery();
+
+            //if rs is empty there is no question in the section
+            if(!rs.first()){
+                return list;
+            }
+
+            //if it's not empty we retrieve the questions
+            rs.first();
+            do{
+                List<String>  keywords = new ArrayList<>();
+                String kw;
+                int i=1;
+                UserProfile author;
+
+                //we find the text of the question
+                String text = rs.getString("text");
+
+                int ID = rs.getInt("questionID");
+
+                //we find the keywords
+                while( i<= 3 && (kw= rs.getString("keyword"+i)) != null ){
+                    keywords.add(kw);
+                    i++;
+                }
+
+                //we find the author. To do this we use the DAO of user profile
+                UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
+                author = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
+
+
+                //finally we add the new question
+                list.add(new Question(text, keywords, author, ID));
+
+            }while(rs.next());
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+        }
+        return list;
+    }
+}

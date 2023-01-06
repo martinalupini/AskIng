@@ -1,5 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegularUser extends Role{
 
     private int points;
@@ -30,6 +33,14 @@ public class RegularUser extends Role{
 
     @Override
     public String userRoleIs(){
-        return "regular";
+        return "regular user";
+    }
+
+    @Override
+    public List<Integer> getRoleInformation(){
+        List<Integer> list = new ArrayList<>();
+        list.add((Integer)this.points);
+        list.add((Integer)this.badBehaviour);
+        return list;
     }
 }

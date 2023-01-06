@@ -52,17 +52,12 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="33.0" layoutY="478.0" text="RICHIEDI DI ESSERE">
+      <Label layoutX="38.0" layoutY="437.0" text="RICHIEDI DI ESSERE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="497.0" text="MODERATORE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="228.0" layoutY="478.0" text="ESCI">
+      <Label layoutX="53.0" layoutY="456.0" text="MODERATORE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -81,29 +76,43 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="57.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToForum" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP" />
-      <Button layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToProfile" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0; -fx-border-radius: 100;" textOverrun="CLIP" />
-      <Button layoutX="57.0" layoutY="399.0" mnemonicParsing="false" onAction="#clickBecomeModerator" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP" />
-      <Button layoutX="206.0" layoutY="399.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP" />
-      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="74.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@comments-solid.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="27.0" layoutX="228.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@user-solid.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="36.0" layoutX="74.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@scale-unbalanced-flip-solid.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="224.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@right-from-bracket-solid.png" />
-         </image>
-      </ImageView>
+      <Button layoutX="57.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToForum" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@comments-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToProfile" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0; -fx-border-radius: 100;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@user-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="61.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickBecomeModerator" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@scale-unbalanced-flip-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="206.0" layoutY="358.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@right-from-bracket-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="230.0" layoutY="437.0" text="ESCI">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

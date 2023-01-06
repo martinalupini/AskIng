@@ -17,4 +17,26 @@ public class UserProfile {
     public UserProfile(Role actualRole){
         this.role = actualRole;
     }
+
+    @Override
+    public String toString() {
+        return username+email+ role.userRoleIs();
+    }
+
+    public String getRoleName(){
+
+        return role.userRoleIs();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Role getRole(){
+        return this.role;
+    }
 }

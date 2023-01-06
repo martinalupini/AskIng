@@ -1,12 +1,22 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ForumSectionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,35 +24,81 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SectionController extends EmptyScreen implements Initializable {
-
-    @FXML
-    private ListView<?> questionList;
+public class SectionController extends EmptyScreen {
 
     @FXML
     private VBox questionLayout;
 
     @FXML
-    void clickNewQuestion(ActionEvent event) {
+    private Label sectionName;
 
+
+    public void setSectionName(String sectionName) {
+        this.sectionName.setText(sectionName);
     }
+
+
 
     @FXML
     void clickSearch(ActionEvent event) {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<QuestionBean> questions = new ArrayList<>(questions());
-        for(int i=0; i<questions.size(); i++){
+
+
+    public void initialize(String sectionName) {
+
+        List<QuestionBean> sectionQuestions = this.questions(sectionName);
+
+        for(QuestionBean q : sectionQuestions){
+
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("questionItem.fxml"));
 
             try{
                 VBox vbox = fxmlLoader.load();
                 QuestionItemController questContr = fxmlLoader.getController();
-                questContr.setQuestion( questions.get(i));
+                questContr.setQuestion( q);
+
+                vbox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+
+                        try {
+                            FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
+                            Parent root = loader.load();
+
+                            ViewQuestionController viewQuestionController = loader.getController();
+                            viewQuestionController.setCurrentQuestion(q);
+                            viewQuestionController.setQuestionLabel(q.getText());
+                            viewQuestionController.setUsernameLabel(q.getUsername());
+                            viewQuestionController.initialize(q.getText(), q.getUsername());
+                            viewQuestionController.setKeyword1(q.getKeywords().get(0));
+
+                            try{
+                                viewQuestionController.setKeyword2(q.getKeywords().get(1));
+                            }catch(IndexOutOfBoundsException e){
+                                viewQuestionController.setInvisible2();
+                            }
+
+                            try{
+                                viewQuestionController.setKeyword2(q.getKeywords().get(2));
+                            }catch(IndexOutOfBoundsException e){
+                                viewQuestionController.setInvisible3();
+                            }
+
+                            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
                 questionLayout.getChildren().add(vbox);
 
             } catch (IOException e){
@@ -52,22 +108,33 @@ public class SectionController extends EmptyScreen implements Initializable {
     }
 
 
-    private List<QuestionBean> questions() {
-        List<QuestionBean> rs = new ArrayList<>();
-        QuestionBean r = new QuestionBean("user1", "ciao tutto ok");
-        rs.add(r);
+    private List<QuestionBean> questions(String sectionName) {
 
-        QuestionBean r1 = new QuestionBean("user2", "ciaoooooooooooooooooooooooooooooooooooooo");
-        rs.add(r1);
+        /*qua devo comunicare con DAO per recuperare domande
+        oppure posso comunicare con section
+        */
 
-        QuestionBean r2 = new QuestionBean("user3", "ewhyfuw2yu3fbt3r2qrvt34y");
-        rs.add(r2);
+        List<QuestionBean> list = new ArrayList<>();
+        ForumSectionBean forumSectionBean = new ForumSectionBean(sectionName);
+        list = forumSectionBean.getQuestions();
 
-        QuestionBean r3 = new QuestionBean("user4", "ewhyfuw2yufdbgiectvyr gyrghvuerhfuiebncfjewbfjewhfnuiewfhiehfieryu3fbt3r2qrvt34y");
-        rs.add(r3);
 
-        return rs;
+        /*List<String> l = new ArrayList<>();
+        QuestionBean q = new QuestionBean("martie", "ciao", l);
+        list.add(q);*/
+
+
+
+        return list;
 
     }
+
+
+
+    public static QuestionBean convertQuestion(Question question){
+        QuestionBean quest = new QuestionBean(question.getAuthor().getUsername(), question.getQuestionText(), question.getKeywords(), question.getID());
+        return quest;
+    }
+
 }
 

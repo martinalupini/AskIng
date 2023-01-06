@@ -10,10 +10,16 @@ public class RequestBean {
     private int badBehaviour;
 
     private int points;
+
+    private String email;
     private String text = "";
 
-    public RequestBean(String user){
+    public RequestBean(String text, String user, String email, int points, int badBehaviour){
         this.username = user;
+        this.text = text;
+        this.points = points;
+        this.badBehaviour = badBehaviour;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -21,6 +27,18 @@ public class RequestBean {
     }
 
     public String getText() { return text; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public int getBadBehaviour() {
+        return badBehaviour;
+    }
 
     public void  checkText() throws TextException{
         StringTokenizer strTok = new StringTokenizer(text, " ");

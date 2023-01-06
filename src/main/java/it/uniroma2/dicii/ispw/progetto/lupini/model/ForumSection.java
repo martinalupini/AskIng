@@ -1,13 +1,16 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ForumSection {
 
     private String section;
-    private List<Question> questions = null;
+    private List<Question> questions;
 
     public ForumSection(String name){
+        questions = new ArrayList<>();
         this.section = name;
     }
 
@@ -21,5 +24,23 @@ public class ForumSection {
         questions.add(quest);
     }
 
+    //A copy of the list is returned since it is impossible to pass a reference of this.questions outside ForumSection
+    public List<Question> getQuestions() {
 
+        List<Question> newList = new ArrayList<Question>();
+
+        if(questions.isEmpty()){
+            ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
+            questions = forumSectionDAOJDBC.retrieveQuestionOfSection(section.toLowerCase());
+        }
+
+        if(!questions.isEmpty()) {
+            for (Question q : questions) {
+                Question newQ = q.cloneQuestion();
+                newList.add(newQ);
+            }
+        }
+
+        return newList;
+    }
 }

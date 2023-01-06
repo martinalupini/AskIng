@@ -25,7 +25,7 @@ public class CurrentUserProfile {
     be effected the first time that is called, when the user is not yet set.
      */
     public void setCurrentUser(UserProfile profile){
-        if(this.currentUser == null && this.logged == false){
+        if(this.currentUser == null && !this.logged){
             this.currentUser = profile;
             this.logged = true;
         }
@@ -41,4 +41,23 @@ public class CurrentUserProfile {
     public boolean isLogged() {
         return logged;
     }
+
+    public String getRoleName(){
+        return currentUser.getRoleName();
+    }
+
+    public String getUsername(){
+        return currentUser.getUsername();
+    }
+
+    public String getEmail(){
+        return currentUser.getEmail();
+    }
+
+    public Role getRole(){
+        return currentUser.getRole();
+    }
+
 }
+
+
