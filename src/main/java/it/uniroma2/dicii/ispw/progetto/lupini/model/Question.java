@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Question {
 
-    private int ID;
+    private int id;
     private String questionText;
     private List<String> keywords;
     private UserProfile author;
@@ -15,18 +15,17 @@ public class Question {
 
 
     //constructor with parameters because is used in ForumSection
-    public Question(String text, List<String> keywords, UserProfile author, int ID){
+    public Question(String text, List<String> keywords, UserProfile author, int id){
         this.questionText = text;
         this.keywords = keywords;
         this.author = author;
-        this.ID = ID;
+        this.id = id;
     }
 
     public Question(String text, List<String> keywords, UserProfile author){
         this.questionText = text;
         this.keywords = keywords;
         this.author = author;
-        this.ID = ID;
     }
 
     /* the relationship between question and responses is a relation of composition. A response exists only if the question
@@ -34,7 +33,7 @@ public class Question {
          */
 
     public Question cloneQuestion(){
-        Question clone = new Question(this.getQuestionText(), this.getKeywords(), this.getAuthor(), this.getID());
+        Question clone = new Question(this.getQuestionText(), this.getKeywords(), this.getAuthor(), this.getId());
         return clone;
     }
 
@@ -51,7 +50,7 @@ public class Question {
         if(responses.isEmpty()){
 
             QuestionDAOJDBC questionDAOJDBC = new QuestionDAOJDBC();
-            responses = questionDAOJDBC.retrieveResponseFromQuestionID(this.ID);
+            responses = questionDAOJDBC.retrieveResponseFromQuestionID(this.id);
         }
 
         for (Response r : responses) {
@@ -76,7 +75,7 @@ public class Question {
         return questionText;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 }

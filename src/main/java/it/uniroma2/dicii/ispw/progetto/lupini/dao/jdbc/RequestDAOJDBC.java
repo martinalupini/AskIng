@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
 import java.sql.Connection;

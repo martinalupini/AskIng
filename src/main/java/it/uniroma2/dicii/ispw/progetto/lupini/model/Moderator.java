@@ -12,7 +12,6 @@ public class Moderator extends Role {
 
     @Override
     public List<Integer> getRoleInformation(){
-        List<Integer> list = new ArrayList<>();
-        return list;
+        return  new ArrayList<>();
     }
 }

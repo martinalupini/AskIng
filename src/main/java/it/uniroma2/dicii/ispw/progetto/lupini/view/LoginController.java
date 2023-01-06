@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.UserProfileBean;
+
 import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.LoginControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;

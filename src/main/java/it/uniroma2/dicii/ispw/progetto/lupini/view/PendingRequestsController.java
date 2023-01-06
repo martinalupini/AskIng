@@ -1,7 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.RequestControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;

@@ -10,9 +10,8 @@ public class RequestControllerAppl {
     public List<Request> getRequests(){
 
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
-        List<Request> list = requestDAOJDBC.retrieveRequests();
 
-        return list;
+        return requestDAOJDBC.retrieveRequests();
 
     }
 }

@@ -1,7 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

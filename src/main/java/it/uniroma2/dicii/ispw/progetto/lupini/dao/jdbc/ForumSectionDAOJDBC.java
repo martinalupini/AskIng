@@ -37,7 +37,7 @@ public class ForumSectionDAOJDBC {
                 //we find the text of the question
                 String text = rs.getString("text");
 
-                int ID = rs.getInt("questionID");
+                int id = rs.getInt("questionID");
 
                 //we find the keywords
                 while( i<= 3 && (kw= rs.getString("keyword"+i)) != null ){
@@ -51,7 +51,7 @@ public class ForumSectionDAOJDBC {
 
 
                 //finally we add the new question
-                list.add(new Question(text, keywords, author, ID));
+                list.add(new Question(text, keywords, author, id));
 
             }while(rs.next());
 

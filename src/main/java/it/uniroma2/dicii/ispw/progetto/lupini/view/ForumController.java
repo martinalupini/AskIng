@@ -35,23 +35,6 @@ public class ForumController extends EmptyScreen implements Initializable{
 
     }
 
-
-    /*  Questa era con la list view
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        courseList.getItems().addAll(courses);
-        courseList.getSelectionModel().selectionModeProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                currentCourse = courseList.getSelectionModel().getSelectedItem();
-
-
-            }
-        });
-    }*/
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
