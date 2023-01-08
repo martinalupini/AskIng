@@ -13,6 +13,6 @@ public class QuestionFormController extends EmptyScreen{
 
     @FXML
     void sendQuestion(ActionEvent event) {
-
+        //need to finish
     }
 }

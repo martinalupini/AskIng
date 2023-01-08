@@ -1,4 +1,4 @@
-package it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo;
+package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.UserProfileBean;

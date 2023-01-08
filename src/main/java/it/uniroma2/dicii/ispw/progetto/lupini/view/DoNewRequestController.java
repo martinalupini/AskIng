@@ -34,6 +34,6 @@ public class DoNewRequestController extends EmptyScreen{
 
     @FXML
     void sendRequest(ActionEvent event) {
-
+        //need to finish
     }
 }

@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.RequestControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
@@ -30,6 +30,9 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Label descriptionLabel;
 
 
     public void newRequest(RequestBean request){
@@ -94,6 +97,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
 
             }
         }catch(DBNotAvailable e){
+            descriptionLabel.setVisible(false);
             errorLabel.setText(e.getMessage());
         }
 

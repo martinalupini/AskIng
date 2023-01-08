@@ -58,7 +58,6 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
     }
 
     private static UserProfile fetchInformationOfUserProfile(ResultSet rs,String username) throws ItemNotFound, SQLException {
-        rs.first();
         Role role;
         if(rs.next()) {
             //if the result set is not empty it is formed by one element

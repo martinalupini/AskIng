@@ -32,7 +32,9 @@ public class HomepageController extends EmptyScreen{
 
         @Override
         @FXML
-        public void goToHomepage(ActionEvent e){}
+        public void goToHomepage(ActionEvent e){
+                //This method is empty because is not needed to change screen
+        }
 
 
         @FXML

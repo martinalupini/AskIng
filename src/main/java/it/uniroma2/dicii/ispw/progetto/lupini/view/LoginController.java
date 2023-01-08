@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 
 
-import it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo.LoginControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LoginControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import javafx.event.ActionEvent;
@@ -18,11 +18,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends HomepageController {
-
-    
-    //String originalPage;
-    
-    
     @FXML
     private Label errorLabel;
 

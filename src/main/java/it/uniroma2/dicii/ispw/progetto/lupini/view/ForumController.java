@@ -28,11 +28,13 @@ public class ForumController extends EmptyScreen implements Initializable{
 
     @Override
     @FXML
-    public void goToForum(ActionEvent e){}  //This method is empty because the screen is already in the forum page
+    public void goToForum(ActionEvent e){
+        //This method is empty because the screen is already in the forum page
+    }
 
     @FXML
     void clickSearch(ActionEvent event) {
-
+        //This method is empty because i have to finish it
     }
 
     @Override

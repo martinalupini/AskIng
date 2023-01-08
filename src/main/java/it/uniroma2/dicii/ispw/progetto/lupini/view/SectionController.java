@@ -5,14 +5,12 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -59,41 +57,38 @@ public class SectionController extends EmptyScreen {
                 QuestionItemController questContr = fxmlLoader.getController();
                 questContr.setQuestion( q);
 
-                vbox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                vbox.setOnMouseClicked(mouseEvent -> {
 
-                        try {
-                            FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
-                            Parent root = loader.load();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
+                        Parent root = loader.load();
 
-                            ViewQuestionController viewQuestionController = loader.getController();
-                            viewQuestionController.setCurrentQuestion(q);
-                            viewQuestionController.setQuestionLabel(q.getText());
-                            viewQuestionController.setUsernameLabel(q.getUsername());
-                            viewQuestionController.initialize(q.getText(), q.getUsername());
-                            viewQuestionController.setKeyword1(q.getKeywords().get(0));
+                        ViewQuestionController viewQuestionController = loader.getController();
+                        viewQuestionController.setCurrentQuestion(q);
+                        viewQuestionController.setQuestionLabel(q.getText());
+                        viewQuestionController.setUsernameLabel(q.getUsername());
+                        viewQuestionController.initialize(q.getText(), q.getUsername());
+                        viewQuestionController.setKeyword1(q.getKeywords().get(0));
 
-                            try{
-                                viewQuestionController.setKeyword2(q.getKeywords().get(1));
-                            }catch(IndexOutOfBoundsException e){
-                                viewQuestionController.setInvisible2();
-                            }
-
-                            try{
-                                viewQuestionController.setKeyword2(q.getKeywords().get(2));
-                            }catch(IndexOutOfBoundsException e){
-                                viewQuestionController.setInvisible3();
-                            }
-
-                            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                            Scene scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();
-
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        try{
+                            viewQuestionController.setKeyword2(q.getKeywords().get(1));
+                        }catch(IndexOutOfBoundsException e){
+                            viewQuestionController.setInvisible2();
                         }
+
+                        try{
+                            viewQuestionController.setKeyword2(q.getKeywords().get(2));
+                        }catch(IndexOutOfBoundsException e){
+                            viewQuestionController.setInvisible3();
+                        }
+
+                        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 });
 

@@ -12,7 +12,7 @@ public class NewQuestionTextController extends EmptyScreen{
 
     @FXML
     public void submitQuestionText(ActionEvent event) {
-
+            //need to finish
     }
 
 

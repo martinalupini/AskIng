@@ -21,7 +21,9 @@ public class ProfileController extends EmptyScreen{
 
     @Override
     @FXML
-    public void goToProfile(ActionEvent e){}  //This method is empty because is not needed to change screen
+    public void goToProfile(ActionEvent e){
+        //This method is empty because is not needed to change screen
+    }
 
 
     public void loadData(String username, String email, int points, int badBehaviour){

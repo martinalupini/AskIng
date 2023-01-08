@@ -25,10 +25,7 @@
       </Pane>
       <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="177.0" prefHeight="381.0" prefWidth="274.0">
          <content>
-            <VBox fx:id="requestLayout" prefHeight="374.0" prefWidth="262.0" spacing="5.0">
-               <children>
-                  <Label fx:id="errorLabel" prefHeight="84.0" prefWidth="262.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
-               </children></VBox>
+            <VBox fx:id="requestLayout" prefHeight="374.0" prefWidth="262.0" spacing="5.0" />
          </content>
       </ScrollPane>
       <Label layoutX="26.0" layoutY="97.0" prefHeight="74.0" prefWidth="282.0" text="Qui sono presenti tutte le richieste ancora in sospeso. Clicca su una richiesta per visualizzarla e accettare o rifiutare." textAlignment="CENTER" wrapText="true" />
@@ -76,5 +73,6 @@
             </HBox>
          </children>
       </AnchorPane>
+      <Label fx:id="errorLabel" layoutX="36.0" layoutY="106.0" prefHeight="63.0" prefWidth="262.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
    </children>
 </AnchorPane>

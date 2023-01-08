@@ -15,6 +15,6 @@ public class NewResponseController extends EmptyScreen{
 
     @FXML
     public void submitResponse(ActionEvent event) {
-
+        //need to finish
     }
 }
