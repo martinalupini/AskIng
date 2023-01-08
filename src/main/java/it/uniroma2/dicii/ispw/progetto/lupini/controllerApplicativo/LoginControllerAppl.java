@@ -11,6 +11,9 @@ import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.LoginController;
 
+import java.nio.ByteBuffer;
+import java.security.SecureRandom;
+
 public class LoginControllerAppl {
 
     LoginController viewCtl;
@@ -22,7 +25,14 @@ public class LoginControllerAppl {
 
     public void login(String username, String password) throws DBNotAvailable, ItemNotFound {
 
-        if(Math.random() > 0.5) {
+        SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        float randomNumber = buffer.getFloat();
+
+        if(randomNumber > 0.5) {
             userDAO = new UserProfileDAOJDBC();
         }else {
             userDAO = new UserProfileDAOCSV();

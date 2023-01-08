@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ForumSectionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +27,9 @@ public class SectionController extends EmptyScreen {
 
     @FXML
     private Label sectionName;
+
+    @FXML
+    private Label errorLabel;
 
 
     public void setSectionName(String sectionName) {
@@ -88,7 +92,7 @@ public class SectionController extends EmptyScreen {
                             stage.show();
 
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            throw new RuntimeException(e);
                         }
                     }
                 });
@@ -97,7 +101,7 @@ public class SectionController extends EmptyScreen {
                 questionLayout.getChildren().add(vbox);
 
             } catch (IOException e){
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
@@ -111,14 +115,11 @@ public class SectionController extends EmptyScreen {
 
         List<QuestionBean> list = new ArrayList<>();
         ForumSectionBean forumSectionBean = new ForumSectionBean(sectionName);
-        list = forumSectionBean.getQuestions();
-
-
-        /*List<String> l = new ArrayList<>();
-        QuestionBean q = new QuestionBean("martie", "ciao", l);
-        list.add(q);*/
-
-
+        try {
+            list = forumSectionBean.getQuestions();
+        } catch (DBNotAvailable e) {
+            errorLabel.setText(e.getMessage());
+        }
 
         return list;
 

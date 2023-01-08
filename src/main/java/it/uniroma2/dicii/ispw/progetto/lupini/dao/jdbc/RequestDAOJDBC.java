@@ -2,6 +2,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class RequestDAOJDBC {
 
-    public List<Request>  retrieveRequests(){
+    public List<Request>  retrieveRequests() throws DBNotAvailable {
         List<Request> list = new ArrayList<>();
 
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
@@ -34,8 +36,16 @@ public class RequestDAOJDBC {
                 String text = rs.getString("text");
 
                 String username = rs.getString("author");
+                UserProfile user;
+
                 UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                UserProfile user = userProfileDAO.retrieveUserFromUsername(username);
+                try{
+                    user = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
+                }catch(ItemNotFound e){
+                    user = new UserProfile("unknown", "unknown", null);
+                } catch(Exception e){
+                    throw new DBNotAvailable("DB is currently not available");
+                }
 
                 Request req = new Request(text, user);
                 list.add(req);
@@ -43,12 +53,8 @@ public class RequestDAOJDBC {
             } while (rs.next());
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new DBNotAvailable("DB is currently not available");
         }
 
         return list;

@@ -2,6 +2,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.ForumSection;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
@@ -61,17 +63,25 @@ public class QuestionBean {
 
 
 
-    public List<ResponseBean> getResponses() {
+    public List<ResponseBean> getResponses() throws DBNotAvailable {
         getResponsesFromModel();
         return responses;
     }
 
-    private void getResponsesFromModel() {
+    private void getResponsesFromModel() throws DBNotAvailable {
         if (responses.isEmpty()) {
-            try {
+
                 UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                UserProfile user = userProfileDAO.retrieveUserFromUsername(this.username);
-                Question question = new Question(text, keywords, user, ID);
+            UserProfile user = null;
+            try {
+                user = userProfileDAO.retrieveUserFromUsername(this.username);
+            } catch(ItemNotFound e){
+                user = new UserProfile(username, "unknown", null);
+            } catch(Exception e){
+            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
+            }
+
+            Question question = new Question(text, keywords, user, ID);
 
                 List<Response> responsesFromModel = question.getResponses();
 
@@ -80,9 +90,7 @@ public class QuestionBean {
                 for (Response r : responsesFromModel) {
                     responses.add(ViewQuestionController.convertResponse(r));
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+
         }
     }
 }

@@ -2,6 +2,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class QuestionDAOJDBC {
 
-    public List<Response> retrieveResponseFromQuestionID(int id) {
+    public List<Response> retrieveResponseFromQuestionID(int id) throws DBNotAvailable {
 
         List<Response> list = new ArrayList<>();
 
@@ -36,8 +38,16 @@ public class QuestionDAOJDBC {
                 String text = rs.getString("text");
 
                 String username = rs.getString("author");
+                UserProfile user;
+
                 UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                UserProfile user = userProfileDAO.retrieveUserFromUsername(username);
+                try{
+                    user = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
+                }catch(ItemNotFound e){
+                    user = new UserProfile("unknown", "unknown", null);
+                } catch(Exception e){
+                    throw new DBNotAvailable("DB is currently not available");
+                }
 
                 Response res = new Response(text, user);
                 list.add(res);
@@ -45,12 +55,8 @@ public class QuestionDAOJDBC {
             } while (rs.next());
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new DBNotAvailable("DB is currently not available");
         }
 
         return list;

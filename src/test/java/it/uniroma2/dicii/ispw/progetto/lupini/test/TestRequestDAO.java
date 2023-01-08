@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import org.junit.Test;
 
@@ -13,7 +14,12 @@ public class TestRequestDAO {
 
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
 
-        List<Request> list = requestDAOJDBC.retrieveRequests();
+        List<Request> list = null;
+        try {
+            list = requestDAOJDBC.retrieveRequests();
+        } catch (DBNotAvailable e) {
+            throw new RuntimeException(e);
+        }
 
         for(Request r: list ){
 

@@ -2,10 +2,12 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -39,6 +41,15 @@ public class ViewQuestionController extends EmptyScreen{
 
     @FXML
     private TextField responseText;
+
+    @FXML
+    private Label risposteText;
+
+    @FXML
+    private Button sendButton;
+
+    @FXML
+    private Label errorLabel;
 
     public void setKeyword1(String keyword1) {
         this.keyword1.setText(keyword1);
@@ -93,7 +104,7 @@ public class ViewQuestionController extends EmptyScreen{
                 responseLayout.getChildren().add(vbox);
 
             } catch (IOException e){
-                e.printStackTrace();
+                throw new RuntimeException();
             }
         }
     }
@@ -101,7 +112,20 @@ public class ViewQuestionController extends EmptyScreen{
     private List<ResponseBean> responses() {
         List<ResponseBean> list = new ArrayList<>();
 
-        list = currentQuestion.getResponses();
+        try {
+            list = currentQuestion.getResponses();
+        } catch (DBNotAvailable e) {
+            questionLabel.setVisible(false);
+            responseLayout.setVisible(false);
+            responseText.setVisible(false);
+            risposteText.setVisible(false);
+            usernameLabel.setVisible(false);
+            keyword1.setVisible(false);
+            keyword2.setVisible(false);
+            keyword3.setVisible(false);
+            sendButton.setVisible(false);
+            errorLabel.setText(e.getMessage());
+        }
 
         return list;
 

@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.view.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -53,7 +54,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
@@ -66,21 +67,8 @@ public class EmptyScreen {
 
         //first I check if the user is logged
         if(!currUser.isLogged()){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                root = loader.load();
-
-                LoginController loginController = loader.getController();
-                loginController.setNextView(nextView);
-
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                return;
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+            UserNotLogged.userNotLogged(nextView, event);
+            return;
         }else if(currUser.getRole().equals("regular user")){
             view = "profileView.fxml";
         }else{
@@ -106,7 +94,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -119,21 +107,8 @@ public class EmptyScreen {
 
         //first I check if the user is logged
         if (!currUser.isLogged()) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                root = loader.load();
-
-                LoginController loginController = loader.getController();
-                loginController.setNextView(nextView);
-
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                return;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            UserNotLogged.userNotLogged(nextView, event);
+            return;
         }
 
             try {
@@ -147,8 +122,44 @@ public class EmptyScreen {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
 
+    }
+
+
+    @FXML
+    void clickBecomeModerator(ActionEvent event) {
+
+        CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
+        String view = "doNewModeratorRequest.fxml";
+        nextView = "DoNewModeratorRequest";
+
+        //first I check if the user is logged
+        if(!currUser.isLogged()){
+            UserNotLogged.userNotLogged(nextView, event);
+            return;
+        }
+
+        //if the user is a moderator they cannot do the request
+        if(currUser.getRole().equals("moderator")){
+            return;
+        }
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
+            Parent root = loader.load();
+
+            DoNewRequestController doNewRequestController = loader.getController();
+            doNewRequestController.loadData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
     }
 }

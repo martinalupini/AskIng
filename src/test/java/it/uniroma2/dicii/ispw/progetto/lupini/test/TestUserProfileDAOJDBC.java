@@ -16,20 +16,21 @@ public class TestUserProfileDAOJDBC {
 
     @Test
     public void TestLoginEmail(){
-        String username = "giada";
-        String password = "password";
+        String username = "martinalupini";
+        String password = "1234";
 
 
         UserProfileDAOJDBC userDAO = new UserProfileDAOJDBC();
 
         try {
             UserProfile user = userDAO.retrieveUserFromUsernameAndPassword(username, password);
-            System.out.println(user.getUsername()+"   "+ user.getEmail()+ "   "+user.getRoleName());
+            System.out.println(user.getUsername()+"   "+ user.getEmail()+ "   "+user.getRoleName()+ ((RegularUser)user.getRole()).getPoints()+ ((RegularUser)user.getRole()).getBadBehaviour());
 
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+
         } catch (ItemNotFound e) {
+            throw new RuntimeException(e);
+        } catch (DBNotAvailable e) {
             throw new RuntimeException(e);
         }
 

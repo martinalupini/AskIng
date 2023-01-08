@@ -38,7 +38,10 @@
       </ImageView>
       <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="317.0" prefHeight="244.0" prefWidth="274.0">
          <content>
-            <VBox fx:id="questionLayout" prefHeight="242.0" prefWidth="262.0" spacing="5.0" />
+            <VBox fx:id="questionLayout" prefHeight="242.0" prefWidth="262.0" spacing="5.0">
+               <children>
+                  <Label fx:id="errorLabel" prefHeight="40.0" prefWidth="274.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+               </children></VBox>
          </content>
       </ScrollPane>
       <AnchorPane layoutX="47.0" layoutY="583.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="238.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="70.0">

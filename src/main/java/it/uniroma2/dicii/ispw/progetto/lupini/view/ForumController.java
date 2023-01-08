@@ -65,8 +65,7 @@ public class ForumController extends EmptyScreen implements Initializable{
                             stage.setScene(scene);
                             stage.show();
                         }catch(IOException e){
-                            e.printStackTrace();
-                            //throw new RuntimeException();
+                            throw new RuntimeException();
                         }
                     }
                 });
@@ -76,8 +75,7 @@ public class ForumController extends EmptyScreen implements Initializable{
                 titleLayout.getChildren().add(button);
 
             } catch (IOException e){
-                e.printStackTrace();
-                //throw new RuntimeException();
+                throw new RuntimeException();
             }
         }
     }

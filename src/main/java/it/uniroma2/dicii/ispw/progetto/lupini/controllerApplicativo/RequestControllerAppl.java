@@ -1,17 +1,22 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controllerApplicativo;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 
 import java.util.List;
 
 public class RequestControllerAppl {
 
-    public List<Request> getRequests(){
+    public List<Request> getRequests() throws DBNotAvailable {
 
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
 
-        return requestDAOJDBC.retrieveRequests();
+        try {
+            return requestDAOJDBC.retrieveRequests();
+        } catch (DBNotAvailable e) {
+            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
+        }
 
     }
 }

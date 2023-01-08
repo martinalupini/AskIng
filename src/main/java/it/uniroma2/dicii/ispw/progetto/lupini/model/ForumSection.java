@@ -1,6 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,20 +27,24 @@ public class ForumSection {
     }
 
     //A copy of the list is returned since it is impossible to pass a reference of this.questions outside ForumSection
-    public List<Question> getQuestions() {
+    public List<Question> getQuestions() throws DBNotAvailable {
 
         List<Question> newList = new ArrayList<Question>();
 
-        if(questions.isEmpty()){
-            ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
-            questions = forumSectionDAOJDBC.retrieveQuestionOfSection(section.toLowerCase());
-        }
-
-        if(!questions.isEmpty()) {
-            for (Question q : questions) {
-                Question newQ = q.cloneQuestion();
-                newList.add(newQ);
+        try {
+            if (questions.isEmpty()) {
+                ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
+                questions = forumSectionDAOJDBC.retrieveQuestionOfSection(section.toLowerCase());
             }
+
+            if (!questions.isEmpty()) {
+                for (Question q : questions) {
+                    Question newQ = q.cloneQuestion();
+                    newList.add(newQ);
+                }
+            }
+        }catch(DBNotAvailable e){
+            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle domande. Riprovare più tardi");
         }
 
         return newList;

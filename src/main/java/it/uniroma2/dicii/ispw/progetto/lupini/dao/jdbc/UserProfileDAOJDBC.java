@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
@@ -16,10 +17,9 @@ import java.sql.SQLException;
 public class UserProfileDAOJDBC implements UserProfileDAO {
 
     @Override
-    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, ClassNotFoundException {
+    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, DBNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
         UserProfile userProfile;
-        Role role;
         try {
             //opening of connection and query
             Connection connDB = getConn.getConnection();
@@ -28,41 +28,18 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
-            if(!rs.first()){
-                throw new ItemNotFound("Item not found in database");
-            }else{
-                rs.first();
-                //if the result set is not empty it is formed by one element
-                String email = rs.getString("email");
-                String roleName = rs.getString("role");
+            return UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
-                //I check the role first in order to instantiate the correct role
-                if (roleName.equals("moderator")) {
-                    role = new Moderator();
-
-                } else {
-                    int points = rs.getInt("points");
-                    int badBehaviour = rs.getInt("bad_behaviour");
-                    role = new RegularUser(points, badBehaviour);
-                }
-                userProfile = new UserProfile(username, email, role);
-            }
-
-            return userProfile;
-
-        } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new DBNotAvailable("DB is currently not available");
         }
 
-        return null;
     }
 
     @Override
-    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, ClassNotFoundException {
+    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, DBNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
         UserProfile userProfile;
-        Role role;
         try {
             //opening of connection and query
             Connection connDB = getConn.getConnection();
@@ -71,32 +48,35 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             ResultSet rs = stmt.executeQuery();
 
 
-            if(rs.next()) {
-                //if the result set is not empty it is formed by one element
-                String email = rs.getString("email");
-                String roleName = rs.getString("role");
+            return UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
-                //I check the role first in order to instantiate the correct role
-                if (roleName.equals("moderator")) {
-                    role = new Moderator();
 
-                } else {
-                    int points = rs.getInt("points");
-                    int badBehaviour = rs.getInt("bad_behaviour");
-                    role = new RegularUser(points, badBehaviour);
-                }
-                userProfile = new UserProfile(username, email, role);
-            }else{
-                throw new ItemNotFound("Item not found in database");
-            }
-
-            return userProfile;
-
-        } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new DBNotAvailable("DB is currently not available");
         }
 
-        return null;
+    }
+
+    private static UserProfile fetchInformationOfUserProfile(ResultSet rs,String username) throws ItemNotFound, SQLException {
+        rs.first();
+        Role role;
+        if(rs.next()) {
+            //if the result set is not empty it is formed by one element
+            String email = rs.getString("email");
+            String roleName = rs.getString("role");
+
+            //I check the role first in order to instantiate the correct role
+            if (roleName.equals("moderator")) {
+                role = new Moderator();
+
+            } else {
+                int points = rs.getInt("points");
+                int badBehaviour = rs.getInt("bad_behaviour");
+                role = new RegularUser(points, badBehaviour);
+            }
+            return new UserProfile(username, email, role);
+        }else{
+            throw new ItemNotFound("Item not found in database");
+        }
     }
 }

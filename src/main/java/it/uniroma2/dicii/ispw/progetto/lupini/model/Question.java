@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +45,17 @@ public class Question {
         responses.add(res);
     }
 
-    public List<Response> getResponses() {
+    public List<Response> getResponses() throws DBNotAvailable {
         List<Response> newList = new ArrayList<>();
 
         if(responses.isEmpty()){
 
             QuestionDAOJDBC questionDAOJDBC = new QuestionDAOJDBC();
-            responses = questionDAOJDBC.retrieveResponseFromQuestionID(this.id);
+            try {
+                responses = questionDAOJDBC.retrieveResponseFromQuestionID(this.id);
+            } catch (DBNotAvailable e) {
+                throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
+            }
         }
 
         for (Response r : responses) {
