@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view.engineering;
 
 
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.EmptyScreen;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.LoginController;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ public class UserNotLogged {
                 stage.show();
 
             }catch(IOException e){
-                e.printStackTrace();
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
     }
 }

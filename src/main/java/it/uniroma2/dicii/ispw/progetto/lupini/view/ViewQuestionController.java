@@ -91,6 +91,7 @@ public class ViewQuestionController extends EmptyScreen{
     @FXML
     public void replyToQuestion(ActionEvent event) {
 
+        //da completare
 
 
     }

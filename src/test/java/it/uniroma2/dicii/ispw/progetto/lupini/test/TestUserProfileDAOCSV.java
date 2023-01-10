@@ -35,5 +35,7 @@ public class TestUserProfileDAOCSV {
         } catch (ImpossibleToUpdate e) {
             throw new RuntimeException(e);
         }
+
+        assertThat("non vuoto", userProfileDAOCSV!=null);
     }
 }

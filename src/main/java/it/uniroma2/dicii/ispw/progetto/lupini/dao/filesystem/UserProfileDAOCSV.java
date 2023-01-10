@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
@@ -31,14 +32,7 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
                 column = line.split(",");
                 if (column[0].equals(username) && column[1].equals(password)) {
-                    if (column[3].equals("regular")) {
-                        role = new RegularUser(Integer.parseInt(column[4]), Integer.parseInt(column[5]));
-                    } else {
-                        role = new Moderator();
-                    }
-                    user = new UserProfile(username, column[2], role);
-
-                    return user;
+                    return obtainUser(column, username);
 
                 }
             }
@@ -59,22 +53,14 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
             String line;
             String[] column;
-            UserProfile user;
-            Role role;
 
         /* The organisation of the csv file is username,password,email,role,points,badBehaviour*/
         while ((line = reader.readLine()) != null) {
 
             column = line.split(",");
             if (column[0].equals(username)) {
-                if (column[3].equals("regular")) {
-                    role = new RegularUser(Integer.parseInt(column[4]), Integer.parseInt(column[5]));
-                } else {
-                    role = new Moderator();
-                }
-                user = new UserProfile(username, column[2], role);
 
-                return user;
+                return obtainUser(column, username);
 
             }
         }
@@ -97,7 +83,7 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
             String line;
             String[] column;
-            String newLine = "";
+            StringBuilder stringBuilder = new StringBuilder();
 
             /* The organisation of the csv file is username,password,email,role,points,badBehaviour*/
             while ((line = reader.readLine()) != null) {
@@ -111,14 +97,16 @@ public class UserProfileDAOCSV implements UserProfileDAO {
                     column[5] = "";
 
                     for (i = 0; i < 5; i++) {
-                        newLine = newLine + column[i] + ",";
+                        stringBuilder.append(column[i] + ",");
                     }
-                    newLine = newLine + column[5] + "\n";
+                    stringBuilder.append(column[5] + "\n");
 
                 } else {
-                    newLine = newLine + line + "\n";
+                    stringBuilder.append(line + "\n");
                 }
             }
+
+            String newLine = stringBuilder.toString();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(fd));
             writer.write(newLine);
@@ -126,8 +114,19 @@ public class UserProfileDAOCSV implements UserProfileDAO {
             writer.close();
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImpossibleToUpdate("Impossible to save change of role");
         }
 
+    }
+
+    private UserProfile obtainUser(String column[], String username){
+
+        Role role;
+        if (column[3].equals("regular")) {
+            role = new RegularUser(Integer.parseInt(column[4]), Integer.parseInt(column[5]));
+        } else {
+            role = new Moderator();
+        }
+        return new UserProfile(username, column[2], role);
     }
 }

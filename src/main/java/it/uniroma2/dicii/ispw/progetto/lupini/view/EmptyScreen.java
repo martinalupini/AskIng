@@ -15,6 +15,8 @@ import java.io.IOException;
 
 public class EmptyScreen {
 
+    private static final String ERROR_GUI = "Errore on starting the GUI";
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -30,7 +32,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new ImpossibleStartGUI( "Errore on starting the GUI");
+            throw new ImpossibleStartGUI( ERROR_GUI);
         }
     }
 
@@ -55,7 +57,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new ImpossibleStartGUI( "Errore on starting the GUI");
+            throw new ImpossibleStartGUI(ERROR_GUI);
         }
 
     }
@@ -95,7 +97,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new ImpossibleStartGUI( "Errore on starting the GUI");
+            throw new ImpossibleStartGUI(ERROR_GUI);
         }
     }
 
@@ -123,7 +125,7 @@ public class EmptyScreen {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
-                throw new ImpossibleStartGUI( "Errore on starting the GUI");
+                throw new ImpossibleStartGUI(ERROR_GUI);
             }
 
     }
@@ -161,7 +163,7 @@ public class EmptyScreen {
             window.setScene(scena);
             window.show();
         }catch(IOException e){
-            throw new ImpossibleStartGUI( "Errore on starting the GUI");
+            throw new ImpossibleStartGUI(ERROR_GUI);
         }
     }
 }

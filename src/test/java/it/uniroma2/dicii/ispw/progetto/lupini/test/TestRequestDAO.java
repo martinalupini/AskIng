@@ -41,6 +41,8 @@ public class TestRequestDAO {
             e.printStackTrace();
         }
 
+        assertThat( "non vuoto", requestDAOJDBC != null);
+
     }
 
     @Test
@@ -51,5 +53,7 @@ public class TestRequestDAO {
         } catch (DBNotAvailable e) {
             e.printStackTrace();
         }
+
+        assertThat("non vuoto", requestDAOJDBC !=null);
     }
 }

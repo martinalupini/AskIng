@@ -20,7 +20,6 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
     @Override
     public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, DBNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-        UserProfile userProfile;
         try {
             //opening of connection and query
             Connection connDB = getConn.getConnection();
@@ -40,7 +39,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
     @Override
     public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, DBNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-        UserProfile userProfile;
+
         try {
             //opening of connection and query
             Connection connDB = getConn.getConnection();

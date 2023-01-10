@@ -90,8 +90,7 @@ public class RequestDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            //throw new DBNotAvailable("Error in elimination of request");
-            e.printStackTrace();
+            throw new DBNotAvailable("Error in elimination of request");
         }
 
 
