@@ -2,7 +2,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
@@ -24,8 +23,6 @@ public class UserProfileDAOCSV implements UserProfileDAO {
             BufferedReader reader = new BufferedReader(new FileReader(fd));
             String line;
             String[] column;
-            UserProfile user;
-            Role role;
 
             /* The organisation of the csv file is username,password,email,role,points,badBehaviour*/
             while ((line = reader.readLine()) != null) {
@@ -119,7 +116,7 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
     }
 
-    private UserProfile obtainUser(String column[], String username){
+    private UserProfile obtainUser(String[] column, String username){
 
         Role role;
         if (column[3].equals("regular")) {
