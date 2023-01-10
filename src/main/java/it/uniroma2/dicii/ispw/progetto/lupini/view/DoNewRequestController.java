@@ -1,9 +1,15 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 
 public class DoNewRequestController extends EmptyScreen{
 
@@ -22,6 +28,19 @@ public class DoNewRequestController extends EmptyScreen{
     @FXML
     private TextField requestText;
 
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label explainingLabel;
+
+    @FXML
+    private Button sendButton;
+
+
+    @FXML
+    private Label statusLabel;
+
 
 
     public void loadData(String username, String email, int point, int behaviour){
@@ -34,6 +53,29 @@ public class DoNewRequestController extends EmptyScreen{
 
     @FXML
     void sendRequest(ActionEvent event) {
-        //need to finish
+
+        //first I create the bean
+        RequestBean requestBean = new RequestBean(requestText.getText(), usernameLabel.getText(), emailLabel.getText(), Integer.valueOf(pointsLabel.getText()), Integer.valueOf(behaviourLabel.getText()));
+        //then I create the application controller
+        RequestControllerAppl requestControllerAppl = new RequestControllerAppl(this, null);
+        //then I call the processRequest method
+        try {
+            requestControllerAppl.processRequest(requestBean);
+        } catch (DBNotAvailable e) {
+            descriptionLabel.setTextFill(Paint.valueOf("red"));
+            descriptionLabel.setText(e.getMessage());
+        } catch (RequestAlreadyDone e) {
+            descriptionLabel.setTextFill(Paint.valueOf("red"));
+            descriptionLabel.setText(e.getMessage());
+        }
+    }
+
+    public void updateStatus(){
+
+        explainingLabel.setVisible(false);
+        sendButton.setVisible(false);
+        requestText.setVisible(false);
+        statusLabel.setText("RICHIESTA MANDATA CON SUCCESSO");
+
     }
 }

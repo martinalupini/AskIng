@@ -1,9 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -34,7 +33,6 @@ public class ForumSectionDAOJDBC {
                 List<String> keywords = new ArrayList<>();
                 String kw;
                 int i = 1;
-                UserProfile author;
 
                 //we find the text of the question
                 String text = rs.getString("text");
@@ -49,15 +47,7 @@ public class ForumSectionDAOJDBC {
 
                 //we find the author. To do this we use the DAO of user profile
 
-                    UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                try{
-                    author = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
-                }catch(ItemNotFound e){
-                        author = new UserProfile("unknown", "unknown", null);
-                } catch(Exception e){
-                    throw new DBNotAvailable("DB is currently not available");
-                }
-
+                UserProfile author = RetrieveUserWithExceptions.retrieveUserWithExceptionsManagement(rs);
 
                 //finally we add the new question
                 list.add(new Question(text, keywords, author, id));

@@ -1,9 +1,10 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ForumSectionBean;
+
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,14 +39,14 @@ public class SectionController extends EmptyScreen {
 
     @FXML
     void clickSearch(ActionEvent event) {
-
+            //need to finish
     }
 
 
 
     public void initialize(String sectionName) {
 
-        List<QuestionBean> sectionQuestions = this.questions(sectionName);
+        List<QuestionBean> sectionQuestions = this.getQuestionOfSection(sectionName);
 
         for(QuestionBean q : sectionQuestions){
 
@@ -68,18 +69,19 @@ public class SectionController extends EmptyScreen {
                         viewQuestionController.setQuestionLabel(q.getText());
                         viewQuestionController.setUsernameLabel(q.getUsername());
                         viewQuestionController.initialize(q.getText(), q.getUsername());
-                        viewQuestionController.setKeyword1(q.getKeywords().get(0));
 
-                        try{
-                            viewQuestionController.setKeyword2(q.getKeywords().get(1));
-                        }catch(IndexOutOfBoundsException e){
+                        List<String> keywords = q.getKeywords();
+                        viewQuestionController.setKeyword1(keywords.get(0));
+                        if(keywords.size() == 1){
                             viewQuestionController.setInvisible2();
-                        }
-
-                        try{
-                            viewQuestionController.setKeyword2(q.getKeywords().get(2));
-                        }catch(IndexOutOfBoundsException e){
                             viewQuestionController.setInvisible3();
+                        }
+                        if(keywords.size() == 2) {
+                            viewQuestionController.setKeyword2(keywords.get(1));
+                            viewQuestionController.setInvisible3();
+                        }
+                        if(keywords.size() == 3){
+                            viewQuestionController.setKeyword2(keywords.get(2));
                         }
 
                         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -88,7 +90,7 @@ public class SectionController extends EmptyScreen {
                         stage.show();
 
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new ImpossibleStartGUI( "Errore on starting the GUI");
                     }
                 });
 
@@ -96,36 +98,31 @@ public class SectionController extends EmptyScreen {
                 questionLayout.getChildren().add(vbox);
 
             } catch (IOException e){
-                throw new RuntimeException(e);
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
         }
     }
 
 
-    private List<QuestionBean> questions(String sectionName) {
-
-        /*qua devo comunicare con DAO per recuperare domande
-        oppure posso comunicare con section
-        */
+    private List<QuestionBean> getQuestionOfSection(String sectionName) {
 
         List<QuestionBean> list = new ArrayList<>();
-        ForumSectionBean forumSectionBean = new ForumSectionBean(sectionName);
-        try {
-            list = forumSectionBean.getQuestions();
+        PostQuestionControllerAppl postQuestCtlAppl = new PostQuestionControllerAppl();
+
+        try{
+
+            list=  postQuestCtlAppl.returnQuestionOfSection(sectionName.toLowerCase());
+
         } catch (DBNotAvailable e) {
             errorLabel.setText(e.getMessage());
         }
 
         return list;
 
+
     }
 
 
-
-    public static QuestionBean convertQuestion(Question question){
-        QuestionBean quest = new QuestionBean(question.getAuthor().getUsername(), question.getQuestionText(), question.getKeywords(), question.getId());
-        return quest;
-    }
 
 }
 

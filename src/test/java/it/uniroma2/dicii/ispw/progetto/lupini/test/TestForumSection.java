@@ -7,12 +7,14 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class TestForumSection {
 
     @Test
     public void testGetQuestions(){
         ForumSection forumSection = new ForumSection("Analisi 1");
-        List<Question> questionsFromModel = null;
+        List<Question> questionsFromModel;
         try {
             questionsFromModel = forumSection.getQuestions();
         } catch (DBNotAvailable e) {
@@ -24,5 +26,7 @@ public class TestForumSection {
             System.out.println( "\n"+quest.getAuthor()+ " "+quest.getKeywords()+" "+quest.getQuestionText());
 
         }
+
+        assertThat("verifica che il metodo faccia qualcosa", questionsFromModel!= null);
     }
 }

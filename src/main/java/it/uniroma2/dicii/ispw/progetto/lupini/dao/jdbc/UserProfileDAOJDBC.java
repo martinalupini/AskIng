@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
@@ -76,6 +77,24 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             return new UserProfile(username, email, role);
         }else{
             throw new ItemNotFound("Item not found in database");
+        }
+    }
+
+    public void changeRoleOfUser(String username) throws ImpossibleToUpdate {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+
+        try {
+
+            Connection connDB = getConn.getConnection();
+
+            PreparedStatement stmt = connDB.prepareStatement("update users set role='moderator', points = '0', bad_behaviour = '0' where username = ?");
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ImpossibleToUpdate("Error in registration of changes");
         }
     }
 }

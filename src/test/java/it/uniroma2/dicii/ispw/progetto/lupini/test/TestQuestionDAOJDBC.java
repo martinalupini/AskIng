@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class TestQuestionDAOJDBC {
 
     @Test
@@ -24,5 +26,7 @@ public class TestQuestionDAOJDBC {
 
             System.out.println(r.getResponseText()+ "    "+ r.getAuthor().getUsername());
         }
+
+        assertThat("non vuoto", list!=null);
     }
 }

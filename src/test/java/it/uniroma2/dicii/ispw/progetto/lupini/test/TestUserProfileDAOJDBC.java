@@ -6,6 +6,8 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class TestUserProfileDAOJDBC {
 
@@ -21,6 +23,7 @@ public class TestUserProfileDAOJDBC {
             UserProfile user = userDAO.retrieveUserFromUsernameAndPassword(username, password);
             System.out.println(user.getUsername()+"   "+ user.getEmail()+ "   "+user.getRoleName());
 
+            assertThat("non vuoto", user!=null);
 
 
         } catch (ItemNotFound e) {

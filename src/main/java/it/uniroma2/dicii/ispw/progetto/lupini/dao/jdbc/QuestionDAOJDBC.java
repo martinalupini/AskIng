@@ -1,9 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -36,18 +35,7 @@ public class QuestionDAOJDBC {
             rs.first();
             do {
                 String text = rs.getString("text");
-
-                String username = rs.getString("author");
-                UserProfile user;
-
-                UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                try{
-                    user = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
-                }catch(ItemNotFound e){
-                    user = new UserProfile("unknown", "unknown", null);
-                } catch(Exception e){
-                    throw new DBNotAvailable("DB is currently not available");
-                }
+                UserProfile user  = RetrieveUserWithExceptions.retrieveUserWithExceptionsManagement(rs);
 
                 Response res = new Response(text, user);
                 list.add(res);
@@ -61,5 +49,6 @@ public class QuestionDAOJDBC {
 
         return list;
     }
+
 
 }

@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new RuntimeException(e);
+            throw new ImpossibleStartGUI( "Errore on starting the GUI");
         }
     }
 
@@ -54,7 +55,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new RuntimeException(e);
+            throw new ImpossibleStartGUI( "Errore on starting the GUI");
         }
 
     }
@@ -62,7 +63,7 @@ public class EmptyScreen {
     @FXML
     public void goToProfile(ActionEvent event) {
         CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
-        String view = null;
+        String view;
         nextView = "profileView";
 
         //first I check if the user is logged
@@ -94,7 +95,7 @@ public class EmptyScreen {
             stage.setScene(scene);
             stage.show();
         }catch(IOException e){
-            throw new RuntimeException(e);
+            throw new ImpossibleStartGUI( "Errore on starting the GUI");
         }
     }
 
@@ -122,7 +123,7 @@ public class EmptyScreen {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
 
     }
@@ -143,23 +144,24 @@ public class EmptyScreen {
 
         //if the user is a moderator they cannot do the request
         if(currUser.getRole().equals("moderator")){
+            goToHomepage(event);
             return;
         }
 
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
-            Parent root = loader.load();
+            Parent parent = loader.load();
 
             DoNewRequestController doNewRequestController = loader.getController();
             doNewRequestController.loadData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scena = new Scene(parent);
+            window.setScene(scena);
+            window.show();
         }catch(IOException e){
-            throw new RuntimeException(e);
+            throw new ImpossibleStartGUI( "Errore on starting the GUI");
         }
     }
 }

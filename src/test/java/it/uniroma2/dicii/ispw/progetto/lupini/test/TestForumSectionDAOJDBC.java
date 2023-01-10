@@ -7,13 +7,15 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class TestForumSectionDAOJDBC {
 
     @Test
     public void testRetrieveQuestionOfSection(){
         ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
 
-        List<Question> question = null;
+        List<Question> question;
         try {
             question = forumSectionDAOJDBC.retrieveQuestionOfSection("analisi 1");
         } catch (DBNotAvailable e) {
@@ -26,6 +28,7 @@ public class TestForumSectionDAOJDBC {
 
         }
 
+        assertThat("non vuoto", question!=null);
 
     }
 }

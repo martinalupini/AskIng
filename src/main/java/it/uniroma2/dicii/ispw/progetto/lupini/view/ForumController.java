@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,7 +68,7 @@ public class ForumController extends EmptyScreen implements Initializable{
                             stage.setScene(scene);
                             stage.show();
                         }catch(IOException e){
-                            throw new RuntimeException();
+                            throw new ImpossibleStartGUI( "Errore on starting the GUI");
                         }
                     }
                 });
@@ -77,7 +78,7 @@ public class ForumController extends EmptyScreen implements Initializable{
                 titleLayout.getChildren().add(button);
 
             } catch (IOException e){
-                throw new RuntimeException();
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
         }
     }

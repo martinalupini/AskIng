@@ -4,20 +4,14 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LoginControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class LoginController extends HomepageController {
+public class LoginController extends EmptyScreen {
     @FXML
     private Label errorLabel;
 
@@ -27,10 +21,11 @@ public class LoginController extends HomepageController {
     @FXML
     private TextField usernameField;
 
-    private String nextView;
+    private String nextWindow;
 
-    public void setNextView(String nextView) {
-        this.nextView = nextView;
+    public void setNextWindow(String nextView) {
+
+        this.nextWindow = nextView;
     }
 
     @FXML
@@ -41,17 +36,11 @@ public class LoginController extends HomepageController {
         try{
             logctl.login(usernameField.getText(), passwordField.getText());
 
-            switch(nextView){
-                case "profileView":
-                    goToProfile(event);
-                    break;
-                case "DoNewModeratorRequest":
-                    clickBecomeModerator(event);
-                    break;
-
-                case "DoNewQuestion":
-                    doNewQuestion(event);
-                    break;
+            switch (nextWindow) {
+                case "profileView" -> goToProfile(event);
+                case "DoNewModeratorRequest" -> clickBecomeModerator(event);
+                case "DoNewQuestion" -> doNewQuestion(event);
+                default -> throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
 
             
@@ -66,21 +55,6 @@ public class LoginController extends HomepageController {
         }
 
 
-    }
-
-
-    //vedi se mantenere questo metodo o eliminarlo mantenendo il costrutto switch
-    private void goToPage(ActionEvent event){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(nextView));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 

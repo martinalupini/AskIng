@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import javafx.fxml.FXML;
@@ -68,7 +69,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
                         stage.setScene(scene);
                         stage.show();
                     } catch (IOException e) {
-                        throw new RuntimeException();
+                        throw new ImpossibleStartGUI( "Errore on starting the GUI");
                     }
                 });
 
@@ -77,7 +78,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
                 requestLayout.getChildren().add(button);
 
             } catch (IOException e){
-                throw new RuntimeException();
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
         }
     }
@@ -86,7 +87,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
 
         List<RequestBean> req = new ArrayList<>();
 
-        RequestControllerAppl requestControllerAppl = new RequestControllerAppl();
+        RequestControllerAppl requestControllerAppl = new RequestControllerAppl(null, null);
 
         try {
             List<Request> request = requestControllerAppl.getRequests();
@@ -114,4 +115,6 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
 
         return new RequestBean(req.getText(), username,email,points, badBehaviour);
     }
+
+
 }

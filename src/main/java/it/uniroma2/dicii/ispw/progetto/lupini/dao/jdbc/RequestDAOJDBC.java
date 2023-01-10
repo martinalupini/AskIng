@@ -1,9 +1,9 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RequestDAOJDBC {
 
-    public List<Request>  retrieveRequests() throws DBNotAvailable {
+    public List<Request> retrieveRequests() throws DBNotAvailable {
         List<Request> list = new ArrayList<>();
 
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
@@ -35,17 +35,7 @@ public class RequestDAOJDBC {
             do {
                 String text = rs.getString("text");
 
-                String username = rs.getString("author");
-                UserProfile user;
-
-                UserProfileDAO userProfileDAO = new UserProfileDAOJDBC();
-                try{
-                    user = userProfileDAO.retrieveUserFromUsername(rs.getString("author"));
-                }catch(ItemNotFound e){
-                    user = new UserProfile("unknown", "unknown", null);
-                } catch(Exception e){
-                    throw new DBNotAvailable("DB is currently not available");
-                }
+                UserProfile user  = RetrieveUserWithExceptions.retrieveUserWithExceptionsManagement(rs);
 
                 Request req = new Request(text, user);
                 list.add(req);
@@ -58,5 +48,52 @@ public class RequestDAOJDBC {
         }
 
         return list;
+    }
+
+
+    public void registerNewRequest(String text, String username) throws DBNotAvailable, RequestAlreadyDone {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+
+        try {
+
+                Connection connDB = getConn.getConnection();
+
+                PreparedStatement stmt = connDB.prepareStatement("insert into requests(text, author) values  (?, ?)");
+                stmt.setString(1, text);
+                stmt.setString(2, username);
+                stmt.executeUpdate();
+
+
+            } catch (SQLException e) {
+                if (e.getMessage().startsWith("Duplicate")) {
+                    throw new RequestAlreadyDone("Request from username is already present");
+                } else {
+                    throw new DBNotAvailable("Error in registration of request");
+                }
+            } catch (ClassNotFoundException e) {
+                throw new DBNotAvailable("Error in registration of request");
+            }
+    }
+
+    public void deleteRequestFromUsername(String username) throws DBNotAvailable {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+
+        try {
+
+            Connection connDB = getConn.getConnection();
+
+            PreparedStatement stmt = connDB.prepareStatement("delete from requests where author = ?");
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            //throw new DBNotAvailable("Error in elimination of request");
+            e.printStackTrace();
+        }
+
+
     }
 }

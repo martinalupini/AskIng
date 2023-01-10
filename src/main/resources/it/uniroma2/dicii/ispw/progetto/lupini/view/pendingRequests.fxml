@@ -28,7 +28,7 @@
             <VBox fx:id="requestLayout" prefHeight="374.0" prefWidth="262.0" spacing="5.0" />
          </content>
       </ScrollPane>
-      <Label layoutX="26.0" layoutY="97.0" prefHeight="74.0" prefWidth="282.0" text="Qui sono presenti tutte le richieste ancora in sospeso. Clicca su una richiesta per visualizzarla e accettare o rifiutare." textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="descriptionLabel" layoutX="26.0" layoutY="97.0" prefHeight="74.0" prefWidth="282.0" text="Qui sono presenti tutte le richieste ancora in sospeso. Clicca su una richiesta per visualizzarla e accettare o rifiutare." textAlignment="CENTER" wrapText="true" />
       <AnchorPane layoutX="65.0" layoutY="582.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="242.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="23.799999999999997" AnchorPane.leftAnchor="70.0">
          <children>
             <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="222.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="45.0">

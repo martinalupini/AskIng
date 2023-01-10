@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class HomepageController extends EmptyScreen{
                         stage.setScene(scene);
                         stage.show();
                 }catch(IOException e){
-                        throw new RuntimeException(e);
+                        throw new ImpossibleStartGUI( "Errore on starting the GUI");
                 }
 
         }

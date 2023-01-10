@@ -97,15 +97,20 @@
             <Insets left="10.0" top="5.0" />
          </padding>
       </Label>
-      <Button layoutX="213.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 15;" text="ACCETTA">
+      <Button fx:id="acceptButton" layoutX="213.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 15;" text="ACCETTA">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="43.0" layoutY="497.0" mnemonicParsing="false" onAction="#declineRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="RIFIUTA">
+      <Button fx:id="declineButton" layoutX="43.0" layoutY="497.0" mnemonicParsing="false" onAction="#declineRequest" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="RIFIUTA">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="28.0" layoutY="448.0" prefHeight="48.0" prefWidth="278.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

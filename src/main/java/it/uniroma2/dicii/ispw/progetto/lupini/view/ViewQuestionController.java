@@ -2,8 +2,9 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +52,8 @@ public class ViewQuestionController extends EmptyScreen{
     @FXML
     private Label errorLabel;
 
+
+
     public void setKeyword1(String keyword1) {
         this.keyword1.setText(keyword1);
     }
@@ -83,6 +86,8 @@ public class ViewQuestionController extends EmptyScreen{
         this.usernameLabel.setText(username);
     }
 
+
+
     @FXML
     public void replyToQuestion(ActionEvent event) {
 
@@ -92,7 +97,7 @@ public class ViewQuestionController extends EmptyScreen{
 
 
     public void initialize(String text, String username) {
-        List<ResponseBean> responses = new ArrayList<>(responses());
+        List<ResponseBean> responses = getResponsesOfQuestion();
         for(ResponseBean r : responses){
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("responseItem.fxml"));
@@ -104,16 +109,19 @@ public class ViewQuestionController extends EmptyScreen{
                 responseLayout.getChildren().add(vbox);
 
             } catch (IOException e){
-                throw new RuntimeException();
+                throw new ImpossibleStartGUI( "Errore on starting the GUI");
             }
         }
     }
 
-    private List<ResponseBean> responses() {
-        List<ResponseBean> list = new ArrayList<>();
+    private List<ResponseBean> getResponsesOfQuestion() {
 
-        try {
-            list = currentQuestion.getResponses();
+        List<ResponseBean> list = new ArrayList<>();
+        PostQuestionControllerAppl postQuestionControllerAppl = new PostQuestionControllerAppl();
+
+        try{
+        list = postQuestionControllerAppl.returnResponsesOfQuestion(currentQuestion.getId());
+
         } catch (DBNotAvailable e) {
             questionLabel.setVisible(false);
             responseLayout.setVisible(false);
@@ -131,13 +139,7 @@ public class ViewQuestionController extends EmptyScreen{
 
     }
 
-    public static ResponseBean convertResponse( Response response){
-        String username = response.getAuthor().getUsername();
-        String text = response.getResponseText();
 
-        ResponseBean responseBean = new ResponseBean(username, text);
 
-        return responseBean;
 
-    }
 }

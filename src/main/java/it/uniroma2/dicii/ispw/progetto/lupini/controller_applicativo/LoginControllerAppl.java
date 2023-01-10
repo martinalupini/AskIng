@@ -8,6 +8,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.LoginController;
 
@@ -26,7 +27,7 @@ public class LoginControllerAppl {
     public void login(String username, String password) throws DBNotAvailable, ItemNotFound {
 
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
-        byte bytes[] = new byte[20];
+        byte[] bytes = new byte[20];
         random.nextBytes(bytes);
 
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
@@ -52,7 +53,7 @@ public class LoginControllerAppl {
             //bean part
             currentUserProfileBean = CurrentUserProfileBean.getProfileInstance();
             if (currUser.getRoleName().equals("regular user")) {
-                userBean = new UserProfileBean(currUser.getUsername(), currUser.getEmail(), "regular user", currUser.getRole().getRoleInformation().get(0), currUser.getRole().getRoleInformation().get(1));
+                userBean = new UserProfileBean(currUser.getUsername(), currUser.getEmail(), "regular user", ((RegularUser)currUser.getRole()).getPoints(), ((RegularUser)currUser.getRole()).getBadBehaviour());
                 currentUserProfileBean.setUser(userBean);
             } else if (currUser.getRoleName().equals("moderator")) {
                 userBean = new UserProfileBean(currUser.getUsername(), currUser.getEmail(), "moderator");

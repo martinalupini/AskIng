@@ -34,8 +34,7 @@ public class Question {
          */
 
     public Question cloneQuestion(){
-        Question clone = new Question(this.getQuestionText(), this.getKeywords(), this.getAuthor(), this.getId());
-        return clone;
+        return new Question(this.getQuestionText(), this.getKeywords(), this.getAuthor(), this.getId());
     }
 
     public void newResponse(String text){
