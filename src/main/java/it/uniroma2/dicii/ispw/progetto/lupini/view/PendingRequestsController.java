@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
@@ -97,7 +97,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
                 req.add(convertRequest(r));
 
             }
-        }catch(DBNotAvailable e){
+        }catch(PersistanceLayerNotAvailable e){
             descriptionLabel.setVisible(false);
             errorLabel.setText(e.getMessage());
         }

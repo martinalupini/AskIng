@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class ForumSectionDAOJDBC {
 
-    public List<Question>  retrieveQuestionOfSection( String sectionName) throws DBNotAvailable {
+    public List<Question>  retrieveQuestionOfSection( String sectionName) throws PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-        List<Question>  list = new ArrayList<Question>();
+        List<Question>  list = new ArrayList<>();
 
         try {
             Connection connDB = getConn.getConnection();
@@ -56,7 +56,7 @@ public class ForumSectionDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("DB is currently not available");
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
         return list;

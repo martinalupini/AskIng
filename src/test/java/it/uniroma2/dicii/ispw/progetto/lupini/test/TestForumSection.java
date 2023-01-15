@@ -1,6 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.ForumSection;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class TestForumSection {
         List<Question> questionsFromModel;
         try {
             questionsFromModel = forumSection.getQuestions();
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             throw new RuntimeException(e);
         }
 

@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,24 +51,21 @@ public class ForumController extends EmptyScreen implements Initializable{
                 titleCourseController.setTitle(c);
 
 
-                button.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("section.fxml"));
-                            Parent root = loader.load();
+                button.setOnAction(event -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("section.fxml"));
+                        Parent root = loader.load();
 
-                            SectionController sectionController = loader.getController();
-                            sectionController.setSectionName(button.getText());
-                            sectionController.initialize(button.getText());
+                        SectionController sectionController = loader.getController();
+                        sectionController.setSectionName(button.getText());
+                        sectionController.initialize(button.getText());
 
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();
-                        }catch(IOException e){
-                            throw new ImpossibleStartGUI( "Errore on starting the GUI");
-                        }
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        throw new ImpossibleStartGUI("Errore on starting the GUI");
                     }
                 });
 

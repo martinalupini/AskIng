@@ -1,10 +1,9 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.*;
 import org.junit.Test;
-
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,7 +17,7 @@ public class TestQuestionDAOJDBC {
         List<Response> list;
         try {
             list = questionDAOJDBC.retrieveResponseFromQuestionID(1);
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             throw new RuntimeException(e);
         }
 
@@ -29,4 +28,6 @@ public class TestQuestionDAOJDBC {
 
         assertThat("non vuoto", list!=null);
     }
+
+
 }

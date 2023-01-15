@@ -1,10 +1,13 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostResponseControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
+import it.uniroma2.dicii.ispw.progetto.lupini.view.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +94,29 @@ public class ViewQuestionController extends EmptyScreen{
     @FXML
     public void replyToQuestion(ActionEvent event) {
 
-        //da completare
+        nextView = "DoNewResponse";
+        CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
+
+        //first I check if the user is logged
+        if (!currUser.isLogged()) {
+            UserNotLogged userNotLogged = new UserNotLogged();
+            userNotLogged.setViewQuestionController(this);
+            userNotLogged.userNotLogged(nextView, event);
+            return;
+        }
+
+        String author = CurrentUserProfileBean.getProfileInstance().getUsername();
+
+        ResponseBean responseBean = new ResponseBean(author);
+
+        try {
+            responseBean.setText(responseText.getText());
+
+            PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl(this);
+            postResponseControllerAppl.checkAndProcessResponse(responseBean, currentQuestion.getId());
+        } catch (TextException | PersistanceLayerNotAvailable e) {
+            errorLabel.setText(e.getMessage());
+        }
 
 
     }
@@ -100,30 +125,21 @@ public class ViewQuestionController extends EmptyScreen{
     public void initialize(String text, String username) {
         List<ResponseBean> responses = getResponsesOfQuestion();
         for(ResponseBean r : responses){
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("responseItem.fxml"));
 
-            try{
-                VBox vbox = fxmlLoader.load();
-                ResponseItemController resContr = fxmlLoader.getController();
-                resContr.setResponse( r);
-                responseLayout.getChildren().add(vbox);
-
-            } catch (IOException e){
-                throw new ImpossibleStartGUI( "Errore on starting the GUI");
-            }
+            showResponse(r);
         }
     }
+
 
     private List<ResponseBean> getResponsesOfQuestion() {
 
         List<ResponseBean> list = new ArrayList<>();
-        PostQuestionControllerAppl postQuestionControllerAppl = new PostQuestionControllerAppl();
+        PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl(null);
 
         try{
-        list = postQuestionControllerAppl.returnResponsesOfQuestion(currentQuestion.getId());
+        list = postResponseControllerAppl.returnResponsesOfQuestion(currentQuestion.getId());
 
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             questionLabel.setVisible(false);
             responseLayout.setVisible(false);
             responseText.setVisible(false);
@@ -141,6 +157,34 @@ public class ViewQuestionController extends EmptyScreen{
     }
 
 
+    public void bannedWordPresent() {
+        errorLabel.setText("Sono state rilevate delle parole non adeguate nella tua risposta. Il tuo punteggio BadBehaviour è stato aumentato.");
+    }
 
 
+    @Override
+    public void update(){
+
+        showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
+    }
+
+    public void responseSuccessful(ResponseBean r) {
+        this.currentQuestion.addResponse(r);
+
+    }
+
+    private void showResponse(ResponseBean r){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("responseItem.fxml"));
+
+        try{
+            VBox vbox = fxmlLoader.load();
+            ResponseItemController resContr = fxmlLoader.getController();
+            resContr.setResponse( r);
+            responseLayout.getChildren().add(vbox);
+
+        } catch (IOException e){
+            throw new ImpossibleStartGUI( "Errore on starting the GUI");
+        }
+    }
 }

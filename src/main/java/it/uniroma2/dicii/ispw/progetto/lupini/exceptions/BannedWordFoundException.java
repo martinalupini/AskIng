@@ -1,10 +1,9 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.exceptions;
 
-public class DBNotAvailable extends Exception{
-
+public class BannedWordFoundException extends Exception{
     private final String message;
 
-    public DBNotAvailable(String message){
+    public BannedWordFoundException(String message) {
         this.message = message;
     }
 

@@ -7,11 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HomepageController extends EmptyScreen{
+
+        @FXML
+        private Label logoutLabel;
 
 
         @FXML
@@ -37,14 +41,7 @@ public class HomepageController extends EmptyScreen{
                 //This method is empty because is not needed to change screen
         }
 
-
-        @FXML
-        void exit(ActionEvent event) {
-
-                /*This method is empty because have to be finished
-
-                 */
-
-
+        public void setLogoutLabel(String logoutLabel) {
+                this.logoutLabel.setText(logoutLabel);
         }
 }

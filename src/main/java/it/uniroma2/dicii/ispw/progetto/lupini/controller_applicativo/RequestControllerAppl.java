@@ -4,7 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
@@ -23,19 +23,19 @@ public class RequestControllerAppl {
         this.viewRequestController = viewRequestController;
     }
 
-    public List<Request> getRequests() throws DBNotAvailable {
+    public List<Request> getRequests() throws PersistanceLayerNotAvailable {
 
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
 
         try {
             return requestDAOJDBC.retrieveRequests();
-        } catch (DBNotAvailable e) {
-            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
+        } catch (PersistanceLayerNotAvailable e) {
+            throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
         }
 
     }
 
-    public void processRequest(RequestBean requestBean) throws DBNotAvailable, RequestAlreadyDone {
+    public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
         //The aim of this method is to register the new request and notify the view controller of moderators
         try {
 
@@ -44,15 +44,15 @@ public class RequestControllerAppl {
             doNewRequestController.updateStatus();
 
 
-        } catch (DBNotAvailable e) {
-            throw new DBNotAvailable("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");
+        } catch (PersistanceLayerNotAvailable e) {
+            throw new PersistanceLayerNotAvailable("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");
         } catch (RequestAlreadyDone e) {
             throw new RequestAlreadyDone("Impossibile fare una nuova richiesta perchè una richiesta fatta da te è ancora in sospeso.");
         }
     }
 
 
-    public void updateRequestState(String username,  String state) throws DBNotAvailable {
+    public void updateRequestState(String username,  String state) throws PersistanceLayerNotAvailable {
         try {
 
             RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
@@ -74,8 +74,8 @@ public class RequestControllerAppl {
             }
 
 
-        } catch (DBNotAvailable | ImpossibleToUpdate e) {
-            throw new DBNotAvailable("Spiacenti la richiesta non può essere accetta o rifiuata per motivi tecnici. Riprovare più tardi.");
+        } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {
+            throw new PersistanceLayerNotAvailable("Spiacenti la richiesta non può essere accetta o rifiuata per motivi tecnici. Riprovare più tardi.");
         }
     }
 }

@@ -38,4 +38,16 @@ public class TestUserProfileDAOCSV {
 
         assertThat("non vuoto", userProfileDAOCSV!=null);
     }
+
+    @Test
+    public void testIncreaseBadBehaviour(){
+        UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
+        try {
+            userProfileDAOCSV.increaseBadBehaviourUser("luigi");
+        } catch (ImpossibleToUpdate e) {
+            throw new RuntimeException(e);
+        }
+
+        assertThat("non vuoto", userProfileDAOCSV!=null);
+    }
 }

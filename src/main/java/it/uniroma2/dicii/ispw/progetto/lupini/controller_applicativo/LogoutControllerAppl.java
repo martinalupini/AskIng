@@ -1,9 +1,17 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
+
 public class LogoutControllerAppl {
 
-    public void resetCurrentUser(){
+    public void exit(){
+        CurrentUserProfileBean currentUserProfileBean = CurrentUserProfileBean.getProfileInstance();
+        currentUserProfileBean.unsetUser();
 
-        //need to finish it
+        CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
+        currentUserProfile.unsetCurrentUser();
+
     }
+
 }

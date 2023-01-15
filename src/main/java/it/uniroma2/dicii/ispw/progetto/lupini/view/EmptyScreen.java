@@ -1,6 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LogoutControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.view.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
@@ -13,14 +15,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EmptyScreen {
+public class EmptyScreen  extends  ObserverOfQuestionBean{
 
-    private static final String ERROR_GUI = "Errore on starting the GUI";
+    private static final String ERROR_GUI = "Error on starting the GUI";
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     protected String nextView;
 
     @FXML
@@ -70,7 +71,8 @@ public class EmptyScreen {
 
         //first I check if the user is logged
         if(!currUser.isLogged()){
-            UserNotLogged.userNotLogged(nextView, event);
+            UserNotLogged userNotLogged = new UserNotLogged();
+            userNotLogged.userNotLogged(nextView, event);
             return;
         }else if(currUser.getRole().equals("regular user")){
             view = "profileView.fxml";
@@ -102,33 +104,8 @@ public class EmptyScreen {
     }
 
 
-    @FXML
-    public void doNewQuestion(ActionEvent event) {
-
-        nextView = "DoNewQuestion";
-        CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
-
-        //first I check if the user is logged
-        if (!currUser.isLogged()) {
-            UserNotLogged.userNotLogged(nextView, event);
-            return;
-        }
-
-            try {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("questionForm.fxml"));
-                root = loader.load();
 
 
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                throw new ImpossibleStartGUI(ERROR_GUI);
-            }
-
-    }
 
 
     @FXML
@@ -140,7 +117,8 @@ public class EmptyScreen {
 
         //first I check if the user is logged
         if(!currUser.isLogged()){
-            UserNotLogged.userNotLogged(nextView, event);
+            UserNotLogged userNotLogged = new UserNotLogged();
+            userNotLogged.userNotLogged(nextView, event);
             return;
         }
 
@@ -153,17 +131,45 @@ public class EmptyScreen {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
-            Parent parent = loader.load();
+            root = loader.load();
 
             DoNewRequestController doNewRequestController = loader.getController();
             doNewRequestController.loadData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
 
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scena = new Scene(parent);
-            window.setScene(scena);
-            window.show();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }catch(IOException e){
             throw new ImpossibleStartGUI(ERROR_GUI);
         }
+    }
+
+    @FXML
+    public void exit(ActionEvent event){
+
+        if(!CurrentUserProfileBean.getProfileInstance().isLogged())  return;
+
+        LogoutControllerAppl logoutControllerAppl =new LogoutControllerAppl();
+        logoutControllerAppl.exit();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("homepage.fxml"));
+            root = loader.load();
+
+            HomepageController homepageController = loader.getController();
+            homepageController.setLogoutLabel("logout effettuato con successo!");
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(IOException e){
+            throw new ImpossibleStartGUI(ERROR_GUI);
+        }
+    }
+
+   @Override
+    public void update() {
+        //void because is overrided in ViewQuestionController
     }
 }

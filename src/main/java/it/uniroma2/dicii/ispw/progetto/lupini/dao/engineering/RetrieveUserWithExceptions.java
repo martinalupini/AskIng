@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -13,7 +13,7 @@ public class RetrieveUserWithExceptions {
 
     private RetrieveUserWithExceptions(){}
 
-    public static UserProfile retrieveUserWithExceptionsManagement(ResultSet rs) throws SQLException, DBNotAvailable {
+    public static UserProfile retrieveUserWithExceptionsManagement(ResultSet rs) throws SQLException, PersistanceLayerNotAvailable {
 
 
         String username = rs.getString("author");

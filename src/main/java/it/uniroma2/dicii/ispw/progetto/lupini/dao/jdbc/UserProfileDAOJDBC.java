@@ -2,14 +2,13 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Role;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +17,7 @@ import java.sql.SQLException;
 public class UserProfileDAOJDBC implements UserProfileDAO {
 
     @Override
-    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, DBNotAvailable {
+    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
         try {
             //opening of connection and query
@@ -31,13 +30,13 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             return UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("DB is currently not available");
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
     }
 
     @Override
-    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, DBNotAvailable {
+    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
         try {
@@ -52,7 +51,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("DB is currently not available");
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
     }
@@ -95,5 +94,64 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
         } catch (SQLException | ClassNotFoundException e) {
             throw new ImpossibleToUpdate("Error in registration of changes");
         }
+    }
+
+    @Override
+    public void increaseBadBehaviourUser(String username) throws ImpossibleToUpdate {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+
+        try {
+
+            int bb = 0;
+            Connection connDB = getConn.getConnection();
+
+            PreparedStatement statement = connDB.prepareStatement("select bad_behaviour from users where username = ?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()){
+                bb = rs.getInt("bad_behaviour")+1;
+            }
+
+            PreparedStatement stmt = connDB.prepareStatement("update users set  bad_behaviour = ? where username = ?");
+            stmt.setInt(1, bb);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ImpossibleToUpdate("Error in registration of changes");
+        }
+    }
+
+    @Override
+    public void increaseUserPoints(String username) throws ImpossibleToUpdate {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+
+        try {
+
+            int points = 0;
+            Connection connDB = getConn.getConnection();
+
+            PreparedStatement statement = connDB.prepareStatement("select points from users where username = ?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()){
+                points = rs.getInt("points")+1;
+            }
+
+            PreparedStatement stmt = connDB.prepareStatement("update users set  points = ? where username = ?");
+            stmt.setInt(1, points);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ImpossibleToUpdate("Error in registration of changes");
+        }
+
     }
 }

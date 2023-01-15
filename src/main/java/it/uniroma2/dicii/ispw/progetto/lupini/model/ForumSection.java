@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +16,8 @@ public class ForumSection {
         this.section = name;
     }
 
-    /* the relationship between ForumSection and Question is a relation of composition. A response exists only if the question
-        associated exists. If the question is deleted so are the responses.
-         */
-    public void newQuestion(String text, List<String> keywords){
-        CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
-        UserProfile author =   currentUserProfile.getCurrentUser();
-        Question quest = new Question(text, keywords, author);
-        questions.add(quest);
-    }
-
     //A copy of the list is returned since it is impossible to pass a reference of this.questions outside ForumSection
-    public List<Question> getQuestions() throws DBNotAvailable {
+    public List<Question> getQuestions() throws PersistanceLayerNotAvailable {
 
         List<Question> newList = new ArrayList<Question>();
 
@@ -43,8 +33,8 @@ public class ForumSection {
                     newList.add(newQ);
                 }
             }
-        }catch(DBNotAvailable e){
-            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle domande. Riprovare più tardi");
+        }catch(PersistanceLayerNotAvailable e){
+            throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle domande. Riprovare più tardi");
         }
 
         return newList;

@@ -1,5 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.engineering.CheckTextLenght;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
+
 public class ResponseBean {
 
     String username = "";
@@ -11,6 +14,11 @@ public class ResponseBean {
 
     }
 
+    public ResponseBean(String user){
+        this.username = user;
+
+    }
+
     public String getUsername() {
         return username;
     }
@@ -19,11 +27,14 @@ public class ResponseBean {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(String text) throws TextException {
+        CheckTextLenght.checkTextLength(text);
         this.text = text;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 }

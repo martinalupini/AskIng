@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RequestDAOJDBC {
 
-    public List<Request> retrieveRequests() throws DBNotAvailable {
+    public List<Request> retrieveRequests() throws PersistanceLayerNotAvailable {
         List<Request> list = new ArrayList<>();
 
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
@@ -44,14 +44,14 @@ public class RequestDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("DB is currently not available");
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
         return list;
     }
 
 
-    public void registerNewRequest(String text, String username) throws DBNotAvailable, RequestAlreadyDone {
+    public void registerNewRequest(String text, String username) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
 
@@ -69,14 +69,14 @@ public class RequestDAOJDBC {
                 if (e.getMessage().startsWith("Duplicate")) {
                     throw new RequestAlreadyDone("Request from username is already present");
                 } else {
-                    throw new DBNotAvailable("Error in registration of request");
+                    throw new PersistanceLayerNotAvailable("Error in registration of request");
                 }
             } catch (ClassNotFoundException e) {
-                throw new DBNotAvailable("Error in registration of request");
+                throw new PersistanceLayerNotAvailable("Error in registration of request");
             }
     }
 
-    public void deleteRequestFromUsername(String username) throws DBNotAvailable {
+    public void deleteRequestFromUsername(String username) throws PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
 
@@ -90,7 +90,7 @@ public class RequestDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("Error in elimination of request");
+            throw new PersistanceLayerNotAvailable("Error in elimination of request");
         }
 
 

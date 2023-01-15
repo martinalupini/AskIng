@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +37,7 @@ public class Question {
         return new Question(this.getQuestionText(), this.getKeywords(), this.getAuthor(), this.getId());
     }
 
-    public void newResponse(String text){
-        CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
-        UserProfile creator =   currentUserProfile.getCurrentUser();
-        Response res = new Response(text, creator);
-        responses.add(res);
-    }
-
-    public List<Response> getResponses() throws DBNotAvailable {
+    public List<Response> getResponses() throws PersistanceLayerNotAvailable {
         List<Response> newList = new ArrayList<>();
 
         if(responses.isEmpty()){
@@ -52,8 +45,8 @@ public class Question {
             QuestionDAOJDBC questionDAOJDBC = new QuestionDAOJDBC();
             try {
                 responses = questionDAOJDBC.retrieveResponseFromQuestionID(this.id);
-            } catch (DBNotAvailable e) {
-                throw new DBNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
+            } catch (PersistanceLayerNotAvailable e) {
+                throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
             }
         }
 

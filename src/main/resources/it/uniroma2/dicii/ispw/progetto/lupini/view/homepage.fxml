@@ -114,5 +114,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <Label fx:id="logoutLabel" alignment="CENTER" layoutX="33.0" layoutY="140.0" prefHeight="18.0" prefWidth="261.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

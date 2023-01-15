@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
@@ -16,7 +16,7 @@ public class UserProfileDAOCSV implements UserProfileDAO {
     private static final String CSV_FILE_NAME = "src/main/resources/it/uniroma2/dicii/ispw/progetto/lupini/view/UserData.csv";
 
     @Override
-    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, DBNotAvailable {
+    public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
         File fd = new File(CSV_FILE_NAME);
 
         try {
@@ -37,13 +37,13 @@ public class UserProfileDAOCSV implements UserProfileDAO {
             //if all the file is read and a match between username and password is not found then the username or password is not correct
             throw new ItemNotFound("Item not found");
         }catch (IOException e) {
-                throw new DBNotAvailable("Error in opening or reading file");
+                throw new PersistanceLayerNotAvailable("Error in opening or reading file");
         }
 
     }
 
     @Override
-    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, DBNotAvailable {
+    public UserProfile retrieveUserFromUsername(String username) throws ItemNotFound, PersistanceLayerNotAvailable {
         File fd = new File(CSV_FILE_NAME);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fd));
@@ -66,13 +66,44 @@ public class UserProfileDAOCSV implements UserProfileDAO {
         throw new ItemNotFound("Item not found");
 
         } catch (IOException e) {
-            throw new DBNotAvailable("Error in opening or reading file");
+            throw new PersistanceLayerNotAvailable("Error in opening or reading file");
         }
 
     }
 
     @Override
     public void changeRoleOfUser(String username) throws ImpossibleToUpdate {
+
+        changeDataUser(username, 1);
+
+    }
+
+    private UserProfile obtainUser(String[] column, String username){
+
+        Role role;
+        if (column[3].equals("regular")) {
+            role = new RegularUser(Integer.parseInt(column[4]), Integer.parseInt(column[5]));
+        } else {
+            role = new Moderator();
+        }
+        return new UserProfile(username, column[2], role);
+    }
+
+
+    @Override
+    public void increaseBadBehaviourUser(String username) throws ImpossibleToUpdate {
+
+        changeDataUser(username, 2);
+
+    }
+
+    @Override
+    public void increaseUserPoints(String username) throws ImpossibleToUpdate{
+
+        changeDataUser(username, 3);
+    }
+
+    private void changeDataUser(String username, int caso) throws ImpossibleToUpdate {
         File fd = new File(CSV_FILE_NAME);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fd));
@@ -89,9 +120,18 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
                 if (column[0].equals(username)) {
                     int i;
-                    column[3] = "moderator";
-                    column[4] = "";
-                    column[5] = "";
+
+                    if(caso==1){
+                        column[3] = "moderator";
+                        column[4] = "";
+                        column[5] = "";
+                    }
+                    if(caso ==2) {
+                        column[5] = String.valueOf(Integer.valueOf(column[5])+ 1);
+                    }
+                    if(caso ==3){
+                        column[4] = String.valueOf(Integer.valueOf(column[4])+ 1);
+                    }
 
                     for (i = 0; i < 5; i++) {
                         stringBuilder.append(column[i] + ",");
@@ -113,17 +153,5 @@ public class UserProfileDAOCSV implements UserProfileDAO {
         } catch (IOException e) {
             throw new ImpossibleToUpdate("Impossible to save change of role");
         }
-
-    }
-
-    private UserProfile obtainUser(String[] column, String username){
-
-        Role role;
-        if (column[3].equals("regular")) {
-            role = new RegularUser(Integer.parseInt(column[4]), Integer.parseInt(column[5]));
-        } else {
-            role = new Moderator();
-        }
-        return new UserProfile(username, column[2], role);
     }
 }

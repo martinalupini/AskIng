@@ -1,7 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import org.junit.Test;
@@ -26,11 +27,19 @@ public class TestUserProfileDAOJDBC {
             assertThat("non vuoto", user!=null);
 
 
-        } catch (ItemNotFound e) {
-            throw new RuntimeException(e);
-        } catch (DBNotAvailable e) {
+        } catch (ItemNotFound | PersistanceLayerNotAvailable e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Test
+    public void testIncrease(){
+        UserProfileDAOJDBC userDAO = new UserProfileDAOJDBC();
+        try {
+            userDAO.increaseBadBehaviourUser("giada");
+        } catch (ImpossibleToUpdate e) {
+            throw new RuntimeException(e);
+        }
     }
 }

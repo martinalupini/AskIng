@@ -1,10 +1,13 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 
+
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
+import it.uniroma2.dicii.ispw.progetto.lupini.view.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +46,6 @@ public class SectionController extends EmptyScreen {
     }
 
 
-
     public void initialize(String sectionName) {
 
         List<QuestionBean> sectionQuestions = this.getQuestionOfSection(sectionName);
@@ -56,7 +58,7 @@ public class SectionController extends EmptyScreen {
             try{
                 VBox vbox = fxmlLoader.load();
                 QuestionItemController questContr = fxmlLoader.getController();
-                questContr.setQuestion( q);
+                questContr.setQuestion(q);
 
                 vbox.setOnMouseClicked(mouseEvent -> {
 
@@ -66,6 +68,7 @@ public class SectionController extends EmptyScreen {
 
                         ViewQuestionController viewQuestionController = loader.getController();
                         viewQuestionController.setCurrentQuestion(q);
+                        q.attach(viewQuestionController);
                         viewQuestionController.setQuestionLabel(q.getText());
                         viewQuestionController.setUsernameLabel(q.getUsername());
                         viewQuestionController.initialize(q.getText(), q.getUsername());
@@ -81,7 +84,7 @@ public class SectionController extends EmptyScreen {
                             viewQuestionController.setInvisible3();
                         }
                         if(keywords.size() == 3){
-                            viewQuestionController.setKeyword2(keywords.get(2));
+                            viewQuestionController.setKeyword3(keywords.get(2));
                         }
 
                         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -107,18 +110,51 @@ public class SectionController extends EmptyScreen {
     private List<QuestionBean> getQuestionOfSection(String sectionName) {
 
         List<QuestionBean> list = new ArrayList<>();
-        PostQuestionControllerAppl postQuestCtlAppl = new PostQuestionControllerAppl();
+        PostQuestionControllerAppl postQuestCtlAppl = new PostQuestionControllerAppl(null);
 
         try{
 
             list=  postQuestCtlAppl.returnQuestionOfSection(sectionName.toLowerCase());
 
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             errorLabel.setText(e.getMessage());
         }
 
         return list;
 
+
+    }
+
+
+    @FXML
+    public void doNewQuestion(ActionEvent event) {
+
+        nextView = "DoNewQuestion";
+        CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
+
+        //first I check if the user is logged
+        if (!currUser.isLogged()) {
+            UserNotLogged userNotLogged = new UserNotLogged();
+            userNotLogged.setSectionController(this);
+            userNotLogged.userNotLogged(nextView, event);
+            return;
+        }
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("questionForm.fxml"));
+            Parent root = loader.load();
+
+            QuestionFormController questionFormController = loader.getController();
+            questionFormController.setSection(this.sectionName.getText());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new ImpossibleStartGUI("Error on starting the GUI");
+        }
 
     }
 

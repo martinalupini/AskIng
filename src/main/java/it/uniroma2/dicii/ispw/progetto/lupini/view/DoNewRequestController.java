@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,7 +61,7 @@ public class DoNewRequestController extends EmptyScreen{
         //then I call the processRequest method
         try {
             requestControllerAppl.processRequest(requestBean);
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             descriptionLabel.setTextFill(Paint.valueOf("red"));
             descriptionLabel.setText(e.getMessage());
         } catch (RequestAlreadyDone e) {
@@ -78,4 +78,6 @@ public class DoNewRequestController extends EmptyScreen{
         statusLabel.setText("RICHIESTA MANDATA CON SUCCESSO");
 
     }
+
+
 }

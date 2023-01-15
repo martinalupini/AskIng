@@ -31,16 +31,16 @@ public class CurrentUserProfile {
         }
     }
 
+    public void unsetCurrentUser(){
+        this.currentUser = null;
+        this.logged = false;
+    }
+
     //used from other class to get information of the current user such as username, email, etc
     public UserProfile getCurrentUser() {
         return currentUser;
     }
 
-
-    //used from other classes tho check if the current user has done the login
-    public boolean isLogged() {
-        return logged;
-    }
 
     public String getRoleName(){
         return currentUser.getRoleName();

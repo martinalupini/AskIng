@@ -2,7 +2,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DBMSConnection;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.RetrieveUserWithExceptions;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class QuestionDAOJDBC {
 
-    public List<Response> retrieveResponseFromQuestionID(int id) throws DBNotAvailable {
+    public List<Response> retrieveResponseFromQuestionID(int id) throws PersistanceLayerNotAvailable {
 
         List<Response> list = new ArrayList<>();
 
@@ -44,10 +45,51 @@ public class QuestionDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBNotAvailable("DB is currently not available");
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
         return list;
+    }
+
+
+    public void saveNewQuestion(Question newQuestion, String section) throws PersistanceLayerNotAvailable {
+
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+
+        try {
+            int id = 0;
+            Connection connDB = getConn.getConnection();
+            PreparedStatement stmt = connDB.prepareStatement("select max(questionID) from questions");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) id = rs.getInt(1);
+
+            PreparedStatement statement = connDB.prepareStatement("insert into questions (questionID, text, author, keyword1, keyword2, keyword3, section ) values (?, ?, ?, ?, ?, ?, ?)");
+            statement.setInt(1, id+1);
+            statement.setString(2, newQuestion.getQuestionText());
+            statement.setString(3, newQuestion.getAuthor().getUsername());
+            statement.setString(7, section);
+
+            List<String> keywords = newQuestion.getKeywords();
+            statement.setString(4, keywords.get(0));
+
+            if (keywords.size() == 1) {
+                statement.setString(5, null);
+                statement.setString(6, null);
+
+            } else if (keywords.size() == 2) {
+                statement.setString(5, keywords.get(1));
+                statement.setString(6, null);
+            } else if (keywords.size() == 3) {
+                statement.setString(5, keywords.get(1));
+                statement.setString(6, keywords.get(2));
+            }
+
+            statement.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new PersistanceLayerNotAvailable("error in opening the connection");
+        }
     }
 
 

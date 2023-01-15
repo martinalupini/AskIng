@@ -11,9 +11,8 @@ public class RegularUser extends Role{
         this.badBehaviour = badBehaviour;
     }
 
-    //the badBehvaiour and points of the user can be increased only
     public void increasePoints(){
-        points++;
+        points += 5;
     }
 
     public void increaseBadBehaviour(){

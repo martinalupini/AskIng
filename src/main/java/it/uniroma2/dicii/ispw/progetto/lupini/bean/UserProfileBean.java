@@ -31,10 +31,12 @@ public class UserProfileBean {
         this.username = username;
     }
 
-    public void setBadBehaviour(int badBehaviour) {
-        this.badBehaviour = badBehaviour;
+    public void increaseBadBehaviour() {
+        this.badBehaviour += 1;
     }
 
+
+    public void increasePoints(){this.points += 5;}
 
 
     public void setPoints(int points) {

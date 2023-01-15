@@ -5,7 +5,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.UserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
@@ -24,7 +24,7 @@ public class LoginControllerAppl {
         this.viewCtl = ctl;
     }
 
-    public void login(String username, String password) throws DBNotAvailable, ItemNotFound {
+    public void login(String username, String password) throws PersistanceLayerNotAvailable, ItemNotFound {
 
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte[] bytes = new byte[20];
@@ -65,7 +65,7 @@ public class LoginControllerAppl {
         } catch (ItemNotFound e) {
             throw new ItemNotFound("Username o password errati. Riprovare. ");
         } catch (Exception e) {
-            throw new DBNotAvailable("Spacenti, si sono verificati dei problemi tecnici. Riprovare più tardi");
+            throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi tecnici. Riprovare più tardi");
         }
 
 

@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class TestForumSectionDAOJDBC {
         List<Question> question;
         try {
             question = forumSectionDAOJDBC.retrieveQuestionOfSection("analisi 1");
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             throw new RuntimeException(e);
         }
 

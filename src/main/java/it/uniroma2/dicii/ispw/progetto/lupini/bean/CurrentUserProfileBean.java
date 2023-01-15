@@ -23,8 +23,18 @@ public class CurrentUserProfileBean {
 
     }
 
+    public void unsetUser(){
+        this.user = null;
+        this.logged = false;
+    }
+
     public boolean isLogged() {
         return logged;
+    }
+
+
+    public UserProfileBean getUser() {
+        return user;
     }
 
     public String getRole(){
@@ -53,4 +63,6 @@ public class CurrentUserProfileBean {
     public int getBadBehaviour(){
         return user.getBadBehaviour();
     }
+
+
 }

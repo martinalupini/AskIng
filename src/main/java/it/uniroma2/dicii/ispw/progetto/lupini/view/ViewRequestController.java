@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.DBNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,7 +49,7 @@ public class ViewRequestController extends  EmptyScreen{
         RequestControllerAppl requestControllerAppl = new RequestControllerAppl(null, this);
         try {
             requestControllerAppl.updateRequestState( this.usernameLabel.getText(), "accepted");
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             statusLabel.setText(e.getMessage());
         }
 
@@ -61,7 +61,7 @@ public class ViewRequestController extends  EmptyScreen{
         RequestControllerAppl requestControllerAppl = new RequestControllerAppl(null, this);
         try {
             requestControllerAppl.updateRequestState( this.usernameLabel.getText(), "declined");
-        } catch (DBNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable e) {
             statusLabel.setText(e.getMessage());
         }
     }
