@@ -65,7 +65,6 @@ public class LoginControllerAppl {
         } catch (ItemNotFound e) {
             throw new ItemNotFound("Username o password errati. Riprovare. ");
         } catch (Exception e) {
-            e.printStackTrace();
             throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi tecnici. Riprovare più tardi");
         }
 

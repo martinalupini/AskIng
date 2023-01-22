@@ -121,22 +121,29 @@ public class UserProfileDAOCSV implements UserProfileDAO {
                 if (column[0].equals(username)) {
                     int i;
 
-                    if(caso==1){
-                        column[3] = "moderator";
-                        column[4] = "";
-                        column[5] = "";
-                    }
-                    if(caso ==2) {
-                        column[5] = String.valueOf(Integer.valueOf(column[5])+ 1);
-                    }
-                    if(caso ==3){
-                        column[4] = String.valueOf(Integer.valueOf(column[4])+ 1);
+                    switch(caso) {
+                        case 1:
+                            column[3] = "moderator";
+                            column[4] = "";
+                            column[5] = "";
+                            break;
+
+                        case 2:
+                            column[5] = String.valueOf(Integer.valueOf(column[5]) + 1);
+                            break;
+
+                        case 3:
+                            column[4] = String.valueOf(Integer.valueOf(column[4]) + 5);
+                            break;
+
+                        default:
                     }
 
                     for (i = 0; i < 5; i++) {
                         stringBuilder.append(column[i] + ",");
                     }
                     stringBuilder.append(column[5] + "\n");
+
 
                 } else {
                     stringBuilder.append(line + "\n");

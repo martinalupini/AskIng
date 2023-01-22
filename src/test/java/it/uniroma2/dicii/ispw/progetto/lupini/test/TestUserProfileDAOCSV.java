@@ -31,7 +31,7 @@ public class TestUserProfileDAOCSV {
     public void testChangeRoleOfUser(){
         UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
         try {
-            userProfileDAOCSV.changeRoleOfUser("pippo");
+            userProfileDAOCSV.changeRoleOfUser("luigi");
         } catch (ImpossibleToUpdate e) {
             throw new RuntimeException(e);
         }
@@ -44,6 +44,18 @@ public class TestUserProfileDAOCSV {
         UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
         try {
             userProfileDAOCSV.increaseBadBehaviourUser("luigi");
+        } catch (ImpossibleToUpdate e) {
+            throw new RuntimeException(e);
+        }
+
+        assertThat("non vuoto", userProfileDAOCSV!=null);
+    }
+
+    @Test
+    public void testIncreasePoints(){
+        UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
+        try {
+            userProfileDAOCSV.increaseUserPoints("luigi");
         } catch (ImpossibleToUpdate e) {
             throw new RuntimeException(e);
         }
