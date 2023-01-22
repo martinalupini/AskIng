@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="doNewQuestion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.SectionController">
+   <children>
+      <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label fx:id="sectionName" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="89.0" prefWidth="323.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="30.0" layoutY="297.0" text="DOMANDE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="29.0" layoutY="129.0" prefHeight="48.0" prefWidth="218.0" promptText="Cerca una domanda..." style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 30; -fx-background-radius: 30;" />
+      <Button layoutX="266.0" layoutY="129.0" mnemonicParsing="false" onAction="#clickSearch" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP" />
+      <ImageView fitHeight="35.0" fitWidth="23.0" layoutX="278.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@magnifying-glass-solid.png" />
+         </image>
+      </ImageView>
+      <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="317.0" prefHeight="244.0" prefWidth="274.0">
+         <content>
+            <VBox fx:id="questionLayout" prefHeight="242.0" prefWidth="262.0" spacing="5.0" />
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="47.0" layoutY="583.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="238.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="70.0">
+         <children>
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="230.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="37.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@house-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="1.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToForum" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@comments-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToProfile" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@user-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Button layoutX="30.0" layoutY="211.0" mnemonicParsing="false" onAction="#doNewQuestion" prefHeight="48.0" prefWidth="274.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20;" text="FAI UNA DOMANDA">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pen-to-square-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="errorLabel" layoutX="29.0" layoutY="263.0" prefHeight="40.0" prefWidth="274.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+   </children>
+</AnchorPane>

@@ -4,6 +4,6 @@ module it.uniroma2.dicii.ispw.progetto.lupini.view.interfacce {
     requires java.sql;
 
 
-    opens it.uniroma2.dicii.ispw.progetto.lupini.view to javafx.fxml;
-    exports it.uniroma2.dicii.ispw.progetto.lupini.view;
+    opens it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico to javafx.fxml;
+    exports it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 }

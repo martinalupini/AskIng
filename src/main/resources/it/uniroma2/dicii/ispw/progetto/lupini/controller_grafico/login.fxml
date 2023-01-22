@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.LoginControllerGrafico">
+   <children>
+      <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label layoutX="130.0" layoutY="35.0" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="35.0" fitWidth="27.0" layoutX="96.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@user-solid.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TextField fx:id="usernameField" layoutX="35.0" layoutY="226.0" prefHeight="35.0" prefWidth="270.0" promptText="Inserire qui il prorpio username..." />
+      <Label layoutX="35.0" layoutY="206.0" text="USERNAME">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="299.0" text="PASSWORD">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="131.0" text="WELCOME BACK!" textFill="#24b7ed">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="128.0" layoutY="381.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="35.0" prefWidth="78.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="105.0" layoutY="562.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="223.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="24.799999999999955" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="7.0">
+         <children>
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="135.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="89.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@house-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="1.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToForum" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@comments-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="176.0" prefHeight="18.0" prefWidth="270.0" textFill="RED" />
+      <PasswordField fx:id="passwordField" layoutX="35.0" layoutY="319.0" prefHeight="35.0" prefWidth="270.0" promptText="Inserire qui la propria password..." />
+      <Button layoutX="104.0" layoutY="497.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON GOOGLE">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button layoutX="92.0" layoutY="459.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON MICROSOFT">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Label layoutX="148.0" layoutY="430.0" text="oppure" />
+      <Button layoutX="125.0" layoutY="535.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="86.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="REGISTRATI">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -25,7 +25,7 @@ public class IncreaseUserPoints {
             userProfileDAOJDBC.increaseUserPoints(username);
 
             UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
-            userProfileDAOJDBC.increaseUserPoints(username);
+            userProfileDAOCSV.increaseUserPoints(username);
         } catch (ImpossibleToUpdate e) {
             throw new PersistanceLayerNotAvailable("error in persistance layer");
         }

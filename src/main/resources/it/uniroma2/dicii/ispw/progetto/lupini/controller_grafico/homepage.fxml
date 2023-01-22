@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright (c) 2017, Gluon and/or its affiliates.
+    All rights reserved. Use is subject to license terms.
+
+    This file is available and licensed under the following license:
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the distribution.
+   - Neither the name of Oracle Corporation and Gluon nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.HomepageController">
+   <children>
+      <Label layoutX="47.0" layoutY="264.0" text="VAI AL FORUM">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="192.0" layoutY="264.0" text="VAI AL PROFILO" AnchorPane.rightAnchor="43.80000000000001">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="437.0" text="RICHIEDI DI ESSERE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="456.0" text="MODERATORE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label layoutX="101.0" layoutY="35.0" text="HOMEPAGE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="66.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@house-solid.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button layoutX="57.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToForum" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@comments-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#goToProfile" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0; -fx-border-radius: 100;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@user-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="61.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickBecomeModerator" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@scale-unbalanced-flip-solid.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="206.0" layoutY="358.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@right-from-bracket-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="230.0" layoutY="437.0" text="ESCI">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="logoutLabel" alignment="CENTER" layoutX="33.0" layoutY="140.0" prefHeight="18.0" prefWidth="261.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

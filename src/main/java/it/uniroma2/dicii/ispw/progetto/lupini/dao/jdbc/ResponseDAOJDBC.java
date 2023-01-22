@@ -29,7 +29,6 @@ public class ResponseDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
             throw new PersistanceLayerNotAvailable("error in opening the connection");
         }
     }

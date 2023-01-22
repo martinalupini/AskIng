@@ -67,7 +67,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                it.uniroma2.dicii.ispw.progetto.lupini.view.interfacce/it.uniroma2.dicii.ispw.progetto.lupini.view.interfacce.HelloApplication
+                                it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfacce/it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfacce.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

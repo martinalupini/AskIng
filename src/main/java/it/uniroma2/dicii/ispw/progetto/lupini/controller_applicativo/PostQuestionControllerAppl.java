@@ -9,7 +9,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundExceptio
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
-import it.uniroma2.dicii.ispw.progetto.lupini.view.QuestionFormController;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.QuestionFormController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,12 @@ public class PostQuestionControllerAppl {
             questionDAOJDBC.saveNewQuestion(newQuestion, section);
 
             //aggiorno points utente
+
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {
                 IncreaseUserPoints.increaseUserPoints();
             }
+
+
 
             //ora bisogna informare l'utente che l'operazione è andata a buon fine
             this.questionFormController.publicationSuccessful();

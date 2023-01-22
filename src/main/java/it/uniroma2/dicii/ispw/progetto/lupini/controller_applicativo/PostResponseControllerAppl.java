@@ -10,7 +10,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundExceptio
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
-import it.uniroma2.dicii.ispw.progetto.lupini.view.ViewQuestionController;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.ViewQuestionController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +67,8 @@ public class PostResponseControllerAppl {
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {
                 IncreaseUserPoints.increaseUserPoints();
             }
+
+
 
             this.viewQuestionController.responseSuccessful(responseBean);
 

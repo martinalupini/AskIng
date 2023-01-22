@@ -38,6 +38,7 @@ public class TestUserProfileDAOJDBC {
         UserProfileDAOJDBC userDAO = new UserProfileDAOJDBC();
         try {
             userDAO.increaseBadBehaviourUser("giada");
+            assertThat("non vuoto", userDAO!=null);
         } catch (ImpossibleToUpdate e) {
             throw new RuntimeException(e);
         }

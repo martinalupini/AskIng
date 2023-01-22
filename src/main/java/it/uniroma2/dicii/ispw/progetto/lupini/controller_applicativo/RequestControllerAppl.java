@@ -8,8 +8,8 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
-import it.uniroma2.dicii.ispw.progetto.lupini.view.DoNewRequestController;
-import it.uniroma2.dicii.ispw.progetto.lupini.view.ViewRequestController;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.DoNewRequestController;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.ViewRequestController;
 
 import java.util.List;
 

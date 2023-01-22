@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.ViewQuestionController">
+   <children>
+      <Pane prefHeight="72.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
+         <children>
+            <Label layoutX="95.0" layoutY="19.0" text="DOMANDA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="risposteText" layoutX="30.0" layoutY="253.0" text="RISPOSTE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="keyword2" alignment="CENTER" editable="false" layoutX="110.0" layoutY="122.0" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #c1cbcf; -fx-background-radius: 20;" />
+      <Label fx:id="usernameLabel" alignment="CENTER" layoutX="30.0" layoutY="82.0" prefHeight="26.0" prefWidth="146.0" style="-fx-border-color: black; -fx-background-color: #c1cbcf; -fx-background-radius: 10; -fx-border-radius: 10;">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets left="5.0" />
+         </opaqueInsets>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@user-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <ScrollPane fx:id="scrollpane" hbarPolicy="NEVER" layoutX="30.0" layoutY="273.0" prefHeight="228.0" prefWidth="274.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="responseLayout" prefHeight="230.0" prefWidth="284.0" spacing="10.0">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="55.0" layoutY="572.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="242.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="23.799999999999997" AnchorPane.leftAnchor="70.0">
+         <children>
+            <HBox layoutX="3.0" layoutY="2.0" prefHeight="58.0" prefWidth="222.0" spacing="25.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="45.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToHomepage" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@house-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="1.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToForum" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@comments-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#goToProfile" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@user-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Label fx:id="questionLabel" alignment="TOP_LEFT" layoutX="30.0" layoutY="160.0" prefHeight="86.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: black;" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="sendButton" layoutX="273.0" layoutY="525.0" mnemonicParsing="false" onAction="#replyToQuestion" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 15;" text="INVIA">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <TextField fx:id="keyword1" alignment="CENTER" editable="false" layoutX="29.0" layoutY="122.0" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #c1cbcf; -fx-background-radius: 20;" />
+      <TextField fx:id="keyword3" alignment="CENTER" editable="false" layoutX="191.0" layoutY="122.0" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #c1cbcf; -fx-background-radius: 20;" />
+      <TextField fx:id="responseText" alignment="TOP_LEFT" layoutX="33.0" layoutY="518.0" prefHeight="48.0" prefWidth="232.0" promptText="Rispondi qui..." />
+      <Label fx:id="errorLabel" layoutX="32.0" layoutY="195.0" prefHeight="58.0" prefWidth="274.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+   </children>
+</AnchorPane>

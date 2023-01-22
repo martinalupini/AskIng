@@ -16,6 +16,8 @@ import java.sql.SQLException;
 
 public class UserProfileDAOJDBC implements UserProfileDAO {
 
+
+    private static final String ERR_REG = "Error in registration of changes";
     @Override
     public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
@@ -27,7 +29,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
-            return UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
+            return  UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("DB is currently not available");
@@ -92,7 +94,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new ImpossibleToUpdate("Error in registration of changes");
+            throw new ImpossibleToUpdate(ERR_REG);
         }
     }
 
@@ -121,7 +123,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new ImpossibleToUpdate("Error in registration of changes");
+            throw new ImpossibleToUpdate(ERR_REG);
         }
     }
 
@@ -150,7 +152,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            throw new ImpossibleToUpdate("Error in registration of changes");
+            throw new ImpossibleToUpdate(ERR_REG);
         }
 
     }

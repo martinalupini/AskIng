@@ -13,7 +13,7 @@ import java.io.*;
 
 public class UserProfileDAOCSV implements UserProfileDAO {
 
-    private static final String CSV_FILE_NAME = "src/main/resources/it/uniroma2/dicii/ispw/progetto/lupini/view/UserData.csv";
+    private static final String CSV_FILE_NAME = "src/main/resources/it/uniroma2/dicii/ispw/progetto/lupini/controller_grafico/UserData.csv";
 
     @Override
     public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {

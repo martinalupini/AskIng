@@ -10,17 +10,17 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-import it.uniroma2.dicii.ispw.progetto.lupini.view.LoginController;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.LoginControllerGrafico;
 
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 
 public class LoginControllerAppl {
 
-    LoginController viewCtl;
+    LoginControllerGrafico viewCtl;
     UserProfileDAO userDAO;
 
-    public LoginControllerAppl(LoginController ctl) {
+    public LoginControllerAppl(LoginControllerGrafico ctl) {
         this.viewCtl = ctl;
     }
 
@@ -65,6 +65,7 @@ public class LoginControllerAppl {
         } catch (ItemNotFound e) {
             throw new ItemNotFound("Username o password errati. Riprovare. ");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi tecnici. Riprovare più tardi");
         }
 

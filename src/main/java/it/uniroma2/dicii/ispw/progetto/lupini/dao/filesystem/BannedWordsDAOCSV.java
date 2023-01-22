@@ -12,7 +12,9 @@ import java.util.List;
 
 public class BannedWordsDAOCSV {
 
-    private static final String CSV_FILE_NAME = "src/main/resources/it/uniroma2/dicii/ispw/progetto/lupini/view/bannedWords.csv";
+    private static final String CSV_FILE_NAME = "src/main/resources/it/uniroma2/dicii/ispw/progetto/lupini/controller_grafico/bannedWords.csv";
+
+    private BannedWordsDAOCSV(){}
 
     public static List<String> retrieveBannedWords() throws PersistanceLayerNotAvailable {
         File fd = new File(CSV_FILE_NAME);
