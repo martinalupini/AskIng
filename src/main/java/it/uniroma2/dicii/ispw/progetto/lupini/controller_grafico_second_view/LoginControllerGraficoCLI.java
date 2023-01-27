@@ -4,14 +4,14 @@ import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LoginContro
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 
-public class LoginControllerGraficoCLI {
+public class LoginControllerGraficoCLI extends EmptyScreenControllerGraficoCLI{
 
 
-    public void selectedLogin(String username, String passowrd) throws ItemNotFound, PersistanceLayerNotAvailable {
+    public void selectedLogin(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
 
         LoginControllerAppl logctl = new LoginControllerAppl(null);
 
-        logctl.login(username,passowrd);
+        logctl.login(username,password);
 
 
     }

@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostResponseControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewResponseControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewQuestionController extends EmptyScreen{
+public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface {
 
     QuestionBean currentQuestion;
 
@@ -157,6 +158,7 @@ public class ViewQuestionController extends EmptyScreen{
     }
 
 
+    @Override
     public void bannedWordPresent() {
         errorLabel.setText("Sono state rilevate delle parole non adeguate nella tua risposta. Il tuo punteggio BadBehaviour è stato aumentato.");
     }
@@ -168,6 +170,7 @@ public class ViewQuestionController extends EmptyScreen{
         showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
     }
 
+    @Override
     public void responseSuccessful(ResponseBean r) {
         this.currentQuestion.addResponse(r);
 

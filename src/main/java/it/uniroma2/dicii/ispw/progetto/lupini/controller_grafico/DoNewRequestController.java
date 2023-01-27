@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import javafx.event.ActionEvent;
@@ -11,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 
-public class DoNewRequestController extends EmptyScreen{
+public class DoNewRequestController extends EmptyScreen implements NewRequestControllerGraficoInterface {
 
     @FXML
     private Label behaviourLabel;
@@ -76,6 +77,11 @@ public class DoNewRequestController extends EmptyScreen{
         sendButton.setVisible(false);
         requestText.setVisible(false);
         statusLabel.setText("RICHIESTA MANDATA CON SUCCESSO");
+
+    }
+
+    @Override
+    public void notifyUser() {
 
     }
 

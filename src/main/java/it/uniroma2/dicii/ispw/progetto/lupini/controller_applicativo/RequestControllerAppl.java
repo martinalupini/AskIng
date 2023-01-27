@@ -1,34 +1,46 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.ManageRequestsContrGrafInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.DoNewRequestController;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.ViewRequestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestControllerAppl {
 
-    ViewRequestController viewRequestController;
-    DoNewRequestController doNewRequestController;
+    private ManageRequestsContrGrafInterface moderatorControllerGrafico;
+    private NewRequestControllerGraficoInterface userControllerGrafico;
 
-    public RequestControllerAppl(DoNewRequestController doNewRequestController, ViewRequestController viewRequestController){
-        this.doNewRequestController = doNewRequestController;
-        this.viewRequestController = viewRequestController;
+    public RequestControllerAppl(NewRequestControllerGraficoInterface doNewRequestController, ManageRequestsContrGrafInterface viewRequestController){
+        this.userControllerGrafico = doNewRequestController;
+        this.moderatorControllerGrafico = viewRequestController;
     }
 
-    public List<Request> getRequests() throws PersistanceLayerNotAvailable {
+    public List<RequestBean> getRequests() throws PersistanceLayerNotAvailable {
 
+        List<Request> requests;
+        List<RequestBean> req = new ArrayList<>();
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
 
         try {
-            return requestDAOJDBC.retrieveRequests();
+            requests =  requestDAOJDBC.retrieveRequests();
+            for (Request r : requests) {
+
+                req.add(convertRequest(r));
+
+            }
+
+            return req;
         } catch (PersistanceLayerNotAvailable e) {
             throw new PersistanceLayerNotAvailable("Spacenti, si sono verificati dei problemi nel caricamento delle risposte. Riprovare più tardi");
         }
@@ -41,7 +53,8 @@ public class RequestControllerAppl {
 
             RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
             requestDAOJDBC.registerNewRequest(requestBean.getText(), requestBean.getUsername());
-            doNewRequestController.updateStatus();
+            userControllerGrafico.updateStatus();
+            
 
 
         } catch (PersistanceLayerNotAvailable e) {
@@ -68,14 +81,25 @@ public class RequestControllerAppl {
 
             //only now I can confirm the right execution of the operation
 
-                this.viewRequestController.updateStatus("ACCETTATA");
+                this.moderatorControllerGrafico.updateStatus("ACCETTATA");
             }else{
-                this.viewRequestController.updateStatus("RIFIUTATA");
+                this.moderatorControllerGrafico.updateStatus("RIFIUTATA");
             }
 
 
         } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {
             throw new PersistanceLayerNotAvailable("Spiacenti la richiesta non può essere accetta o rifiuata per motivi tecnici. Riprovare più tardi.");
         }
+    }
+
+
+    private RequestBean  convertRequest(Request req ){
+
+        String username = req.getAuthor().getUsername();
+        String email = req.getAuthor().getEmail();
+        int points = ((RegularUser)req.getAuthor().getRole()).getPoints();
+        int badBehaviour = ((RegularUser)req.getAuthor().getRole()).getBadBehaviour();
+
+        return new RequestBean(req.getText(), username,email,points, badBehaviour);
     }
 }

@@ -4,23 +4,24 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.CheckBannedWords;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.IncreaseUserPoints;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewResponseControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ResponseDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.ViewQuestionController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostResponseControllerAppl {
 
-    private ViewQuestionController viewQuestionController;
 
-    public PostResponseControllerAppl(ViewQuestionController viewQuestionController){
-        this.viewQuestionController = viewQuestionController;
+    private NewResponseControllerInterface controllerGrafico;
+
+    public PostResponseControllerAppl(NewResponseControllerInterface viewQuestionController){
+        this.controllerGrafico = viewQuestionController;
     }
     public List<ResponseBean> returnResponsesOfQuestion(int questionId) throws PersistanceLayerNotAvailable {
 
@@ -70,12 +71,12 @@ public class PostResponseControllerAppl {
 
 
 
-            this.viewQuestionController.responseSuccessful(responseBean);
+            this.controllerGrafico.responseSuccessful(responseBean);
 
         } catch (PersistanceLayerNotAvailable e) {
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
         } catch (BannedWordFoundException e) {
-            this.viewQuestionController.bannedWordPresent();
+            this.controllerGrafico.bannedWordPresent();
         }
 
     }

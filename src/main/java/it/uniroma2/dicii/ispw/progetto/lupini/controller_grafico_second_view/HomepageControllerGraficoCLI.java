@@ -1,11 +1,10 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.second_view.ForumView;
-import it.uniroma2.dicii.ispw.progetto.lupini.second_view.LoginView;
-import it.uniroma2.dicii.ispw.progetto.lupini.second_view.ProfileView;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LogoutControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.*;
 
-public class HomepageControllerGraficoCLI {
+public class HomepageControllerGraficoCLI extends EmptyScreenControllerGraficoCLI{
 
     public void goToForum(){
         ForumView forumView = new ForumView();
@@ -20,5 +19,27 @@ public class HomepageControllerGraficoCLI {
         }
         ProfileView profileView = new ProfileView();
         profileView.displayProfile();
+    }
+
+    public void exit(){
+        if(!CurrentUserProfileBean.getProfileInstance().isLogged())  return;
+        LogoutControllerAppl logoutControllerAppl =new LogoutControllerAppl();
+        logoutControllerAppl.exit();
+        System.out.println("Logout effettuato con successo!");
+    }
+
+    public void selectedBecomeModerator(){
+        if(!CurrentUserProfileBean.getProfileInstance().isLogged()){
+            LoginView loginView = new LoginView();
+            loginView.displayForm();
+        }
+
+        BecomeModeratorFormView becomeModeratorFormView = new BecomeModeratorFormView();
+        becomeModeratorFormView.displayForm();
+    }
+
+    public void selectedViewModeratorRequests(){
+        ManageRequestsView manageRequestsView = new ManageRequestsView();
+        manageRequestsView.displayRequests();
     }
 }

@@ -1,13 +1,17 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.Notification;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.ManageRequestsContrGrafInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class ViewRequestController extends  EmptyScreen{
+import java.text.SimpleDateFormat;
+
+public class ViewRequestController extends  EmptyScreen implements ManageRequestsContrGrafInterface {
 
     @FXML
     private Label behaviourLabel;
@@ -66,11 +70,20 @@ public class ViewRequestController extends  EmptyScreen{
         }
     }
 
+    @Override
     public void updateStatus(String s){
 
         acceptButton.setVisible(false);
         declineButton.setVisible(false);
         statusLabel.setText("RICHIESTA "+s+" CON SUCCESSO");
+    }
+
+    @Override
+    public void notifyModeratorNewRequest() {
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        Notification notification = new Notification();
+        String destination= "moderators_"+timeStamp;
+        notification.notify(destination, "E' arrivata una nuova richiesta per diventare moderatore. Controllare la propria sezione");
     }
 
 }

@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewQuestionControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
@@ -11,10 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class QuestionFormController extends EmptyScreen{
+public class QuestionFormController extends EmptyScreen implements NewQuestionControllerInterface {
 
     @FXML
     private TextField keywordField;
@@ -34,14 +33,11 @@ public class QuestionFormController extends EmptyScreen{
     @FXML
     public void sendQuestion(ActionEvent event) {
 
-        List<String> keywords = parseListKeywords(keywordField.getText());
         String author = CurrentUserProfileBean.getProfileInstance().getUsername();
-
-
         QuestionBean questionBean = new QuestionBean(author);
 
         try{
-            questionBean.setKeywords(keywords);
+            questionBean.setKeywords(keywordField.getText());
             questionBean.setText(textField.getText());
 
             //ora bisogna inviare la domanda al controller applicativo il quale controllerà se le keyword o il testo
@@ -58,32 +54,17 @@ public class QuestionFormController extends EmptyScreen{
 
     }
 
+    @Override
     public void bannedWordPresent(){
         errorLabel.setText("Sono state rilevate delle parole non adeguate nel testo della domanda. Il tuo punteggio BadBehaviour è stato aumentato.");
     }
 
+    @Override
     public void publicationSuccessful(){
         errorLabel.setText("La tua domanda è stata pubblicata");
     }
 
-    private List<String> parseListKeywords(String text) {
-        int i;
 
-        List<String> list = new ArrayList<>();
-        String[] words  = text.split(" ");
-
-        //Simply check to verify that double blank space or punctuation characters are not
-        //considered as a word
-        for(i=0; i< words.length; i++){
-            if(words[i].matches("^[\\s\\p{P}]*$")){
-                continue;
-            }
-            list.add(words[i]);
-        }
-
-        return list;
-
-    }
 
 
 }

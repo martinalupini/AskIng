@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.CheckBannedWords;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.IncreaseUserPoints;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewQuestionControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
@@ -16,10 +17,10 @@ import java.util.List;
 
 public class PostQuestionControllerAppl {
 
-    private QuestionFormController questionFormController;
+    private NewQuestionControllerInterface controllerGrafico;
 
-    public PostQuestionControllerAppl(QuestionFormController questionFormController){
-        this.questionFormController = questionFormController;
+    public PostQuestionControllerAppl(NewQuestionControllerInterface questionFormController){
+        this.controllerGrafico = questionFormController;
     }
 
 
@@ -44,13 +45,13 @@ public class PostQuestionControllerAppl {
 
 
             //ora bisogna informare l'utente che l'operazione è andata a buon fine
-            this.questionFormController.publicationSuccessful();
+            this.controllerGrafico.publicationSuccessful();
 
 
         } catch (PersistanceLayerNotAvailable e) {
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
         } catch (BannedWordFoundException e) {
-            this.questionFormController.bannedWordPresent();
+            this.controllerGrafico.bannedWordPresent();
         }
     }
 

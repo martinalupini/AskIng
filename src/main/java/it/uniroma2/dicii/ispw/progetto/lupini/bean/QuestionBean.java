@@ -51,7 +51,8 @@ public class QuestionBean extends  SubjectQuestionBean{
 
 
 
-    public void setKeywords(List<String> keywords) throws  KeywordsException{
+    public void setKeywords(String listKeywords) throws  KeywordsException{
+            List<String> keywords = parseListKeywords(listKeywords);
             checkKeywords(keywords);
             this.keywords = keywords;
     }
@@ -77,7 +78,24 @@ public class QuestionBean extends  SubjectQuestionBean{
         return id;
     }
 
+    private List<String> parseListKeywords(String text) {
+        int i;
 
+        List<String> list = new ArrayList<>();
+        String[] words  = text.split(" ");
+
+        //Simply check to verify that double blank space or punctuation characters are not
+        //considered as a word
+        for(i=0; i< words.length; i++){
+            if(words[i].matches("^[\\s\\p{P}]*$")){
+                continue;
+            }
+            list.add(words[i]);
+        }
+
+        return list;
+
+    }
 
 
 }
