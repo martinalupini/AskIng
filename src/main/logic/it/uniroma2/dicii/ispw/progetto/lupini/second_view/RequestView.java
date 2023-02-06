@@ -32,17 +32,17 @@ public class RequestView {
         while (true) {
             line = reader.nextLine();
             try{
-            if (line.toLowerCase().equals("a")) {
+            if (line.equalsIgnoreCase("a")) {
 
                 this.controller.acceptRequest(this.request);
                 return;
 
-            }if(line.toLowerCase().equals("b")){
+            }else if(line.equalsIgnoreCase("b")){
 
                 this.controller.declineRequest(this.request);
                 return;
 
-            }if (line.toLowerCase().equals("c")) {
+            }else if (line.equalsIgnoreCase("c")) {
                 this.controller.goToHomepage();
                 return;
             } else {
@@ -54,7 +54,7 @@ public class RequestView {
         }
     }
 
-    public void updateStatusRequest(String s) {
-        System.out.println("RICHIESTA "+s+" CON SUCCESSO");
+    public void updateStatusRequest(String status) {
+        System.out.println("RICHIESTA "+status+" CON SUCCESSO");
     }
 }

@@ -42,7 +42,7 @@ public class ManageRequestsView {
 
         while (true) {
             line = reader.nextLine();
-            if (line.toLowerCase().equals("a")) {
+            if (line.equalsIgnoreCase("a")) {
                 System.out.println("Inserire il numero della richiesta che si vuole consultare: ");
                 i = reader.nextInt();
                 this.controller.goToRequest(i);
@@ -50,7 +50,7 @@ public class ManageRequestsView {
 
 
             }
-            if (line.toLowerCase().equals("b")) {
+            if (line.equalsIgnoreCase("b")) {
                 this.controller.goToHomepage();
                 return;
             } else {

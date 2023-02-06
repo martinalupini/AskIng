@@ -34,10 +34,6 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
     private Label descriptionLabel;
 
 
-    public void newRequest(RequestBean request){
-        requests.add(request);
-    }
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         requests = requests();

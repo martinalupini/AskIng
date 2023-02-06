@@ -5,6 +5,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.UserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.BecomeModeratorFormView;
@@ -24,7 +25,7 @@ public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGr
         try {
             RequestUserAPI requestUserAPI = new RequestUserAPI(this, null);
             requestUserAPI.sendRequest(requestBean);
-        }catch(PersistanceLayerNotAvailable e){
+        }catch(PersistanceLayerNotAvailable | ItemNotFound e){
             throw new PersistanceLayerNotAvailable("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");
         }catch(RequestAlreadyDone e){
             throw new RequestAlreadyDone("Impossibile fare una nuova richiesta perchè una richiesta fatta da te è ancora in sospeso.");

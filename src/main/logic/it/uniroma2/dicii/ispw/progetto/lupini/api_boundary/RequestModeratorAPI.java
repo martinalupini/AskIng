@@ -5,17 +5,16 @@ import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.Not
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.ManageRequestsContrGrafInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
-
 import java.text.SimpleDateFormat;
 
 public class RequestModeratorAPI {
 
     private ManageRequestsContrGrafInterface moderatorControllerGrafico;
-    private RequestControllerAppl controllerAppl;
+    private RequestControllerAppl requestControllerAppl;
 
-    public RequestModeratorAPI(ManageRequestsContrGrafInterface controllerGrafico, RequestControllerAppl controllerAppl){
+    public RequestModeratorAPI(ManageRequestsContrGrafInterface controllerGrafico, RequestControllerAppl requestControllerAppl){
         this.moderatorControllerGrafico = controllerGrafico;
-        this.controllerAppl = controllerAppl;
+        this.requestControllerAppl = requestControllerAppl;
     }
 
     public void updateRequestState(String username, String state) throws PersistanceLayerNotAvailable, ImpossibleToUpdate {

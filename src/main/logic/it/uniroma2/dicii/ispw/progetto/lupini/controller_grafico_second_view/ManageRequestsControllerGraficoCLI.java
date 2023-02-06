@@ -28,8 +28,8 @@ public class ManageRequestsControllerGraficoCLI extends EmptyScreenControllerGra
 
     public void goToRequest(int i) {
 
-        RequestView view = new RequestView(this.requests.get(i-1));
-        view.displayRequest();
+        RequestView requestView = new RequestView(this.requests.get(i-1));
+        requestView.displayRequest();
     }
 
 

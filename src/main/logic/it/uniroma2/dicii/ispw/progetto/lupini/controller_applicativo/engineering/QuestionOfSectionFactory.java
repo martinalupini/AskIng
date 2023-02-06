@@ -109,7 +109,7 @@ public class QuestionOfSectionFactory {
                 }
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
 

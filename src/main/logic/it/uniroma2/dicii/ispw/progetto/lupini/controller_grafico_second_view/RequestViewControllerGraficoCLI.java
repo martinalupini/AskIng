@@ -29,8 +29,8 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
 
 
     @Override
-    public void updateStatus(String s) {
-        this.view.updateStatusRequest(s);
+    public void updateStatus(String status) {
+        this.view.updateStatusRequest(status);
         goToHomepage();
 
     }

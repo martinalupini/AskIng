@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import javafx.event.ActionEvent;
@@ -62,7 +63,7 @@ public class DoNewRequestController extends EmptyScreen implements NewRequestCon
         RequestUserAPI requestAPI = new RequestUserAPI(this, null);
         try {
             requestAPI.sendRequest(requestBean);
-        } catch (PersistanceLayerNotAvailable e) {
+        } catch (PersistanceLayerNotAvailable | ItemNotFound e) {
             descriptionLabel.setTextFill(Paint.valueOf("red"));
             descriptionLabel.setText("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");
         } catch (RequestAlreadyDone e) {

@@ -44,7 +44,7 @@ public class RequestDAOJDBC {
             } while (rs.next());
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
@@ -52,7 +52,7 @@ public class RequestDAOJDBC {
     }
 
 
-    public void registerNewRequest(String text, String username) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
+    public void registerNewRequest(Request request) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
 
@@ -61,8 +61,8 @@ public class RequestDAOJDBC {
                 Connection connDB = getConn.getConnection();
 
                 PreparedStatement stmt = connDB.prepareStatement("insert into requests(text, author) values  (?, ?)");
-                stmt.setString(1, text);
-                stmt.setString(2, username);
+                stmt.setString(1, request.getText());
+                stmt.setString(2, request.getAuthor().getUsername());
                 stmt.executeUpdate();
 
 
@@ -72,7 +72,7 @@ public class RequestDAOJDBC {
                 } else {
                     throw new PersistanceLayerNotAvailable("Error in registration of request");
                 }
-            } catch (ClassNotFoundException | IOException e) {
+            } catch (ClassNotFoundException e) {
                 throw new PersistanceLayerNotAvailable("Error in registration of request");
             }
     }
@@ -90,7 +90,7 @@ public class RequestDAOJDBC {
             stmt.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("Error in elimination of request");
         }
 

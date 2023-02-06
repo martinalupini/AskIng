@@ -46,16 +46,15 @@ public class SectionView {
 
         while(true){
             line = reader.nextLine();
-            if(line.toLowerCase().equals("a")){
+            if(line.equalsIgnoreCase("a")){
                 System.out.println("Inserire il numero della domanda che si vuole consultare: ");
                 i = reader.nextInt();
                 this.controller.goToQuestion(i);
                 return;
-            }
-            if(line.toLowerCase().equals("b")){
+            }else if(line.equalsIgnoreCase("b")){
                 this.controller.doNewQuestion();
                 return;
-            }if(line.toLowerCase().equals("c")){
+            }else if(line.equalsIgnoreCase("c")){
                 this.controller.goToHomepage();
                 return;
             }

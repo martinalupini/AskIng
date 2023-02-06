@@ -16,7 +16,6 @@ public class BecomeModeratorFormView {
 
     public void displayForm(){
         String text;
-        String line;
         Scanner reader = new Scanner(System.in);
 
         System.out.println("Manda qui la tua richiesta per diventare moderatore.\n" +

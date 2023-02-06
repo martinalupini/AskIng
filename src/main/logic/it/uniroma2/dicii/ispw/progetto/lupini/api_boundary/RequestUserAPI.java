@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.RequestControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.Notification;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 
@@ -19,7 +20,7 @@ public class RequestUserAPI {
         this.userControllerGrafico = contrGR;
     }
 
-    public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
+    public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
         //prima istanzio il controller applicativo (essendo che il caso d'uso è stato appena inizializzato l'attributo rispettivo avrà valore null)
         this.requestControllerAppl=  new RequestControllerAppl(this, null);
         //poi chiamo il metodo del controller applicativo per processare la richiesta

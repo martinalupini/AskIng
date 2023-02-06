@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostResponseControllerAppl;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface {
+public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface, ObserverOfQuestionBean {
 
     QuestionBean currentQuestion;
 
@@ -167,7 +168,7 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
     }
 
 
-    @Override
+
     public void update(){
 
         showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));

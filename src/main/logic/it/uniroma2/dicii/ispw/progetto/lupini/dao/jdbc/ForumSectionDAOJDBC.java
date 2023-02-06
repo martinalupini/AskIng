@@ -6,8 +6,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.model.ForumSection;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ public class ForumSectionDAOJDBC {
     public ForumSection retrieveSection(String sectionName) throws PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
         ForumSection forumSection = new ForumSection(sectionName);
-        List<Question>  list = new ArrayList<>();
 
         try {
             Connection connDB = getConn.getConnection();
@@ -59,7 +56,7 @@ public class ForumSectionDAOJDBC {
             } while (rs.next());
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             throw new PersistanceLayerNotAvailable("DB is currently not available");
         }

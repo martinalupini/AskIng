@@ -23,11 +23,11 @@ public class ForumView {
         while(true) {
             line = scanner.nextLine();
 
-            if ((line.toLowerCase()).equals("b")) {
+            if (line.equalsIgnoreCase("b")){
                 controller.goToHomepage();
                 return;
             }
-            if ((line.toLowerCase().equals("a"))) {
+            if (line.equalsIgnoreCase("a")){
                 goToSectionSelected(scanner);
             }
         }

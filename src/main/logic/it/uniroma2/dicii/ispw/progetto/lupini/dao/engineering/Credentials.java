@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering;
 
 public class Credentials {
 
-    private final String pass= "Marrari11!";
+    private final static String pass= "Marrari11!";
 
     private static Credentials instance = null;
 

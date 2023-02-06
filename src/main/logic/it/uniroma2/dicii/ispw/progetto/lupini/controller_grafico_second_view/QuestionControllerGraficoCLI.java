@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostResponseControllerAppl;
@@ -12,7 +13,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.second_view.LoginView;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.QuestionView;
 import java.util.List;
 
-public class QuestionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI implements NewResponseControllerInterface {
+public class QuestionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI implements NewResponseControllerInterface, ObserverOfQuestionBean {
 
     private QuestionBean question;
 
@@ -62,7 +63,6 @@ public class QuestionControllerGraficoCLI extends EmptyScreenControllerGraficoCL
 
     }
 
-    @Override
     public void update(){
         //l'update fa si che venga mostrata la risposta caricata
         view.displayQuestion();

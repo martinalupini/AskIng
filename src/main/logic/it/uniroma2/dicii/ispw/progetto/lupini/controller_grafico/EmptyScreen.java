@@ -1,7 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LogoutControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.UserNotLogged;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EmptyScreen  extends  ObserverOfQuestionBean{
+public class EmptyScreen{
 
     private static final String ERROR_GUI = "Error on starting the GUI";
 
@@ -168,8 +167,4 @@ public class EmptyScreen  extends  ObserverOfQuestionBean{
         }
     }
 
-   @Override
-    public void update() {
-        //void because is overrode in ViewQuestionController
-    }
 }

@@ -10,7 +10,9 @@ public class Notification {
     public void notify(String destination, String message){
         File notification = new File("src/main/resources/notifications/Notification_for_"+destination+".txt");
         try {
-            notification.createNewFile();
+            if(notification.createNewFile() == false){
+                return;
+            }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(notification));
         writer.write(message);

@@ -6,9 +6,12 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
 public class RequestControllerAppl {
 
@@ -23,14 +26,16 @@ public class RequestControllerAppl {
         this.moderatorBoundary = moderatorBoundary;
     }
 
-    public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
+    public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
         //The aim of this method is to register the new request and notify the view controller of moderators
 
+           UserProfile author = new UserProfileDAOJDBC().retrieveUserFromUsername(requestBean.getUsername());
+           Request request = new Request(requestBean.getText(), author);
 
-            RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
 
             //salvataggio della richiesta sulla memoria di persistenza
-            requestDAOJDBC.registerNewRequest(requestBean.getText(), requestBean.getUsername());
+            RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
+            requestDAOJDBC.registerNewRequest(request);
 
             //aggiorno l'utente che l'invio della richiesta è andata a buon fine
             regularUserBoundary.updateStatus();

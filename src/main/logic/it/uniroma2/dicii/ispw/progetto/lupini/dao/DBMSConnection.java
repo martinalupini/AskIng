@@ -1,8 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.dao;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.engineering.Credentials;
-
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,7 +23,7 @@ public class DBMSConnection {
         return instanceConnection;
     }
 
-    public Connection getConnection() throws SQLException, ClassNotFoundException, IOException {
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
 
         if(conn == null) {
 

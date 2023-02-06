@@ -27,7 +27,7 @@ public class ProfileView {
 
         while(true) {
             line = reader.nextLine();
-            if(line.toLowerCase().equals("h")){
+            if(line.equalsIgnoreCase("h")){
                 this.controller.goToHomepage();
                 return;
             }else{

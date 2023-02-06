@@ -2,7 +2,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import org.junit.Test;
 
@@ -32,18 +31,6 @@ public class TestRequestDAO {
         assertThat("non vuoto", list!=null);
     }
 
-    @Test
-    public void testRegisterNewRequest(){
-        RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
-        try {
-            requestDAOJDBC.registerNewRequest("ciao", "luigi");
-        } catch (PersistanceLayerNotAvailable | RequestAlreadyDone e) {
-            e.printStackTrace();
-        }
-
-        assertThat( "non vuoto", requestDAOJDBC != null);
-
-    }
 
     @Test
     public void testDeleteRequestFromUsername(){

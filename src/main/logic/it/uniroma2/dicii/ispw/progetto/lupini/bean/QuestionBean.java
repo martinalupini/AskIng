@@ -18,14 +18,6 @@ public class QuestionBean extends  SubjectQuestionBean{
 
     List<ResponseBean> responses= new ArrayList<>();
 
-    public void addResponse(ResponseBean r){
-        responses.add(r);
-        notifyObservers();
-    }
-
-    public List<ResponseBean> getResponses() {
-        return responses;
-    }
 
     public QuestionBean(String user){
         this.username = user;
@@ -38,6 +30,16 @@ public class QuestionBean extends  SubjectQuestionBean{
         this.keywords = keywords;
 
     }
+
+    public void addResponse(ResponseBean r){
+        responses.add(r);
+        notifyObservers();
+    }
+
+    public List<ResponseBean> getResponses() {
+        return responses;
+    }
+
 
     //The syntax check of user inserted data is in charge of the bean class
     private void checkKeywords( List<String> keywords)  throws KeywordsException{
@@ -52,9 +54,9 @@ public class QuestionBean extends  SubjectQuestionBean{
 
 
     public void setKeywords(String listKeywords) throws  KeywordsException{
-            List<String> keywords = parseListKeywords(listKeywords);
-            checkKeywords(keywords);
-            this.keywords = keywords;
+            List<String> keywords_list = parseListKeywords(listKeywords);
+            checkKeywords(keywords_list);
+            this.keywords = keywords_list;
     }
 
     public void setText(String text) throws TextException {

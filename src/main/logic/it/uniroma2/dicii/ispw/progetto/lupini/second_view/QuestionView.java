@@ -52,7 +52,7 @@ public class QuestionView {
 
         while (true) {
             line = reader.nextLine();
-            if (line.toLowerCase().equals("a")) {
+            if (line.equalsIgnoreCase("a")) {
                 try {
                     System.out.println("Inserire qui la propria risposta: ");
                     line = reader.nextLine();
@@ -64,7 +64,7 @@ public class QuestionView {
                 }
 
             }
-            if (line.toLowerCase().equals("b")) {
+            if (line.equalsIgnoreCase("b")) {
                 this.controller.goToHomepage();
                 return;
             } else {

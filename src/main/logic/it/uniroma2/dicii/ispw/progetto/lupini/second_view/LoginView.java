@@ -17,14 +17,15 @@ public class LoginView {
         Scanner reader = new Scanner(System.in);
 
         System.out.println("""
-                \n\n------------------------------------------LOGIN------------------------------------------
+                ------------------------------------------LOGIN------------------------------------------
 
-                Per eseguire questa operazione devi prima effettuare il login.\nInserire "c" se si vuole continuare oppure "h" se si vuole tornare all'homepage: 
+                Per eseguire questa operazione devi prima effettuare il login.
+                Inserire "c" se si vuole continuare oppure "h" se si vuole tornare all'homepage: 
 
                 """);
 
         line = reader.nextLine();
-        if(line.toLowerCase().equals("h")){
+        if(line.equalsIgnoreCase("h")){
             controllerG.goToHomepage();
             return;
         }
