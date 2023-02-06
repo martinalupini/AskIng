@@ -10,7 +10,7 @@ public class Notification {
     public void notify(String destination, String message){
         File notification = new File("src/main/resources/notifications/Notification_for_"+destination+".txt");
         try {
-            if(notification.createNewFile() == false){
+            if(!notification.createNewFile()){
                 return;
             }
 

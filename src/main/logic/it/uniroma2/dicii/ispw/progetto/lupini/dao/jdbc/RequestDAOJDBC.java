@@ -6,8 +6,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

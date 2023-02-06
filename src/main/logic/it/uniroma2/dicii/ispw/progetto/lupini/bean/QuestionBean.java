@@ -54,9 +54,9 @@ public class QuestionBean extends  SubjectQuestionBean{
 
 
     public void setKeywords(String listKeywords) throws  KeywordsException{
-            List<String> keywords_list = parseListKeywords(listKeywords);
-            checkKeywords(keywords_list);
-            this.keywords = keywords_list;
+            List<String> keywordsList = parseListKeywords(listKeywords);
+            checkKeywords(keywordsList);
+            this.keywords = keywordsList;
     }
 
     public void setText(String text) throws TextException {

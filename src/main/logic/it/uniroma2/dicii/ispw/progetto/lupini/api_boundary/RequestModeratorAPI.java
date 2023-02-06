@@ -18,8 +18,8 @@ public class RequestModeratorAPI {
     }
 
     public void updateRequestState(String username, String state) throws PersistanceLayerNotAvailable, ImpossibleToUpdate {
-        RequestControllerAppl requestControllerAppl = new RequestControllerAppl(null, this);
-        requestControllerAppl.updateRequestState(username, state);
+        RequestControllerAppl controllerAppl = new RequestControllerAppl(null, this);
+        controllerAppl.updateRequestState(username, state);
     }
 
     public void updateStatus(String status){
