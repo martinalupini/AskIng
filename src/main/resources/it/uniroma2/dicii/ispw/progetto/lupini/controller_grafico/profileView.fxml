@@ -135,5 +135,6 @@
             <Insets left="10.0" />
          </padding>
       </Label>
+      <Label layoutX="37.0" layoutY="504.0" prefHeight="58.0" prefWidth="270.0" style="-fx-background-color: white;" text="*ogni volta che le tue domande verranno rimosse da un moderatore o tenterai di scrivere parole inappropriate questo punteggio verrà aumentato." wrapText="true" />
    </children>
 </AnchorPane>

@@ -133,7 +133,7 @@ public class EmptyScreen{
             root = loader.load();
 
             DoNewRequestController doNewRequestController = loader.getController();
-            doNewRequestController.loadData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
+            doNewRequestController.displayUserData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);

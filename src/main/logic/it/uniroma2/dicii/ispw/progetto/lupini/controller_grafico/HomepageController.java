@@ -17,6 +17,9 @@ public class HomepageController extends EmptyScreen{
         @FXML
         private Label logoutLabel;
 
+        @FXML
+        private Label errorLabel;
+
 
         @FXML
         void visualizeRequests(ActionEvent event) {
@@ -43,5 +46,10 @@ public class HomepageController extends EmptyScreen{
 
         public void setLogoutLabel(String logoutLabel) {
                 this.logoutLabel.setText(logoutLabel);
+        }
+
+        @FXML
+        void removeQuestion(ActionEvent event) {
+                this.errorLabel.setText("NOT IMPLEMENTED");
         }
 }

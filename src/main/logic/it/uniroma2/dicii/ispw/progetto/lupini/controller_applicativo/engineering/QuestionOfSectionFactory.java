@@ -4,12 +4,11 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineerin
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.ForumSection;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,11 @@ public class QuestionOfSectionFactory {
 
     private static QuestionOfSectionFactory instance = null;
 
-    private List<ForumSection> sections = new ArrayList<>();
+    private List<ForumSection> sections;
 
-    private QuestionOfSectionFactory(){}
+    private QuestionOfSectionFactory(){
+        this.sections = new ArrayList<>();
+    }
 
     public static QuestionOfSectionFactory getCurrentInstance(){
         if(instance == null){
@@ -54,18 +55,18 @@ public class QuestionOfSectionFactory {
 
     }
 
-    private List<Question> retrieveQuestionsFromSection(String username) throws PersistanceLayerNotAvailable {
+    private List<Question> retrieveQuestionsFromSection(String sectionName) throws PersistanceLayerNotAvailable {
 
         //per prima cosa controllo se la sezione è già stata recuperata in precedenza
         for( ForumSection f: this.sections){
-            if(f.getSection().equals(username)){
+            if(f.getSectionName().equalsIgnoreCase(sectionName)){
                 return f.getQuestions();
             }
         }
 
         //se non è stata recuperata consulto il DAO e la aggiungo alla lista di sezioni
         ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
-        ForumSection newSection =  forumSectionDAOJDBC.retrieveSection(username);
+        ForumSection newSection =  forumSectionDAOJDBC.retrieveSection(sectionName);
         this.sections.add(newSection);
         return newSection.getQuestions();
 
@@ -101,10 +102,6 @@ public class QuestionOfSectionFactory {
         for( ForumSection f: this.sections){
             for(Question q: f.getQuestions()){
                 if(q.getId() == idQuestion){
-                    if(q.getResponses().isEmpty()){
-                        q.setResponses(new QuestionDAOJDBC().retrieveResponseFromQuestionID(q.getId()));
-                    }
-
                     return q.getResponses();
                 }
             }
@@ -123,12 +120,14 @@ public class QuestionOfSectionFactory {
 
 
     //metodi per l'aggiunta di una domanda e di una risposta
-
     public void addQuestionToSection(String section, Question q){
+        System.out.println("oioooo");
         for( ForumSection f: this.sections){
-            if(f.getSection().equals(section)){
+            System.out.println(f.getSectionName());
+            if(f.getSectionName().equalsIgnoreCase(section)){
+                System.out.println("trovata");
                 f.addQuestion(q);
-                break;
+                return;
             }
         }
     }
@@ -138,6 +137,24 @@ public class QuestionOfSectionFactory {
             for(Question q: f.getQuestions()){
                 if(q.getId() == idQuestion){
                     q.addResponse(r);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    public void changeRoleOfUser(String username){
+        for( ForumSection f: this.sections){
+            for(Question q: f.getQuestions()){
+                if(q.getAuthor().getUsername().equals(username)){
+                    q.getAuthor().setRole(new Moderator());
+                }
+
+                for(Response r: q.getResponses()){
+                    if(r.getAuthor().getUsername().equals(username)){
+                        r.getAuthor().setRole(new Moderator());
+                    }
                 }
             }
         }

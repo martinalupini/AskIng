@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.SectionControllerGraficoCLI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
-
 import java.util.List;
 import java.util.Scanner;
 

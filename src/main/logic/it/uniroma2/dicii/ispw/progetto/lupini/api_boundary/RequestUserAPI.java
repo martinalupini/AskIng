@@ -15,16 +15,22 @@ public class RequestUserAPI {
     private NewRequestControllerGraficoInterface userControllerGrafico;
     private RequestControllerAppl requestControllerAppl;
 
-    public RequestUserAPI(NewRequestControllerGraficoInterface contrGR, RequestControllerAppl contrAPP){
-        this.requestControllerAppl = contrAPP;
-        this.userControllerGrafico = contrGR;
+    public RequestUserAPI(){}
+
+    public void setRequestControllerAppl(RequestControllerAppl requestControllerAppl) {
+        this.requestControllerAppl = requestControllerAppl;
+    }
+
+    public void setUserControllerGrafico(NewRequestControllerGraficoInterface userControllerGrafico) {
+        this.userControllerGrafico = userControllerGrafico;
     }
 
     public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
         //prima istanzio il controller applicativo (essendo che il caso d'uso è stato appena inizializzato l'attributo rispettivo avrà valore null)
-        this.requestControllerAppl=  new RequestControllerAppl(this, null);
+        this.requestControllerAppl=  new RequestControllerAppl();
+        this.requestControllerAppl.setRegularUserBoundary(this);
         //poi chiamo il metodo del controller applicativo per processare la richiesta
-        requestControllerAppl.processRequest(request);
+        this.requestControllerAppl.processRequest(request);
     }
 
     public void updateStatus() {

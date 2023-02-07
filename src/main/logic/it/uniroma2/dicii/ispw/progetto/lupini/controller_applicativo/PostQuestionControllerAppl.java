@@ -11,14 +11,17 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 
+import java.util.ArrayList;
+
 public class PostQuestionControllerAppl {
 
     private NewQuestionControllerInterface controllerGrafico;
 
-    public PostQuestionControllerAppl(NewQuestionControllerInterface questionFormController){
-        this.controllerGrafico = questionFormController;
-    }
+    public PostQuestionControllerAppl(){}
 
+    public void setControllerGrafico(NewQuestionControllerInterface controllerGrafico) {
+        this.controllerGrafico = controllerGrafico;
+    }
 
     public void checkAndProcessQuestion(QuestionBean questionBean, String section) throws PersistanceLayerNotAvailable {
         try {
@@ -30,10 +33,12 @@ public class PostQuestionControllerAppl {
             //se non sono presenti procedo a salvare la domanda in memoria
             Question newQuestion = new Question(questionBean.getText(), questionBean.getKeywords(), currentUserProfile.getCurrentUser());
             QuestionDAOJDBC questionDAOJDBC = new QuestionDAOJDBC();
-            questionDAOJDBC.saveNewQuestion(newQuestion, section);
+            int id = questionDAOJDBC.saveNewQuestion(newQuestion, section);
+
+            Question q = new Question(newQuestion.getQuestionText(), newQuestion.getKeywords(), newQuestion.getAuthor(), id, new ArrayList<>());
 
             //aggiungo la domanda alla relativa sezione
-            QuestionOfSectionFactory.getCurrentInstance().addQuestionToSection(section, newQuestion);
+            QuestionOfSectionFactory.getCurrentInstance().addQuestionToSection(section, q);
 
             //aggiorno points utente
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {

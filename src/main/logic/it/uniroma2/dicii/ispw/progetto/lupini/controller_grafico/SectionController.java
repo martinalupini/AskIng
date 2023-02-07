@@ -9,6 +9,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -42,7 +43,7 @@ public class SectionController extends EmptyScreen {
 
     @FXML
     void clickSearch(ActionEvent event) {
-            //need to finish
+            this.errorLabel.setText("NOT IMPLEMENTED");
     }
 
 

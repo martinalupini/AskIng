@@ -43,7 +43,8 @@ public class QuestionControllerGraficoCLI extends EmptyScreenControllerGraficoCL
         ResponseBean responseBean = new ResponseBean(author);
 
         responseBean.setText(text);
-        PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl(this);
+        PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl();
+        postResponseControllerAppl.setControllerGrafico(this);
         try {
             postResponseControllerAppl.checkAndProcessResponse(responseBean, question.getId());
         }catch(PersistanceLayerNotAvailable e){

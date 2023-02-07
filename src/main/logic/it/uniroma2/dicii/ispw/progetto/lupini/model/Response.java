@@ -25,4 +25,8 @@ public class Response {
     public UserProfile getAuthor() {
         return author;
     }
+
+    public Response clone(){
+        return new Response(this.responseText, this.author);
+    }
 }

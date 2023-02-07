@@ -37,7 +37,7 @@ public class ViewRequestController extends  EmptyScreen implements ManageRequest
     private Button declineButton;
 
 
-    public void loadData(String username, String email, int point, int behaviour, String text){
+    public void displayUserRequestData(String username, String email, int point, int behaviour, String text){
         this.usernameLabel.setText(username);
         this.emailLabel.setText(email);
         this.pointsLabel.setText(String.valueOf(point));
@@ -48,7 +48,8 @@ public class ViewRequestController extends  EmptyScreen implements ManageRequest
     @FXML
     void acceptRequest(ActionEvent event) {
 
-        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI(this, null);
+        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
+        moderatorAPI.setModeratorControllerGrafico(this);
         try {
             moderatorAPI.updateRequestState(this.usernameLabel.getText(), "accepted");
         } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {
@@ -60,7 +61,8 @@ public class ViewRequestController extends  EmptyScreen implements ManageRequest
 
     @FXML
     void declineRequest(ActionEvent event) {
-        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI(this, null);
+        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
+        moderatorAPI.setModeratorControllerGrafico(this);
         try {
             moderatorAPI.updateRequestState(this.usernameLabel.getText(), "declined");
         } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {

@@ -17,14 +17,11 @@ import java.security.SecureRandom;
 
 public class LoginControllerAppl {
 
-    LoginControllerGrafico viewCtl;
-    UserProfileDAO userDAO;
-
-    public LoginControllerAppl(LoginControllerGrafico ctl) {
-        this.viewCtl = ctl;
-    }
+    public LoginControllerAppl() {}
 
     public void login(String username, String password) throws PersistanceLayerNotAvailable, ItemNotFound {
+
+        UserProfileDAO userDAO;
 
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte[] bytes = new byte[20];

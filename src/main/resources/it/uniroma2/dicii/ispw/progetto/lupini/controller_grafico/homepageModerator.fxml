@@ -20,12 +20,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="13.0" layoutY="432.0" prefHeight="80.0" prefWidth="166.0" text="VISUALIZZA NUOVE RICHIESTE PER MODERATORI" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="52.0" layoutY="462.0">
+      <Label layoutX="13.0" layoutY="396.0" prefHeight="80.0" prefWidth="166.0" text="VISUALIZZA NUOVE RICHIESTE PER MODERATORI" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -60,7 +55,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="61.0" layoutY="364.0" mnemonicParsing="false" onAction="#visualizeRequests" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+      <Button layoutX="61.0" layoutY="328.0" mnemonicParsing="false" onAction="#visualizeRequests" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -68,7 +63,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="206.0" layoutY="364.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+      <Button layoutX="206.0" layoutY="328.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -77,10 +72,25 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="231.0" layoutY="442.0" text="ESCI">
+      <Label layoutX="231.0" layoutY="406.0" text="ESCI">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <Button layoutX="132.0" layoutY="487.0" mnemonicParsing="false" onAction="#removeQuestion" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 100; -fx-background-color: #92d6f0;" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@trash-can-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="86.0" layoutY="571.0" text="RIMUOVI UNA DOMANDA">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorLabel" layoutX="58.0" layoutY="132.0" prefHeight="18.0" prefWidth="212.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

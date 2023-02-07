@@ -12,14 +12,20 @@ public class RequestModeratorAPI {
     private ManageRequestsContrGrafInterface moderatorControllerGrafico;
     private RequestControllerAppl requestControllerAppl;
 
-    public RequestModeratorAPI(ManageRequestsContrGrafInterface controllerGrafico, RequestControllerAppl requestControllerAppl){
-        this.moderatorControllerGrafico = controllerGrafico;
+    public RequestModeratorAPI(){}
+
+    public void setModeratorControllerGrafico(ManageRequestsContrGrafInterface moderatorControllerGrafico) {
+        this.moderatorControllerGrafico = moderatorControllerGrafico;
+    }
+
+    public void setRequestControllerAppl(RequestControllerAppl requestControllerAppl) {
         this.requestControllerAppl = requestControllerAppl;
     }
 
     public void updateRequestState(String username, String state) throws PersistanceLayerNotAvailable, ImpossibleToUpdate {
-        RequestControllerAppl controllerAppl = new RequestControllerAppl(null, this);
-        controllerAppl.updateRequestState(username, state);
+        this.requestControllerAppl = new RequestControllerAppl();
+        this.requestControllerAppl.setModeratorBoundary(this);
+        this.requestControllerAppl.updateRequestState(username, state);
     }
 
     public void updateStatus(String status){

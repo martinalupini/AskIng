@@ -18,10 +18,11 @@ public class PostResponseControllerAppl {
 
     private NewResponseControllerInterface controllerGrafico;
 
-    public PostResponseControllerAppl(NewResponseControllerInterface viewQuestionController){
-        this.controllerGrafico = viewQuestionController;
-    }
+    public PostResponseControllerAppl(){}
 
+    public void setControllerGrafico(NewResponseControllerInterface controllerGrafico) {
+        this.controllerGrafico = controllerGrafico;
+    }
 
     public void checkAndProcessResponse(ResponseBean responseBean, int id) throws PersistanceLayerNotAvailable {
 

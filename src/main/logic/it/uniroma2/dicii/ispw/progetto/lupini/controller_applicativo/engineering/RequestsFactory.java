@@ -51,4 +51,16 @@ public class RequestsFactory {
 
         return new RequestBean(req.getText(), username,email,points, badBehaviour);
     }
+
+    public void deleteRequest(String username){
+        for(Request r: this.requests){
+            if(r.getAuthor().getUsername().equals(username)){
+                this.requests.remove(r);
+            }
+        }
+    }
+
+    public void addRequest(Request request){
+        this.requests.add(request);
+    }
 }

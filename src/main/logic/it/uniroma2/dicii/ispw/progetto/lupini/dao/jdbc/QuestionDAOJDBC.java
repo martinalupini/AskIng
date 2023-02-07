@@ -6,8 +6,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Response;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,43 +15,8 @@ import java.util.List;
 
 public class QuestionDAOJDBC {
 
-    public List<Response> retrieveResponseFromQuestionID(int id) throws PersistanceLayerNotAvailable {
 
-        List<Response> list = new ArrayList<>();
-
-        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-
-        try {
-            Connection connDB = getConn.getConnection();
-            PreparedStatement stmt = connDB.prepareStatement("select * from responses  where question = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            //if rs is empty there is no question in the section
-            if (!rs.first()) {
-                return list;
-            }
-
-            rs.first();
-            do {
-                String text = rs.getString("text");
-                UserProfile user  = RetrieveUserWithExceptions.retrieveUserWithExceptionsManagement(rs);
-
-                Response res = new Response(text, user);
-                list.add(res);
-
-            } while (rs.next());
-
-
-        } catch (SQLException | ClassNotFoundException | IOException e) {
-            throw new PersistanceLayerNotAvailable("DB is currently not available");
-        }
-
-        return list;
-    }
-
-
-    public void saveNewQuestion(Question newQuestion, String section) throws PersistanceLayerNotAvailable {
+    public int saveNewQuestion(Question newQuestion, String section) throws PersistanceLayerNotAvailable {
 
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
@@ -86,11 +49,63 @@ public class QuestionDAOJDBC {
             }
 
             statement.executeUpdate();
+            return id+1;
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("error in opening the connection");
         }
+    }
+
+
+    public List<Question> retrieveQuestionsOfSection(String sectionName) throws PersistanceLayerNotAvailable {
+        DBMSConnection getConn = DBMSConnection.getInstanceConnection();
+        List<Question> questions = new ArrayList<>();
+
+        try {
+            Connection connDB = getConn.getConnection();
+            PreparedStatement stmt = connDB.prepareStatement("select * from questions where section = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1, sectionName);
+            ResultSet rs = stmt.executeQuery();
+
+            //se è vuoto non c'è nessuna domanda nella sezione
+            if (!rs.first()) {
+                return  questions;
+            }
+
+            //se non è vuoto recuperiamo le domande
+            rs.first();
+            do {
+                List<String> keywords = new ArrayList<>();
+                String kw;
+                int i = 1;
+
+                //recuperiamo i dati della domanda
+                String text = rs.getString("text");
+                int id = rs.getInt("questionID");
+                while (i <= 3 && (kw = rs.getString("keyword" + i)) != null) {
+                    keywords.add(kw);
+                    i++;
+                }
+
+                //recuperiamo l'autore. E' necessario usare lo specifico DAO
+                UserProfile author = RetrieveUserWithExceptions.retrieveUserWithExceptionsManagement(rs);
+
+                //recuperiamo le risposte. E' necessario recuperare lo specifico DAO
+                List<Response> responses = new ResponseDAOJDBC().retrieveResponseFromQuestionID(id);
+
+                //finally we add the new question
+                questions.add(new Question(text, keywords, author, id, responses));
+
+            } while (rs.next());
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+            throw new PersistanceLayerNotAvailable("DB is currently not available");
+        }
+
+        return questions;
     }
 
 

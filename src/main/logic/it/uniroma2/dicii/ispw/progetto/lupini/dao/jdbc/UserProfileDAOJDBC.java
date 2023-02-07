@@ -33,7 +33,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
             return  UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
@@ -54,7 +54,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             return UserProfileDAOJDBC.fetchInformationOfUserProfile(rs, username);
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 
@@ -95,7 +95,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             stmt.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new ImpossibleToUpdate(ERR_REG);
         }
     }
@@ -124,7 +124,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             stmt.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new ImpossibleToUpdate(ERR_REG);
         }
     }
@@ -153,7 +153,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             stmt.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new ImpossibleToUpdate(ERR_REG);
         }
 

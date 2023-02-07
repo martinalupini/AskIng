@@ -10,9 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +21,9 @@ public class ForumController extends EmptyScreen implements Initializable{
 
     @FXML
     private VBox titleLayout;
+
+    @FXML
+    private Label notImplemented;
 
 
     private final String[]  courses = {"Algebra e Logica", "Analisi 1", "Analisi 2", "Automi e Linguaggi", "Basi di Dati", "Calcolatori Elettronici", "Campi Elettromagnetici", "Fisica 1", "Fisica 2", "Fondamenti di Controlli", "Fondamenti di Informatica", "Fondamenti di Elelttronica","Fondamenti di Telecomunicazione", "Geometria", "Ingegneria degli Algoritmi", "Ingegneria di Internet e Web","Ingegneria del Software e Progettazione Web", "Probabilità e Statistica", "Ricerca Operativa", "Sistemi Operativi"};
@@ -34,7 +37,7 @@ public class ForumController extends EmptyScreen implements Initializable{
 
     @FXML
     void clickSearch(ActionEvent event) {
-        //This method is empty because i have to finish it
+        this.notImplemented.setText("NOT IMPLEMENTED");
     }
 
     @Override

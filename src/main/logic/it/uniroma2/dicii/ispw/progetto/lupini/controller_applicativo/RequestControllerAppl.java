@@ -3,6 +3,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestModeratorAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.RequestsFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
@@ -21,9 +23,15 @@ public class RequestControllerAppl {
 
 
 
-    public RequestControllerAppl(RequestUserAPI regularUserBoundary, RequestModeratorAPI moderatorBoundary){
-        this.regularUserBoundary = regularUserBoundary;
+    public RequestControllerAppl(){
+    }
+
+    public void setModeratorBoundary(RequestModeratorAPI moderatorBoundary) {
         this.moderatorBoundary = moderatorBoundary;
+    }
+
+    public void setRegularUserBoundary(RequestUserAPI regularUserBoundary) {
+        this.regularUserBoundary = regularUserBoundary;
     }
 
     public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
@@ -37,11 +45,16 @@ public class RequestControllerAppl {
             RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
             requestDAOJDBC.registerNewRequest(request);
 
+            //aggiunta della richiesta nella classe factory
+            RequestsFactory.getCurrentInstance().addRequest(request);
+
             //aggiorno l'utente che l'invio della richiesta è andata a buon fine
             regularUserBoundary.updateStatus();
 
             //mando notifica al moderatore
-            new RequestModeratorAPI(null,this).notifyModeratorNewRequest();
+            this.moderatorBoundary = new RequestModeratorAPI();
+            this.moderatorBoundary.setRequestControllerAppl(this);
+            this.moderatorBoundary.notifyModeratorNewRequest();
 
     }
 
@@ -67,7 +80,15 @@ public class RequestControllerAppl {
             }
 
             //notifico l'utente che il suo ruolo è stato cambiato
-            new RequestUserAPI(null, this).notifyUser(username, state);
+            this.regularUserBoundary = new RequestUserAPI();
+            this.regularUserBoundary.setRequestControllerAppl(this);
+            this.regularUserBoundary.notifyUser(username, state);
+
+            //elimino la richiesta
+            RequestsFactory.getCurrentInstance().deleteRequest(username);
+
+            //aggiorno il profilo drll'utente nelle domande e nelle risposte
+            QuestionOfSectionFactory.getCurrentInstance().changeRoleOfUser(username);
 
 
     }

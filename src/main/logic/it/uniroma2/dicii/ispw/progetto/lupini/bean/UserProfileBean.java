@@ -62,4 +62,5 @@ public class UserProfileBean {
     public String getRole() {
         return role;
     }
+
 }

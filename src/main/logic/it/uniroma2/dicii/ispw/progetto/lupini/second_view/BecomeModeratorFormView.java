@@ -10,9 +10,7 @@ public class BecomeModeratorFormView {
 
     private BecomeModeratorControllerGraficoCLI controller;
 
-    public BecomeModeratorFormView(){
-        this.controller = new BecomeModeratorControllerGraficoCLI(this);
-    }
+    public BecomeModeratorFormView(){}
 
     public void displayForm(){
         String text;
@@ -24,6 +22,8 @@ public class BecomeModeratorFormView {
 
         text = reader.nextLine();
         try {
+            this.controller = new BecomeModeratorControllerGraficoCLI();
+            this.controller.setView(this);
             this.controller.sendRequest(text);
         } catch (PersistanceLayerNotAvailable | RequestAlreadyDone e) {
             System.err.println(e.getMessage());

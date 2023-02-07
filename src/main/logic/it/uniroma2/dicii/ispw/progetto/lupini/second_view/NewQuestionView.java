@@ -29,8 +29,7 @@ public class NewQuestionView {
                 
                 ------------------------------------------NUOVA DOMANDA------------------------------------------
 
-                Per eseguire questa operazione devi prima effettuare il login.
-                Inserire "c" se si vuole continuare oppure "h" se si vuole tornare all'homepage: 
+                Inserire "h" se si vuole tornare all'homepage: 
 
                 """);
 
@@ -49,6 +48,7 @@ public class NewQuestionView {
 
             try {
                 this.controller.submitQuestion(keywords, text);
+                return;
             } catch (KeywordsException | TextException | PersistanceLayerNotAvailable e) {
                 System.out.println(e.getMessage());
             }
@@ -59,6 +59,7 @@ public class NewQuestionView {
 
     public void success(){
         System.out.println("La tua domanda è stata pubblicata");
+        this.controller.goToHomepage();
     }
 
     public void bannedWordInText(){

@@ -18,7 +18,8 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
 
     public void acceptRequest(RequestBean request) throws PersistanceLayerNotAvailable {
 
-        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI(this, null);
+        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
+        moderatorAPI.setModeratorControllerGrafico(this);
         try {
             moderatorAPI.updateRequestState( request.getUsername(), "accepted");
         } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {
@@ -36,7 +37,8 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
     }
 
     public void declineRequest(RequestBean request) throws PersistanceLayerNotAvailable {
-        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI(this, null);
+        RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
+        moderatorAPI.setModeratorControllerGrafico(this);
         try{
         moderatorAPI.updateRequestState( request.getUsername(), "declined");
         } catch (PersistanceLayerNotAvailable | ImpossibleToUpdate e) {

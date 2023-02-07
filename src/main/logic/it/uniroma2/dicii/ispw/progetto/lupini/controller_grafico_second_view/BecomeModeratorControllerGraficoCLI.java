@@ -13,7 +13,9 @@ import it.uniroma2.dicii.ispw.progetto.lupini.second_view.BecomeModeratorFormVie
 public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGraficoCLI implements NewRequestControllerGraficoInterface {
 
     private BecomeModeratorFormView view;
-    public BecomeModeratorControllerGraficoCLI(BecomeModeratorFormView view){
+    public BecomeModeratorControllerGraficoCLI(){}
+
+    public void setView(BecomeModeratorFormView view) {
         this.view = view;
     }
 
@@ -23,7 +25,8 @@ public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGr
         RequestBean requestBean = new RequestBean(text, user.getUsername(), user.getEmail(), user.getPoints(), user.getBadBehaviour());
 
         try {
-            RequestUserAPI requestUserAPI = new RequestUserAPI(this, null);
+            RequestUserAPI requestUserAPI = new RequestUserAPI();
+            requestUserAPI.setUserControllerGrafico(this);
             requestUserAPI.sendRequest(requestBean);
         }catch(PersistanceLayerNotAvailable | ItemNotFound e){
             throw new PersistanceLayerNotAvailable("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");

@@ -40,8 +40,7 @@ public class ForumView {
             line = scanner.nextLine();
 
             for(String s: courses){
-                s = s.toLowerCase();
-                if(s.equals(line)){
+                if(s.equalsIgnoreCase(line)){
                     this.controller.goToSection(line.toLowerCase());
                     return;
                 }

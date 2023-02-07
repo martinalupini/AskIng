@@ -10,8 +10,7 @@ public class LoginControllerGraficoCLI extends EmptyScreenControllerGraficoCLI{
     public void selectedLogin(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
 
         try {
-            LoginControllerAppl logctl = new LoginControllerAppl(null);
-
+            LoginControllerAppl logctl = new LoginControllerAppl();
             logctl.login(username, password);
         }catch(ItemNotFound e){
             throw new ItemNotFound("Username o password errati. Riprovare. ");

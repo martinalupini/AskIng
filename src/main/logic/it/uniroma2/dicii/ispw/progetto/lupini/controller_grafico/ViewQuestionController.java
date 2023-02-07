@@ -58,7 +58,13 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
     @FXML
     private Label errorLabel;
 
+    public void setResponseText(String responseText) {
+        this.responseText.setText(responseText);
+    }
 
+    public String getResponseText() {
+        return responseText.getText();
+    }
 
     public void setKeyword1(String keyword1) {
         this.keyword1.setText(keyword1);
@@ -115,7 +121,8 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
         try {
             responseBean.setText(responseText.getText());
 
-            PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl(this);
+            PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl();
+            postResponseControllerAppl.setControllerGrafico(this);
             postResponseControllerAppl.checkAndProcessResponse(responseBean, currentQuestion.getId());
         } catch (TextException e) {
             errorLabel.setText(e.getMessage());

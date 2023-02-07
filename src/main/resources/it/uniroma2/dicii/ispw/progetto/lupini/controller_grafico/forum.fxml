@@ -90,5 +90,6 @@
             <VBox fx:id="titleLayout" prefHeight="335.0" prefWidth="262.0" spacing="5.0" />
          </content>
       </ScrollPane>
+      <Label fx:id="notImplemented" layoutX="43.0" layoutY="109.0" prefHeight="18.0" prefWidth="238.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

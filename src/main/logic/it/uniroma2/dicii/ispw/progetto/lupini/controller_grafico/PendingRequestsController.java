@@ -56,7 +56,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
                         Parent root = loader.load();
 
                         ViewRequestController viewRequestController = loader.getController();
-                        viewRequestController.loadData(r.getUsername(), r.getEmail(), r.getPoints(), r.getBadBehaviour(), r.getText());
+                        viewRequestController.displayUserRequestData(r.getUsername(), r.getEmail(), r.getPoints(), r.getBadBehaviour(), r.getText());
 
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene scene = new Scene(root);

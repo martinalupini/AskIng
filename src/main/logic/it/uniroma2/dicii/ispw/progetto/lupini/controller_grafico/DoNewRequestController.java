@@ -45,7 +45,7 @@ public class DoNewRequestController extends EmptyScreen implements NewRequestCon
 
 
 
-    public void loadData(String username, String email, int point, int behaviour){
+    public void displayUserData(String username, String email, int point, int behaviour){
         this.usernameLabel.setText(username);
         this.emailLabel.setText(email);
         this.pointsLabel.setText(String.valueOf(point));
@@ -60,7 +60,8 @@ public class DoNewRequestController extends EmptyScreen implements NewRequestCon
         RequestBean requestBean = new RequestBean(requestText.getText(), usernameLabel.getText(), emailLabel.getText(), Integer.valueOf(pointsLabel.getText()), Integer.valueOf(behaviourLabel.getText()));
 
         //creo la classe attraverso cui comunicare con il controller applicativo
-        RequestUserAPI requestAPI = new RequestUserAPI(this, null);
+        RequestUserAPI requestAPI = new RequestUserAPI();
+        requestAPI.setUserControllerGrafico(this);
         try {
             requestAPI.sendRequest(requestBean);
         } catch (PersistanceLayerNotAvailable | ItemNotFound e) {

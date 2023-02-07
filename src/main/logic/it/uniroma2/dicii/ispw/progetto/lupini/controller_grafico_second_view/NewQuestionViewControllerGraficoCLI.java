@@ -26,7 +26,8 @@ public class NewQuestionViewControllerGraficoCLI extends EmptyScreenControllerGr
         questionBean.setKeywords(keywords);
         questionBean.setText(text);
         try {
-            PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl(this);
+            PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl();
+            controllerAppl.setControllerGrafico(this);
             controllerAppl.checkAndProcessQuestion(questionBean, section);
         }catch(PersistanceLayerNotAvailable e){
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");

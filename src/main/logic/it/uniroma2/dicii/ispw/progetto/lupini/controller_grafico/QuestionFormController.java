@@ -43,7 +43,8 @@ public class QuestionFormController extends EmptyScreen implements NewQuestionCo
             //ora bisogna inviare la domanda al controller applicativo il quale controllerà se le keyword o il testo
             //contengono parole bannate
 
-            PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl(this);
+            PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl();
+            controllerAppl.setControllerGrafico(this);
             controllerAppl.checkAndProcessQuestion(questionBean, section);
 
 

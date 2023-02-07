@@ -9,17 +9,22 @@ public class Question {
     private String questionText;
     private List<String> keywords;
     private UserProfile author;
-    private List<Response> responses = new ArrayList<>();
+    private List<Response> responses;
 
 
     //constructor with parameters because is used in ForumSection
-    public Question(String text, List<String> keywords, UserProfile author, int id){
+    public Question(String text, List<String> keywords, UserProfile author, int id, List<Response> responses){
         this.questionText = text;
         this.keywords = keywords;
         this.author = author;
         this.id = id;
+        this.responses = new ArrayList<>();
+        for(Response r: responses){
+            this.responses.add(r.clone());
+        }
     }
 
+    //usata quando ho una nuova domanda
     public Question(String text, List<String> keywords, UserProfile author){
         this.questionText = text;
         this.keywords = keywords;
@@ -31,15 +36,15 @@ public class Question {
          */
 
     public List<Response> getResponses(){
-        return responses;
-    }
-
-    public void setResponses(List<Response> responses) {
-        this.responses = responses;
+        List<Response>  copyResponses = new ArrayList<>();
+        for(Response r: this.responses){
+            copyResponses.add(r.clone());
+        }
+        return copyResponses;
     }
 
     public void addResponse(Response r){
-        responses.add(r);
+        responses.add(r.clone());
     }
 
     public UserProfile getAuthor() {
@@ -56,5 +61,9 @@ public class Question {
 
     public int getId() {
         return id;
+    }
+
+    public Question clone(){
+        return new Question(this.questionText, this.keywords, this.author, this.id, this.responses);
     }
 }
