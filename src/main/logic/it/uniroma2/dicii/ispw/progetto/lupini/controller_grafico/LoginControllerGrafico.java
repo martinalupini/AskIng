@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -75,24 +76,7 @@ public class LoginControllerGrafico extends EmptyScreen {
                     viewQuestionController.initialize(q.getText(), q.getUsername());
                     viewQuestionController.setResponseText(this.viewQuestionController.getResponseText());
 
-                    List<String> keywords = q.getKeywords();
-                    viewQuestionController.setKeyword1(keywords.get(0));
-                    if(keywords.size() == 1){
-                        viewQuestionController.setInvisible2();
-                        viewQuestionController.setInvisible3();
-                    }
-                    if(keywords.size() == 2) {
-                        viewQuestionController.setKeyword2(keywords.get(1));
-                        viewQuestionController.setInvisible3();
-                    }
-                    if(keywords.size() == 3){
-                        viewQuestionController.setKeyword3(keywords.get(2));
-                    }
-
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
+                    SectionController.displayQuestion(root, viewQuestionController, q, (Node)event.getSource());
 
                     viewQuestionController.replyToQuestion(event);
                 }
@@ -112,6 +96,7 @@ public class LoginControllerGrafico extends EmptyScreen {
 
 
     }
+
 
 
 }

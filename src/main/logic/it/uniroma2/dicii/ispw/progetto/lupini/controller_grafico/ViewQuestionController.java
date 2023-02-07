@@ -201,4 +201,6 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
             throw new ImpossibleStartGUI( "Errore on starting the GUI");
         }
     }
+
+
 }

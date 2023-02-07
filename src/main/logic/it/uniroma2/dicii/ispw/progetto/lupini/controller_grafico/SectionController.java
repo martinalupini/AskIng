@@ -74,24 +74,7 @@ public class SectionController extends EmptyScreen {
                         viewQuestionController.setUsernameLabel(q.getUsername());
                         viewQuestionController.initialize(q.getText(), q.getUsername());
 
-                        List<String> keywords = q.getKeywords();
-                        viewQuestionController.setKeyword1(keywords.get(0));
-                        if(keywords.size() == 1){
-                            viewQuestionController.setInvisible2();
-                            viewQuestionController.setInvisible3();
-                        }
-                        if(keywords.size() == 2) {
-                            viewQuestionController.setKeyword2(keywords.get(1));
-                            viewQuestionController.setInvisible3();
-                        }
-                        if(keywords.size() == 3){
-                            viewQuestionController.setKeyword3(keywords.get(2));
-                        }
-
-                        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
+                        displayQuestion(root, viewQuestionController, q, (Node) mouseEvent.getSource());
 
                     } catch (IOException e) {
                         throw new ImpossibleStartGUI( "Errore on starting the GUI");
@@ -124,6 +107,27 @@ public class SectionController extends EmptyScreen {
         return list;
 
 
+    }
+
+    static void displayQuestion(Parent root, ViewQuestionController viewQuestionController, QuestionBean q, Node source) {
+        List<String> keywords = q.getKeywords();
+        viewQuestionController.setKeyword1(keywords.get(0));
+        if(keywords.size() == 1){
+            viewQuestionController.setInvisible2();
+            viewQuestionController.setInvisible3();
+        }
+        if(keywords.size() == 2) {
+            viewQuestionController.setKeyword2(keywords.get(1));
+            viewQuestionController.setInvisible3();
+        }
+        if(keywords.size() == 3){
+            viewQuestionController.setKeyword3(keywords.get(2));
+        }
+
+        Stage stage = (Stage) source.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
