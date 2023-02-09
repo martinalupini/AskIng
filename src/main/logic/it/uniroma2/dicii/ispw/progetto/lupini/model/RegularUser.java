@@ -15,8 +15,6 @@ public class RegularUser extends Role{
         return "regular user";
     }
 
-
-
     public void increasePoints(){
         points += 5;
     }

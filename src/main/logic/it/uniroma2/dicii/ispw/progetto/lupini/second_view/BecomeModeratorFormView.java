@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.Bec
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class BecomeModeratorFormView {
         String text;
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Manda qui la tua richiesta per diventare moderatore.\n" +
+        Print.print("Manda qui la tua richiesta per diventare moderatore.\n" +
                 "Chi valuterà la tua richiesta vedrà il tuo username, la tua email, i tuoi punti accumulati e il tuo BadBehaviour. " +
                 "Scrivi qui un breve testo sul perchè vuoi diventare moderatore:");
 
@@ -26,14 +27,14 @@ public class BecomeModeratorFormView {
             this.controller.setView(this);
             this.controller.sendRequest(text);
         } catch (PersistanceLayerNotAvailable | RequestAlreadyDone e) {
-            System.err.println(e.getMessage());
+            Print.printError(e.getMessage());
             this.controller.goToHomepage();
         } catch (TextException e) {
-            System.err.println(e.getMessage());
+            Print.printError(e.getMessage());
         }
     }
 
     public void requestSuccessful(){
-        System.out.println("La tua richiesta è stata mandata con successo.");
+        Print.print("La tua richiesta è stata mandata con successo.");
     }
 }

@@ -25,7 +25,7 @@ public class RequestUserAPI {
 
     //chiamata dal controller grafico per inviare la richiesta.
     // Il metodo chiama la rispettiva operazione del controller applicativo
-    public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
+    public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
         this.requestControllerAppl=  new RequestControllerAppl();
         this.requestControllerAppl.setRegularUserBoundary(this);
         this.requestControllerAppl.processRequest(request);

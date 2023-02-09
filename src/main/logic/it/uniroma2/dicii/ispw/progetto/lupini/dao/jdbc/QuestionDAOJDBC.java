@@ -22,11 +22,13 @@ public class QuestionDAOJDBC {
 
         try {
             int id = 0;
+            //per prima cosa recupero l'ultimo id utilizzato
             Connection connDB = getConn.getConnection();
             PreparedStatement stmt = connDB.prepareStatement("select max(questionID) from questions");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) id = rs.getInt(1);
 
+            //poi salvo la domanda
             PreparedStatement statement = connDB.prepareStatement("insert into questions (questionID, text, author, keyword1, keyword2, keyword3, section ) values (?, ?, ?, ?, ?, ?, ?)");
             statement.setInt(1, id+1);
             statement.setString(2, newQuestion.getQuestionText());
@@ -94,7 +96,7 @@ public class QuestionDAOJDBC {
                 //recuperiamo le risposte. E' necessario recuperare lo specifico DAO
                 List<Response> responses = new ResponseDAOJDBC().retrieveResponseFromQuestionID(id);
 
-                //finally we add the new question
+                //aggiungiamo la nuova domanda
                 questions.add(new Question(text, keywords, author, id, responses));
 
             } while (rs.next());

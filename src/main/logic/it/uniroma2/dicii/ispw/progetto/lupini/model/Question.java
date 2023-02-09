@@ -1,7 +1,5 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.SubjectQuestionBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +11,7 @@ public class Question {
     private UserProfile author;
     private List<Response> responses;
 
-
-    //constructor with parameters because is used in ForumSection
+    //usata nei DAO
     public Question(String text, List<String> keywords, UserProfile author, int id, List<Response> responses){
         this.questionText = text;
         this.keywords = keywords;
@@ -27,15 +24,13 @@ public class Question {
     }
 
     //usata quando ho una nuova domanda
+    // (non ci sono domande e l'id viene stabilito da database)
     public Question(String text, List<String> keywords, UserProfile author){
         this.questionText = text;
         this.keywords = keywords;
         this.author = author;
     }
 
-    /* the relationship between question and responses is a relation of composition. A response exists only if the question
-        associated exists. If the question is deleted so are the responses.
-         */
 
     public List<Response> getResponses(){
         List<Response>  copyResponses = new ArrayList<>();

@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.LoginControllerGraficoCLI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class LoginView {
         String username;
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("""
+        Print.print("""
                 ------------------------------------------LOGIN------------------------------------------
 
                 Per eseguire questa operazione devi prima effettuare il login.
@@ -31,9 +32,9 @@ public class LoginView {
         }
 
         while(true) {
-            System.out.println("Inserire il proprio username: ");
+            Print.print("Inserire il proprio username: ");
             username = reader.nextLine();
-            System.out.println("Inserire la propria password: ");
+            Print.print("Inserire la propria password: ");
             password = reader.nextLine();
 
             LoginControllerGraficoCLI controller = new LoginControllerGraficoCLI();
@@ -41,9 +42,9 @@ public class LoginView {
                 controller.selectedLogin(username,password);
                 return;
             } catch (ItemNotFound e) {
-                System.err.println("Username o password errati. Riprovare");
+                Print.printError("Username o password errati. Riprovare");
             } catch (PersistanceLayerNotAvailable e) {
-                System.err.println("Spiacenti, si sono verificati problemi interni. Riprovare più tardi.");
+                Print.printError("Spiacenti, si sono verificati problemi interni. Riprovare più tardi.");
                 this.controllerG.goToHomepage();
             }
 

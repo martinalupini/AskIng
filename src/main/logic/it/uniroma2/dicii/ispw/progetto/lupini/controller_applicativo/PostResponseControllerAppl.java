@@ -5,7 +5,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.CheckBannedWords;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.IncreaseUserPoints;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewResponseControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ResponseDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
@@ -37,7 +37,7 @@ public class PostResponseControllerAppl {
             responseDAOJDBC.saveNewResponse(res, questionBean.getId());
 
             //aggiungo la risposta alla relativa domanda
-            QuestionOfSectionFactory.getCurrentInstance().addResponseToQuestion(questionBean.getId(), res);
+            QuestionsAndResponsesFactory.getCurrentInstance().addResponseToQuestion(questionBean.getId(), res);
 
             //aggiurno il punteggio dell'utente
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {

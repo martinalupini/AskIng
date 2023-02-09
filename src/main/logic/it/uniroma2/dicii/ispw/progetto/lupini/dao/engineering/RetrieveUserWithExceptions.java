@@ -13,8 +13,8 @@ public class RetrieveUserWithExceptions {
 
     private RetrieveUserWithExceptions(){}
 
+    //metodo statico usato in molti metodi dei DAO
     public static UserProfile retrieveUserWithExceptionsManagement(ResultSet rs) throws SQLException, PersistanceLayerNotAvailable {
-
 
         String username = rs.getString("author");
 
@@ -23,6 +23,7 @@ public class RetrieveUserWithExceptions {
             return userProfileDAO.retrieveUserFromUsername(username);
 
         }catch(ItemNotFound e){
+            //se non si riesce a recuperare l'autore va bene anche non inserire informazioni
           return new UserProfile("unknown", "unknown", null);
 
         }

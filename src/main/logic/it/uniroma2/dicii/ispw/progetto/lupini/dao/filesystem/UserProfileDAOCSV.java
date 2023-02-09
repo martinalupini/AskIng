@@ -75,7 +75,6 @@ public class UserProfileDAOCSV implements UserProfileDAO {
     public void changeRoleOfUser(String username) throws ImpossibleToUpdate {
 
         changeDataUser(username, 1);
-
     }
 
     private UserProfile obtainUser(String[] column, String username){

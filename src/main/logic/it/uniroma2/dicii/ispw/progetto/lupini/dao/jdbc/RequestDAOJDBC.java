@@ -25,7 +25,7 @@ public class RequestDAOJDBC {
             PreparedStatement stmt = connDB.prepareStatement("select * from requests", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery();
 
-            //if rs is empty there is no question in the section
+            //se è vuoto non c'è nessuna domanda nella sezione
             if (!rs.first()) {
                 return list;
             }

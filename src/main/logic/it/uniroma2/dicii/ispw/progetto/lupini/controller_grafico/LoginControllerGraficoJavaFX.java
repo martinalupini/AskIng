@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class LoginControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX {
+
+    private static final String NOT_IMPLEMENTED = "NOT IMPLEMENTED";
     @FXML
     private Label errorLabel;
 
@@ -59,18 +61,18 @@ public class LoginControllerGraficoJavaFX extends EmptyScreenControllerGraficoJa
                     FXMLLoader loader = new FXMLLoader(TitleCourseControllerGraficoJavaFX.class.getResource("viewQuestion.fxml"));
                     Parent root = loader.load();
 
-                    ViewSingleQuestionControllerGraficoJavaFX viewQuestionController = loader.getController();
+                    ViewSingleQuestionControllerGraficoJavaFX viewSingleQuestionControllerGraficoJavaFX = loader.getController();
                     QuestionBean q = this.viewQuestionController.currentQuestion;
-                    viewQuestionController.setCurrentQuestion(q);
-                    q.attach(viewQuestionController);
-                    viewQuestionController.setQuestionLabel(q.getText());
-                    viewQuestionController.setUsernameLabel(q.getUsername());
-                    viewQuestionController.initialize(q.getText(), q.getUsername());
-                    viewQuestionController.setResponseText(this.viewQuestionController.getResponseText());
+                    viewSingleQuestionControllerGraficoJavaFX.setCurrentQuestion(q);
+                    q.attach(viewSingleQuestionControllerGraficoJavaFX);
+                    viewSingleQuestionControllerGraficoJavaFX.setQuestionLabel(q.getText());
+                    viewSingleQuestionControllerGraficoJavaFX.setUsernameLabel(q.getUsername());
+                    viewSingleQuestionControllerGraficoJavaFX.initialize(q.getText(), q.getUsername());
+                    viewSingleQuestionControllerGraficoJavaFX.setResponseText(this.viewQuestionController.getResponseText());
 
-                    SectionControllerGraficoJavaFX.displayQuestion(root, viewQuestionController, q, (Node)event.getSource());
+                    SectionControllerGraficoJavaFX.displayQuestion(root, viewSingleQuestionControllerGraficoJavaFX, q, (Node)event.getSource());
 
-                    viewQuestionController.replyToQuestion(event);
+                    viewSingleQuestionControllerGraficoJavaFX.replyToQuestion(event);
                 }
                 default -> throw new ImpossibleStartGUI("Errore on starting the GUI");
             }
@@ -91,17 +93,17 @@ public class LoginControllerGraficoJavaFX extends EmptyScreenControllerGraficoJa
 
     @FXML
     void loginGoogle(ActionEvent event) {
-        errorLabel.setText("NOT IMPLEMENTED");
+        errorLabel.setText(NOT_IMPLEMENTED);
     }
 
     @FXML
     void loginMicrosoft(ActionEvent event) {
-        errorLabel.setText("NOT IMPLEMENTED");
+        errorLabel.setText(NOT_IMPLEMENTED);
     }
 
     @FXML
     void register(ActionEvent event) {
-        errorLabel.setText("NOT IMPLEMENTED");
+        errorLabel.setText(NOT_IMPLEMENTED);
     }
 
 

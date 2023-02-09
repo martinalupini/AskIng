@@ -1,8 +1,5 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
-
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,6 @@ public class ForumSection {
         return sectionName;
     }
 
-    //A copy of the list is returned since it is impossible to pass a reference of this.questions outside ForumSection
     public List<Question> getQuestions(){
         List<Question> copyQuestions = new ArrayList<>();
         for(Question q: this.questions){

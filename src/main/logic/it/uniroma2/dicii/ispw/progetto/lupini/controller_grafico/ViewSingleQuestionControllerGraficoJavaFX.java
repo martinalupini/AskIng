@@ -5,7 +5,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostResponseControllerAppl;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewResponseControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
@@ -150,7 +150,7 @@ public class ViewSingleQuestionControllerGraficoJavaFX extends EmptyScreenContro
     private List<ResponseBean> getResponsesOfQuestion() {
 
         List<ResponseBean> list = new ArrayList<>();
-        QuestionOfSectionFactory factory = QuestionOfSectionFactory.getCurrentInstance();
+        QuestionsAndResponsesFactory factory = QuestionsAndResponsesFactory.getCurrentInstance();
 
         try{
         list = factory.retrieveResponsesBeanFromQuestion(currentQuestion.getId());

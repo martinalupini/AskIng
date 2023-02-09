@@ -3,7 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.CheckBannedWords;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.IncreaseUserPoints;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewQuestionControllerInterface;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.QuestionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
@@ -37,7 +37,7 @@ public class PostQuestionControllerAppl {
             Question q = new Question(newQuestion.getQuestionText(), newQuestion.getKeywords(), newQuestion.getAuthor(), id, new ArrayList<>());
 
             //aggiungo la domanda alla relativa sezione
-            QuestionOfSectionFactory.getCurrentInstance().addQuestionToSection(section, q);
+            QuestionsAndResponsesFactory.getCurrentInstance().addQuestionToSection(section, q);
 
             //aggiorno points utente
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {

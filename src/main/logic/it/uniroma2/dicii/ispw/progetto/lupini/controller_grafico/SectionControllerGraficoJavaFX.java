@@ -4,7 +4,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.UserNotLogged;
@@ -84,7 +84,7 @@ public class SectionControllerGraficoJavaFX extends EmptyScreenControllerGrafico
     private List<QuestionBean> getQuestionOfSection(String sectionName) {
 
         List<QuestionBean> list = new ArrayList<>();
-        QuestionOfSectionFactory factory = QuestionOfSectionFactory.getCurrentInstance();
+        QuestionsAndResponsesFactory factory = QuestionsAndResponsesFactory.getCurrentInstance();
 
         try{
 

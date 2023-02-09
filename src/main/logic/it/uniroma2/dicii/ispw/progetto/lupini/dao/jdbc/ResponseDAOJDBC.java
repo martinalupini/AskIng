@@ -26,7 +26,6 @@ public class ResponseDAOJDBC {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
-            //if rs is empty there is no question in the section
             if (!rs.first()) {
                 return list;
             }

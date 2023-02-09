@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.HomepageControllerGraficoCLI;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class HomepageView {
         }
 
         if(Boolean.TRUE.equals(regular)) {
-            System.out.println("\n\n------------------------------------------HOMEPAGE AskIng------------------------------------------\n\n" +
+            Print.print("\n\n------------------------------------------HOMEPAGE AskIng------------------------------------------\n\n" +
                     "Bentornati nell'homepage di AskIng.Selezionate cosa volete fare:\n" +
                     "a) Consultare il forum\n" +
                     "b) Visualizzare profilo\n" +
@@ -29,7 +30,7 @@ public class HomepageView {
                     "d) Uscire");
         }else{
 
-            System.out.println("\n\n------------------------------------------HOMEPAGE AskIng------------------------------------------\n\n" +
+            Print.print("\n\n------------------------------------------HOMEPAGE AskIng------------------------------------------\n\n" +
                     "Bentornati nell'homepage di AskIng.Selezionate cosa volete fare:\n" +
                     "a) Consultare il forum\n" +
                     "b) Visualizzare profilo\n" +
@@ -62,7 +63,7 @@ public class HomepageView {
                         return;
                     }
                 default:
-                    System.err.println("Opzione inserita non valida riprovare: ");
+                    Print.printError("Opzione inserita non valida riprovare: ");
             }
         }
 

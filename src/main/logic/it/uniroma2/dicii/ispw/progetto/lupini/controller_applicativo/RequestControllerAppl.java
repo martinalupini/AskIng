@@ -3,13 +3,10 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestModeratorAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
@@ -76,7 +73,7 @@ public class RequestControllerAppl {
 
 
             //aggiorno il profilo drll'utente nelle domande e nelle risposte
-            QuestionOfSectionFactory.getCurrentInstance().changeRoleOfUser(username);
+            QuestionsAndResponsesFactory.getCurrentInstance().changeRoleOfUser(username);
 
 
     }

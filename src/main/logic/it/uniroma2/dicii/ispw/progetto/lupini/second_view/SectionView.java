@@ -3,6 +3,8 @@ package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.SectionControllerGraficoCLI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,14 +27,14 @@ public class SectionView {
         Scanner reader = new Scanner(System.in);
         String line;
 
-        System.out.println("\n\n------------------------------------------"+this.name.toUpperCase()+"------------------------------------------\n\n");
+        Print.print("\n\n------------------------------------------"+this.name.toUpperCase()+"------------------------------------------\n\n");
         int i = 1;
 
         try {
             this.questions = this.controller.getQuestionOfSection(this.name);
 
             for(QuestionBean q : this.questions){
-                System.out.println(i+") "+q.getUsername()+"\n"+q.getText()+"\n");
+                Print.print(i+") "+q.getUsername()+"\n"+q.getText()+"\n");
                 i++;
             }
 
@@ -42,16 +44,16 @@ public class SectionView {
         }
 
         while(true){
-            System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Consultare una domanda\nb) Fare una domanda\nc) Tornare all'homepage\n" +
+            Print.print("Selezionare l'operazione che si vuole svolgere:\na) Consultare una domanda\nb) Fare una domanda\nc) Tornare all'homepage\n" +
                     "Inserire qui la propria scelta: ");
             line = reader.nextLine();
             if(line.equalsIgnoreCase("a")){
-                System.out.println("Inserire il numero della domanda che si vuole consultare: ");
+                Print.print("Inserire il numero della domanda che si vuole consultare: ");
                 i = reader.nextInt();
                 try {
                     this.controller.goToQuestion(i);
                 }  catch (PersistanceLayerNotAvailable e) {
-                System.err.println("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
+                    Print.printError("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
             }
                 return;
             }else if(line.equalsIgnoreCase("b")){
@@ -62,7 +64,7 @@ public class SectionView {
                 return;
             }
             else{
-                System.err.println("Opzione inserita non valida riprovare");
+                Print.printError("Opzione inserita non valida riprovare");
             }
         }
 

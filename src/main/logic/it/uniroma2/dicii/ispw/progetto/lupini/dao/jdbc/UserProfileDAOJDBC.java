@@ -9,8 +9,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Role;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +22,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
     public UserProfile retrieveUserFromUsernameAndPassword(String username, String password) throws ItemNotFound, PersistanceLayerNotAvailable {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
         try {
-            //opening of connection and query
+
             Connection connDB = getConn.getConnection();
             PreparedStatement stmt = connDB.prepareStatement("select * from users where username = ? and password = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setString(1,username);
@@ -44,7 +42,6 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
 
         try {
-            //opening of connection and query
             Connection connDB = getConn.getConnection();
             PreparedStatement stmt = connDB.prepareStatement("select * from users where username = ?");
             stmt.setString(1,username);
@@ -60,6 +57,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
     }
 
+    //metodo privato creato per evitare duplicazioni
     private static UserProfile fetchInformationOfUserProfile(ResultSet rs,String username) throws ItemNotFound, SQLException {
         Role role;
         if(rs.next()) {
@@ -84,7 +82,6 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
 
     public void changeRoleOfUser(String username) throws ImpossibleToUpdate {
         DBMSConnection getConn = DBMSConnection.getInstanceConnection();
-
 
         try {
 

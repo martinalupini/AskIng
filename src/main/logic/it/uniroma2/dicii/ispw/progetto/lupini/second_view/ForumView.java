@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.ForumControllerGraficoCLI;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 
 import java.util.Scanner;
 
@@ -13,12 +14,12 @@ public class ForumView {
         Scanner scanner = new Scanner(System.in);
         String line;
 
-        System.out.println("\n\n------------------------------------------FORUM------------------------------------------\n\n");
+        Print.print("\n\n------------------------------------------FORUM------------------------------------------\n\n");
         for( String s : courses){
-            System.out.println(s+"\n");
+            Print.print(s+"\n");
         }
 
-        System.out.println("\nSelezionare l'operazione che si desidera fare:\na) Consultare una sezione\nb) Tornare nell'homepage\nInserire qui la propria scelta: ");
+        Print.print("\nSelezionare l'operazione che si desidera fare:\na) Consultare una sezione\nb) Tornare nell'homepage\nInserire qui la propria scelta: ");
 
         while(true) {
             line = scanner.nextLine();
@@ -36,7 +37,7 @@ public class ForumView {
     private void goToSectionSelected(Scanner scanner){
         String line;
         while(true){
-            System.out.println("Inserire il nome della sezione che si vuole consultare: ");
+            Print.print("Inserire il nome della sezione che si vuole consultare: ");
             line = scanner.nextLine();
 
             for(String s: courses){
@@ -45,7 +46,7 @@ public class ForumView {
                     return;
                 }
             }
-            System.err.println("Sezione non esistente");
+            Print.printError("Sezione non esistente");
         }
     }
 }

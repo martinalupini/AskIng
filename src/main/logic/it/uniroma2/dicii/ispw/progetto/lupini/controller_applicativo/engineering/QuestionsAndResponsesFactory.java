@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineerin
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.ForumSectionDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.ForumSection;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Moderator;
@@ -16,19 +15,19 @@ import java.util.List;
     Questa classe ha lo scopo di recuperare dallo strato di persistenza le classi richieste dall'applicazione, ovvero
     le sezioni e le domande contenute e le risposte delle domande.
 */
-public class QuestionOfSectionFactory {
+public class QuestionsAndResponsesFactory {
 
-    private static QuestionOfSectionFactory instance = null;
+    private static QuestionsAndResponsesFactory instance = null;
 
     private List<ForumSection> sections;
 
-    private QuestionOfSectionFactory(){
+    private QuestionsAndResponsesFactory(){
         this.sections = new ArrayList<>();
     }
 
-    public static QuestionOfSectionFactory getCurrentInstance(){
+    public static QuestionsAndResponsesFactory getCurrentInstance(){
         if(instance == null){
-            instance = new QuestionOfSectionFactory();
+            instance = new QuestionsAndResponsesFactory();
         }
 
         return instance;
@@ -66,8 +65,8 @@ public class QuestionOfSectionFactory {
         }
 
         //se non è stata recuperata consulto il DAO e la aggiungo alla lista di sezioni
-        ForumSectionDAOJDBC forumSectionDAOJDBC = new ForumSectionDAOJDBC();
-        ForumSection newSection =  forumSectionDAOJDBC.retrieveSection(sectionName);
+        ForumSectionFactory sectionFactory = new ForumSectionFactory();
+        ForumSection newSection =  sectionFactory.retrieveSection(sectionName);
         this.sections.add(newSection);
         return newSection.getQuestions();
 
