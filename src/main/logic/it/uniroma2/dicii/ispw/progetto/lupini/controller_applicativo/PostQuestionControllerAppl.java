@@ -17,13 +17,12 @@ public class PostQuestionControllerAppl {
 
     private NewQuestionControllerInterface controllerGrafico;
 
-    public PostQuestionControllerAppl(){}
 
     public void setControllerGrafico(NewQuestionControllerInterface controllerGrafico) {
         this.controllerGrafico = controllerGrafico;
     }
 
-    public void checkAndProcessQuestion(QuestionBean questionBean, String section) throws PersistanceLayerNotAvailable {
+    public void checkAndProcessQuestion(QuestionBean questionBean, String section) throws PersistanceLayerNotAvailable, BannedWordFoundException {
         try {
 
             CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
@@ -53,8 +52,6 @@ public class PostQuestionControllerAppl {
 
         } catch (PersistanceLayerNotAvailable e) {
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
-        } catch (BannedWordFoundException e) {
-            this.controllerGrafico.bannedWordPresent();
         }
     }
 
