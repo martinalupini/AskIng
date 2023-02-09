@@ -51,7 +51,7 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
 
 
     //metodo chiamato per recuperare le risposte dalla factory
-    public List<ResponseBean> getResponsesOfQuestion(int id) throws PersistanceLayerNotAvailable {
+    public List<ResponseBean> getResponsesOfQuestion(int id) {
 
         QuestionsAndResponsesFactory factory = QuestionsAndResponsesFactory.getCurrentInstance();
         return factory.retrieveResponsesBeanFromQuestion(id);
