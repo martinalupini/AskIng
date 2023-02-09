@@ -109,7 +109,7 @@
       <Label fx:id="emailLabel" layoutX="134.0" layoutY="231.0" prefHeight="18.0" prefWidth="183.0" />
       <Label fx:id="pointsLabel" layoutX="134.0" layoutY="257.0" prefHeight="18.0" prefWidth="183.0" />
       <Label fx:id="behaviourLabel" layoutX="134.0" layoutY="288.0" prefHeight="18.0" prefWidth="183.0" />
-      <Label fx:id="statusLabel" layoutX="18.0" layoutY="386.0" prefHeight="58.0" prefWidth="295.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="18.0" layoutY="386.0" prefHeight="58.0" prefWidth="295.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

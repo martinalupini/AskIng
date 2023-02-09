@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RequestsFactory {
 
-    private List<Request> requests = null;
+    private List<Request> requests;
 
     private static RequestsFactory instance = null;
 
@@ -29,10 +29,10 @@ public class RequestsFactory {
 
         List<RequestBean> req = new ArrayList<>();
 
-        if(requests == null){
-            RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
-            requests =  requestDAOJDBC.retrieveRequests();
-        }
+
+        RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
+        requests =  requestDAOJDBC.retrieveRequests();
+
 
         for (Request r : requests) {
 
@@ -52,15 +52,4 @@ public class RequestsFactory {
         return new RequestBean(req.getText(), username,email,points, badBehaviour);
     }
 
-    public void deleteRequest(String username){
-        for(Request r: this.requests){
-            if(r.getAuthor().getUsername().equals(username)){
-                this.requests.remove(r);
-            }
-        }
-    }
-
-    public void addRequest(Request request){
-        this.requests.add(request);
-    }
 }

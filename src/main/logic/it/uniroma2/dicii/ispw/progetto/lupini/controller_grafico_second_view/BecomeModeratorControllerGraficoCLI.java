@@ -13,7 +13,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.second_view.BecomeModeratorFormVie
 public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGraficoCLI implements NewRequestControllerGraficoInterface {
 
     private BecomeModeratorFormView view;
-    public BecomeModeratorControllerGraficoCLI(){}
 
     public void setView(BecomeModeratorFormView view) {
         this.view = view;

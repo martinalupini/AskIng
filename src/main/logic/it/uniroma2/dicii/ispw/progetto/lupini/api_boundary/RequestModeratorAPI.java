@@ -12,7 +12,6 @@ public class RequestModeratorAPI {
     private ManageRequestsContrGrafInterface moderatorControllerGrafico;
     private RequestControllerAppl requestControllerAppl;
 
-    public RequestModeratorAPI(){}
 
     public void setModeratorControllerGrafico(ManageRequestsContrGrafInterface moderatorControllerGrafico) {
         this.moderatorControllerGrafico = moderatorControllerGrafico;

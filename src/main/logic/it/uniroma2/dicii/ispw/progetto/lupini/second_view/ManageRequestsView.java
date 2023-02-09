@@ -34,13 +34,13 @@ public class ManageRequestsView {
 
         } catch (PersistanceLayerNotAvailable e) {
             System.err.println("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
+            this.controller.goToHomepage();
         }
-
-        System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Esaminare una richiesta\nb) Tornare all'homepage\n" +
-                "Inserire qui la propria scelta: ");
 
 
         while (true) {
+            System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Esaminare una richiesta\nb) Tornare all'homepage\n" +
+                    "Inserire qui la propria scelta: ");
             line = reader.nextLine();
             if (line.equalsIgnoreCase("a")) {
                 System.out.println("Inserire il numero della richiesta che si vuole consultare: ");

@@ -1,65 +1,39 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.test;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
+
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.RegularUser;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestUserProfileDAOCSV {
 
-    @Test
-    public void TestRetrieveUserFromUsernameAndPassword(){
-        UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
-        try {
-            UserProfile user = userProfileDAOCSV.retrieveUserFromUsernameAndPassword("martinalupini", "1234");
-            CurrentUserProfileBean currentUserProfileBean = CurrentUserProfileBean.getProfileInstance();
-            //currentUserProfileBean.setUser(user);
-            System.out.println(user.toString());
-            System.out.println(currentUserProfileBean.toString());
 
-            assertThat("non vuoto", user!=null);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    @Test
-    public void testChangeRoleOfUser(){
-        UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
-        try {
-            userProfileDAOCSV.changeRoleOfUser("luigi");
-        } catch (ImpossibleToUpdate e) {
-            throw new RuntimeException(e);
-        }
-
-        assertThat("non vuoto", userProfileDAOCSV!=null);
-    }
-
+    /*
+    In questo test verifico se viene effettivamente incrementato il comportamento scorretto dell'utente.
+    Per fare ciò prima recupero l'utente dal database e controllo il suo punteggio.
+    Poi aumento il punteggio e infine ricarico l'utente da database per vedere se l'aumento è stato effettivamente salvato.
+     */
     @Test
     public void testIncreaseBadBehaviour(){
+        int previousBadBehaviour= 0;
+        int nextBadBehaviour= 0;
         UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
         try {
-            userProfileDAOCSV.increaseBadBehaviourUser("luigi");
-        } catch (ImpossibleToUpdate e) {
+            UserProfile user = userProfileDAOCSV.retrieveUserFromUsername("martinalupini");
+            previousBadBehaviour = ((RegularUser)user.getRole()).getBadBehaviour();
+            userProfileDAOCSV.increaseBadBehaviourUser("martinalupini");
+            user = userProfileDAOCSV.retrieveUserFromUsername("martinalupini");
+            nextBadBehaviour = ((RegularUser)user.getRole()).getBadBehaviour();
+        } catch (ImpossibleToUpdate | ItemNotFound | PersistanceLayerNotAvailable e) {
             throw new RuntimeException(e);
         }
 
-        assertThat("non vuoto", userProfileDAOCSV!=null);
+        assertEquals(nextBadBehaviour, previousBadBehaviour+1);
     }
 
-    @Test
-    public void testIncreasePoints(){
-        UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
-        try {
-            userProfileDAOCSV.increaseUserPoints("luigi");
-        } catch (ImpossibleToUpdate e) {
-            throw new RuntimeException(e);
-        }
-
-        assertThat("non vuoto", userProfileDAOCSV!=null);
-    }
 }

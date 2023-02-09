@@ -44,6 +44,7 @@ public class LoginView {
                 System.err.println("Username o password errati. Riprovare");
             } catch (PersistanceLayerNotAvailable e) {
                 System.err.println("Spiacenti, si sono verificati problemi interni. Riprovare più tardi.");
+                this.controllerG.goToHomepage();
             }
 
         }

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface, ObserverOfQuestionBean {
+public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface {
 
     QuestionBean currentQuestion;
 
@@ -176,14 +176,9 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
 
 
 
-    public void update(){
-
-        showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
-    }
-
     @Override
     public void responseSuccessful(ResponseBean r) {
-        this.currentQuestion.addResponse(r);
+        showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
 
     }
 

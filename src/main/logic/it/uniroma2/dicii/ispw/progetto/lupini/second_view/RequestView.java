@@ -26,10 +26,9 @@ public class RequestView {
                 "\nBad Behaviour: "+this.request.getBadBehaviour()+"\nRICHIESTA\n"+this.request.getText());
 
 
-        System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Accettare la richiesta\nb) Rifiutare la richiesta\nc) Tornare all'homepage\n" +
-                "Inserire qui la propria scelta: ");
-
         while (true) {
+            System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Accettare la richiesta\nb) Rifiutare la richiesta\nc) Tornare all'homepage\n" +
+                    "Inserire qui la propria scelta: ");
             line = reader.nextLine();
             try{
             if (line.equalsIgnoreCase("a")) {

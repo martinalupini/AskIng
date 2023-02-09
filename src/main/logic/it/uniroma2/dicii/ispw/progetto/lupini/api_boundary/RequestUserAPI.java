@@ -15,8 +15,6 @@ public class RequestUserAPI {
     private NewRequestControllerGraficoInterface userControllerGrafico;
     private RequestControllerAppl requestControllerAppl;
 
-    public RequestUserAPI(){}
-
     public void setRequestControllerAppl(RequestControllerAppl requestControllerAppl) {
         this.requestControllerAppl = requestControllerAppl;
     }

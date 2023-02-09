@@ -144,7 +144,7 @@ public class UserProfileDAOJDBC implements UserProfileDAO {
             ResultSet rs = statement.executeQuery();
 
             if(rs.next()){
-                points = rs.getInt("points")+1;
+                points = rs.getInt("points")+5;
             }
 
             PreparedStatement stmt = connDB.prepareStatement("update users set  points = ? where username = ?");

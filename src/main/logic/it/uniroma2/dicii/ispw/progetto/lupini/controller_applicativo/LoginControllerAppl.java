@@ -17,8 +17,6 @@ import java.security.SecureRandom;
 
 public class LoginControllerAppl {
 
-    public LoginControllerAppl() {}
-
     public void login(String username, String password) throws PersistanceLayerNotAvailable, ItemNotFound {
 
         UserProfileDAO userDAO;

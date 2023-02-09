@@ -70,7 +70,6 @@ public class LoginControllerGrafico extends EmptyScreen {
                     ViewQuestionController viewQuestionController = loader.getController();
                     QuestionBean q = this.viewQuestionController.currentQuestion;
                     viewQuestionController.setCurrentQuestion(q);
-                    q.attach(viewQuestionController);
                     viewQuestionController.setQuestionLabel(q.getText());
                     viewQuestionController.setUsernameLabel(q.getUsername());
                     viewQuestionController.initialize(q.getText(), q.getUsername());
