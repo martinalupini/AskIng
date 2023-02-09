@@ -11,12 +11,6 @@ public class Response {
         this.author =  author;
     }
 
-
-    public Response cloneResponse(){
-
-        return new Response(this.responseText, this.author);
-    }
-
     //getters
     public String getResponseText() {
         return responseText;
@@ -26,7 +20,7 @@ public class Response {
         return author;
     }
 
-    public Response clone(){
+    public Response cloneResponse(){
         return new Response(this.responseText, this.author);
     }
 }
