@@ -4,13 +4,16 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewQuestionControllerInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.io.IOException;
 
 
 public class QuestionFormController extends EmptyScreen implements NewQuestionControllerInterface {
@@ -47,11 +50,15 @@ public class QuestionFormController extends EmptyScreen implements NewQuestionCo
             controllerAppl.setControllerGrafico(this);
             controllerAppl.checkAndProcessQuestion(questionBean, section);
 
+            SectionController.goToViewQuestion((Node)event.getSource(), questionBean);
+
 
         }catch( KeywordsException | TextException  e){
             errorLabel.setText(e.getMessage());
-        }catch(PersistanceLayerNotAvailable e){
+        }catch(PersistanceLayerNotAvailable | IOException e){
             errorLabel.setText("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
+        } catch (BannedWordFoundException e) {
+            bannedWordPresent();
         }
 
 
@@ -59,7 +66,7 @@ public class QuestionFormController extends EmptyScreen implements NewQuestionCo
 
     @Override
     public void bannedWordPresent(){
-        errorLabel.setText("Sono state rilevate delle parole non adeguate nel testo della domanda. Il tuo punteggio BadBehaviour è stato aumentato.");
+        errorLabel.setText("Sono state rilevate parole non adeguate nel testo della domanda. Il tuo punteggio BadBehaviour è stato aumentato.");
     }
 
     @Override
