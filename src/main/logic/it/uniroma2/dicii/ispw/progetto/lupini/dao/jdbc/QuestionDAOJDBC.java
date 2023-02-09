@@ -103,7 +103,6 @@ public class QuestionDAOJDBC {
 
 
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
             throw new PersistanceLayerNotAvailable("DB is currently not available");
         }
 

@@ -83,7 +83,7 @@ public class QuestionsAndResponsesFactory {
     Questi metodi hanno un funzionamento analogo al precedente ma sono utilizzati per recuperare le risposte ad una domanda
      */
 
-    public List<ResponseBean>  retrieveResponsesBeanFromQuestion(int idQuestion) throws PersistanceLayerNotAvailable {
+    public List<ResponseBean>  retrieveResponsesBeanFromQuestion(int idQuestion) {
 
         List<ResponseBean> responses= new ArrayList<>();
 

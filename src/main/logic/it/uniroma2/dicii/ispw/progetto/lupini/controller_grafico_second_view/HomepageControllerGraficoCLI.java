@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LogoutControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.*;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 
 public class HomepageControllerGraficoCLI extends EmptyScreenControllerGraficoCLI{
 
@@ -25,7 +26,7 @@ public class HomepageControllerGraficoCLI extends EmptyScreenControllerGraficoCL
         if(!CurrentUserProfileBean.getProfileInstance().isLogged())  return;
         LogoutControllerAppl logoutControllerAppl =new LogoutControllerAppl();
         logoutControllerAppl.exit();
-        System.out.println("Logout effettuato con successo!");
+        Print.print("Logout effettuato con successo!");
     }
 
     //per fare richiesta da parte di un utente normale di diventare moderatore

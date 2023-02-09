@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.Homepage;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.HomepageView;
+import it.uniroma2.dicii.ispw.progetto.lupini.second_view.engineering.Print;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class Main extends Application {
 
         Scanner reader = new Scanner(System.in);
         int selection;
-        System.out.println("SELEZIONARE LA MODALITA' DI VISUALIZZAZIONE DELL'INTERFACCIA\n\n1) interfaccia grafica\n2) da linea di comando\n\nPer selezionare inserire il numero corrispondente: ");
+        Print.print("SELEZIONARE LA MODALITA' DI VISUALIZZAZIONE DELL'INTERFACCIA\n\n1) interfaccia grafica\n2) da linea di comando\n\nPer selezionare inserire il numero corrispondente: ");
 
 
         while(true){
@@ -28,7 +29,7 @@ public class Main extends Application {
                 HomepageView homepageView = new HomepageView();
                 homepageView.displayHomepage();
             }else{
-                System.out.println("Inserire il  numero 1 o 2 a seconda dell'interfaccia scelta: ");
+                Print.print("Inserire il  numero 1 o 2 a seconda dell'interfaccia scelta: ");
             }
 
         }

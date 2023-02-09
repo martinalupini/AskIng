@@ -39,7 +39,7 @@ public class SectionView {
             }
 
         } catch (PersistanceLayerNotAvailable e) {
-            System.err.println("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
+            Print.printError("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
             this.controller.goToHomepage();
         }
 
