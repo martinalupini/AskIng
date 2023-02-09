@@ -28,23 +28,31 @@ public class HomepageControllerGraficoCLI extends EmptyScreenControllerGraficoCL
         System.out.println("Logout effettuato con successo!");
     }
 
+    //per fare richiesta da parte di un utente normale di diventare moderatore
     public void selectedBecomeModerator(){
         CurrentUserProfileBean currentUserProfileBean = CurrentUserProfileBean.getProfileInstance();
+
+        //prima verifico se l'utente è loggato
         if(!currentUserProfileBean.isLogged()){
             LoginView loginView = new LoginView();
             loginView.displayForm();
         }
 
+        //se è un moderatore lo reindirizzo sulla homepage
         if(currentUserProfileBean.getRole().equals("moderator")){
             goToHomepage();
         }
 
+        //altrimenti viene mostrato il form
         BecomeModeratorFormView becomeModeratorFormView = new BecomeModeratorFormView();
         becomeModeratorFormView.displayForm();
     }
 
+    //utilizzato quando il moderatore richiede di visualizzare le richieste
     public void selectedViewModeratorRequests(){
         CurrentUserProfileBean currentUserProfileBean = CurrentUserProfileBean.getProfileInstance();
+
+        //per prima cosa vedo se l'utente è loggato
         if(!currentUserProfileBean.isLogged()){
             LoginView loginView = new LoginView();
             loginView.displayForm();

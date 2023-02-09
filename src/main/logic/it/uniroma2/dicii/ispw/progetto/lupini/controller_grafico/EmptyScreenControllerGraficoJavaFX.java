@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EmptyScreen{
+public class EmptyScreenControllerGraficoJavaFX {
 
     private static final String ERROR_GUI = "Error on starting the GUI";
 
@@ -47,8 +47,6 @@ public class EmptyScreen{
         }else{
             view = "homepage.fxml";
         }
-
-
 
         try {
             root = FXMLLoader.load(getClass().getResource(view));
@@ -84,7 +82,7 @@ public class EmptyScreen{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
             root = loader.load();
 
-            ProfileController profileController = loader.getController();
+            ProfileControllerGraficoJavaFX profileController = loader.getController();
 
             if(currUser.getRole().equals("regular user")) {
                 profileController.loadData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
@@ -101,10 +99,6 @@ public class EmptyScreen{
             throw new ImpossibleStartGUI(ERROR_GUI);
         }
     }
-
-
-
-
 
 
     @FXML
@@ -132,7 +126,7 @@ public class EmptyScreen{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
             root = loader.load();
 
-            DoNewRequestController doNewRequestController = loader.getController();
+            DoNewRequestControllerGraficoJavaFX doNewRequestController = loader.getController();
             doNewRequestController.displayUserData(currUser.getUsername(), currUser.getEmail(), currUser.getPoints(), currUser.getBadBehaviour());
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -155,7 +149,7 @@ public class EmptyScreen{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("homepage.fxml"));
             root = loader.load();
 
-            HomepageController homepageController = loader.getController();
+            HomepageControllerGraficoJavaFX homepageController = loader.getController();
             homepageController.setLogoutLabel("logout effettuato con successo!");
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

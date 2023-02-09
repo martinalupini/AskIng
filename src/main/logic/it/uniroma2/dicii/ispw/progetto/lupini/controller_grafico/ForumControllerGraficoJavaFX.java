@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ForumController extends EmptyScreen implements Initializable{
+public class ForumControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX implements Initializable{
 
     @FXML
     private VBox titleLayout;
@@ -40,6 +40,7 @@ public class ForumController extends EmptyScreen implements Initializable{
         this.notImplemented.setText("NOT IMPLEMENTED");
     }
 
+    //metodo per il caricamento della schermata
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -50,16 +51,16 @@ public class ForumController extends EmptyScreen implements Initializable{
 
             try{
                 Button button  = fxmlLoader.load();
-                TitleCourseController titleCourseController = fxmlLoader.getController();
+                TitleCourseControllerGraficoJavaFX titleCourseController = fxmlLoader.getController();
                 titleCourseController.setTitle(c);
 
 
                 button.setOnAction(event -> {
                     try {
-                        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("section.fxml"));
+                        FXMLLoader loader = new FXMLLoader(TitleCourseControllerGraficoJavaFX.class.getResource("section.fxml"));
                         Parent root = loader.load();
 
-                        SectionController sectionController = loader.getController();
+                        SectionControllerGraficoJavaFX sectionController = loader.getController();
                         sectionController.setSectionName(button.getText());
                         sectionController.initialize(button.getText());
 

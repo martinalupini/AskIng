@@ -22,15 +22,12 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
 
     public  List<QuestionBean> getQuestionOfSection(String sectionName) throws PersistanceLayerNotAvailable {
 
-
         QuestionOfSectionFactory factory = QuestionOfSectionFactory.getCurrentInstance();
-
         this.questions =  factory.returnQuestionBeanOfSection(sectionName.toLowerCase());
-
         return this.questions;
-
     }
 
+    //metodo chiamato quando l'utente vuole vedere una specifica domanda (identificata dal suo id)
     public void goToQuestion(int index) throws PersistanceLayerNotAvailable {
 
         QuestionBean questionBean = this.questions.get(index-1);
@@ -41,7 +38,9 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
 
     }
 
+    //metodo chiamato quando l'utente vuole fare una nuova domanda
     public void doNewQuestion(){
+        //per prima cosa vedo se l'utente è loggato
         if(!CurrentUserProfileBean.getProfileInstance().isLogged()){
             LoginView loginView = new LoginView();
             loginView.displayForm();
@@ -51,6 +50,7 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
     }
 
 
+    //metodo chiamato per recuperare le risposte dalla factory
     public List<ResponseBean> getResponsesOfQuestion(int id) throws PersistanceLayerNotAvailable {
 
         QuestionOfSectionFactory factory = QuestionOfSectionFactory.getCurrentInstance();

@@ -3,6 +3,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.BecomeModeratorControllerGraficoCLI;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 
 import java.util.Scanner;
 
@@ -27,6 +28,8 @@ public class BecomeModeratorFormView {
         } catch (PersistanceLayerNotAvailable | RequestAlreadyDone e) {
             System.err.println(e.getMessage());
             this.controller.goToHomepage();
+        } catch (TextException e) {
+            System.err.println(e.getMessage());
         }
     }
 

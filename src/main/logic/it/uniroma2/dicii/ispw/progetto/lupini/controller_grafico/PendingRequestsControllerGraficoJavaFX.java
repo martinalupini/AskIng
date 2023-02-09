@@ -14,14 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PendingRequestsController extends EmptyScreen implements Initializable {
+public class PendingRequestsControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX implements Initializable {
     @FXML
     private VBox requestLayout;
 
@@ -34,6 +33,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
     private Label descriptionLabel;
 
 
+    //metodo che carica i dati della pagina
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         requests = requests();
@@ -46,16 +46,16 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
             try{
                 Button button  = fxmlLoader.load();
 
-                RequestItemController requestItemController = fxmlLoader.getController();
+                RequestItemControllerGraficoJavaFX requestItemController = fxmlLoader.getController();
                 requestItemController.setRequestItem(r.getText());
 
                 //qua devo fare che ogni volta che ci clicco apre
                 button.setOnAction(event -> {
                     try {
-                        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("requestView.fxml"));
+                        FXMLLoader loader = new FXMLLoader(TitleCourseControllerGraficoJavaFX.class.getResource("requestView.fxml"));
                         Parent root = loader.load();
 
-                        ViewRequestController viewRequestController = loader.getController();
+                        ViewSingleRequestControllerGraficoJavaFX viewRequestController = loader.getController();
                         viewRequestController.displayUserRequestData(r.getUsername(), r.getEmail(), r.getPoints(), r.getBadBehaviour(), r.getText());
 
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -77,6 +77,7 @@ public class PendingRequestsController extends EmptyScreen implements Initializa
         }
     }
 
+    //recupera le richieste dalla factory
     private List<RequestBean> requests() {
 
         List<RequestBean> req = new ArrayList<>();

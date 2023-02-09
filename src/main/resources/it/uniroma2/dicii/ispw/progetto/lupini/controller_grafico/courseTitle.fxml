@@ -3,4 +3,4 @@
 <?import javafx.scene.control.Button?>
 
 
-<Button fx:id="title" mnemonicParsing="false" prefHeight="27.0" prefWidth="259.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.TitleCourseController" />
+<Button fx:id="title" mnemonicParsing="false" prefHeight="27.0" prefWidth="259.0" style="-fx-background-color: #92d6f0; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.TitleCourseControllerGraficoJavaFX" />

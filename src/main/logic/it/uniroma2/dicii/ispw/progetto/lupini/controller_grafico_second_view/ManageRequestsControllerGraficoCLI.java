@@ -20,12 +20,13 @@ public class ManageRequestsControllerGraficoCLI extends EmptyScreenControllerGra
 
     public List<RequestBean> getRequests() throws PersistanceLayerNotAvailable {
 
-
         this.requests = RequestsFactory.getCurrentInstance().getRequestsBean();
         return this.requests;
 
     }
 
+    //metodo chiamto quando il
+    // moderatore vuole visualizzare una richiesta specifica (identificata dall'username del suo autore)
     public void goToRequest(int i) {
 
         RequestView requestView = new RequestView(this.requests.get(i-1));

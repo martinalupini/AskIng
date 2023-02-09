@@ -6,6 +6,7 @@ public class CheckTextLenght {
 
     private CheckTextLenght(){}
 
+    //metodo statico per il controllo sulla lunghezza del testo di domande, richieste e risposte
     public static void checkTextLength(String text) throws TextException {
         if(text.isEmpty()){
             throw new TextException("Inserire il testo della domanda");

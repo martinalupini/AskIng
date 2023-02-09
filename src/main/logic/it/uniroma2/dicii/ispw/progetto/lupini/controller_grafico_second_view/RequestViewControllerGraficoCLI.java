@@ -16,6 +16,8 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
         this.view = view;
     }
 
+    //metodo chiamato quando il moderatore vuole accettare la richiesta. Il controller grafico comunica con un API
+    //che mappa le chiamate del controller grafico su quelle del controller applicativo
     public void acceptRequest(RequestBean request) throws PersistanceLayerNotAvailable {
 
         RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
@@ -29,6 +31,7 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
     }
 
 
+    //aggiorna il moderatore che la richiesta è andata a buon fine
     @Override
     public void updateStatus(String status) {
         this.view.updateStatusRequest(status);
@@ -36,6 +39,8 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
 
     }
 
+
+    //simile a acceptRequest
     public void declineRequest(RequestBean request) throws PersistanceLayerNotAvailable {
         RequestModeratorAPI moderatorAPI = new RequestModeratorAPI();
         moderatorAPI.setModeratorControllerGrafico(this);

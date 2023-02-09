@@ -13,10 +13,10 @@ public class Notification {
             if(!notification.createNewFile()){
                 return;
             }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(notification));
+            writer.write(message);
+            writer.close();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(notification));
-        writer.write(message);
-        writer.close();
         } catch (IOException e) {
             //It's not a big deal if the notification can't be sent so we just catch the exception
         }

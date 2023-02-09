@@ -4,7 +4,8 @@ import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestModeratorAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.RequestsFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.UserProfileDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
@@ -14,7 +15,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.CurrentUserProfile;
 import it.uniroma2.dicii.ispw.progetto.lupini.model.Request;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.UserProfile;
 
 public class RequestControllerAppl {
 
@@ -31,8 +31,7 @@ public class RequestControllerAppl {
         this.regularUserBoundary = regularUserBoundary;
     }
 
-    public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
-        //The aim of this method is to register the new request and notify the view controller of moderators
+    public void processRequest(RequestBean requestBean) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
 
            Request request = new Request(requestBean.getText(), CurrentUserProfile.getCurrentUserInstance().getCurrentUser());
 
@@ -58,14 +57,13 @@ public class RequestControllerAppl {
 
             if (state.equals("accepted")){
             //cambio il ruolo dell'utente sia su filesystem che su DBMS
-            UserProfileDAOJDBC userProfileDAOJDBC = new UserProfileDAOJDBC();
+            UserProfileDAO userProfileDAOJDBC = DAOFactory.getInstance().createUserDAOJDBC();
             userProfileDAOJDBC.changeRoleOfUser(username);
 
-            UserProfileDAOCSV userProfileDAOCSV = new UserProfileDAOCSV();
+            UserProfileDAO userProfileDAOCSV = DAOFactory.getInstance().createUserDAOCSV();
             userProfileDAOCSV.changeRoleOfUser(username);
 
             //informo il moderatore che l'operazione è andata a buon fine
-
                 this.moderatorBoundary.updateStatus("ACCETTATA");
             }else{
                 this.moderatorBoundary.updateStatus("RIFIUTATA");

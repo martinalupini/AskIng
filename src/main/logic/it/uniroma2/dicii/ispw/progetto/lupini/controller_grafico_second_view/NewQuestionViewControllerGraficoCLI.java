@@ -20,16 +20,20 @@ public class NewQuestionViewControllerGraficoCLI extends EmptyScreenControllerGr
         this.section = section;
     }
 
+    //chiamato quando l'utente vuole inviare una nuova domanda
     public void submitQuestion(String keywords, String text) throws KeywordsException, TextException, PersistanceLayerNotAvailable {
         String author = CurrentUserProfileBean.getProfileInstance().getUsername();
         QuestionBean questionBean = new QuestionBean(author);
 
+        //controllo sintattico effettuato dal bean quando voglio settare il testo
         questionBean.setKeywords(keywords);
         questionBean.setText(text);
         try {
+
             PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl();
             controllerAppl.setControllerGrafico(this);
             controllerAppl.checkAndProcessQuestion(questionBean, section);
+
         }catch(PersistanceLayerNotAvailable e){
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
         } catch (BannedWordFoundException e) {

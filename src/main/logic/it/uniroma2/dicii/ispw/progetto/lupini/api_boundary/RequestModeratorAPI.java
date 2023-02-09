@@ -21,16 +21,21 @@ public class RequestModeratorAPI {
         this.requestControllerAppl = requestControllerAppl;
     }
 
+    //usata dal controller grafico per indicare che il moderatore vuole accettare/rifiutare la richiesta
     public void updateRequestState(String username, String state) throws PersistanceLayerNotAvailable, ImpossibleToUpdate {
         this.requestControllerAppl = new RequestControllerAppl();
         this.requestControllerAppl.setModeratorBoundary(this);
         this.requestControllerAppl.updateRequestState(username, state);
     }
 
+    //invocata dal controller applicativo per aggiornare il moderatore se l'operazione
+    //di accettazione o rifiuto è andata a buon fine
     public void updateStatus(String status){
         this.moderatorControllerGrafico.updateStatus(status);
     }
 
+
+    //invocata dal controller applicativo per notificare il moderatore di una nuova richiesta
     public void notifyModeratorNewRequest() {
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
         Notification notification = new Notification();

@@ -15,8 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 
-
-public class QuestionFormController extends EmptyScreen implements NewQuestionControllerInterface {
+public class QuestionFormControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX implements NewQuestionControllerInterface {
 
     @FXML
     private TextField keywordField;
@@ -36,22 +35,23 @@ public class QuestionFormController extends EmptyScreen implements NewQuestionCo
     @FXML
     public void sendQuestion(ActionEvent event) {
 
+        //prende il nome dell'utente che ha fatto la domanda (utente corrente)
         String author = CurrentUserProfileBean.getProfileInstance().getUsername();
         QuestionBean questionBean = new QuestionBean(author);
 
         try{
+            //il bean effettua il controllo sintattico su keywords e bean
             questionBean.setKeywords(keywordField.getText());
             questionBean.setText(textField.getText());
 
             //ora bisogna inviare la domanda al controller applicativo il quale controllerà se le keyword o il testo
             //contengono parole bannate
-
             PostQuestionControllerAppl controllerAppl = new PostQuestionControllerAppl();
             controllerAppl.setControllerGrafico(this);
             controllerAppl.checkAndProcessQuestion(questionBean, section);
 
-            SectionController.goToViewQuestion((Node)event.getSource(), questionBean);
-
+            //se non contengono parole scurrili viene mostrata la schermata della domanda
+            SectionControllerGraficoJavaFX.goToViewQuestion((Node)event.getSource(), questionBean);
 
         }catch( KeywordsException | TextException  e){
             errorLabel.setText(e.getMessage());
@@ -60,7 +60,6 @@ public class QuestionFormController extends EmptyScreen implements NewQuestionCo
         } catch (BannedWordFoundException e) {
             bannedWordPresent();
         }
-
 
     }
 

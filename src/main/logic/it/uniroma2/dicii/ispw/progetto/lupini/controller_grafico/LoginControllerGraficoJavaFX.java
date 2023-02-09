@@ -1,7 +1,5 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
-
-
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.LoginControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
@@ -12,17 +10,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.List;
 
-public class LoginControllerGrafico extends EmptyScreen {
+public class LoginControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX {
     @FXML
     private Label errorLabel;
 
@@ -34,48 +27,48 @@ public class LoginControllerGrafico extends EmptyScreen {
 
     private String nextWindow;
 
-    private SectionController sectionController;
+    private SectionControllerGraficoJavaFX sectionController;
 
-    private ViewQuestionController viewQuestionController;
+    private ViewSingleQuestionControllerGraficoJavaFX viewQuestionController;
 
     public void setNextWindow(String nextView) {
 
         this.nextWindow = nextView;
     }
 
-    public void setSectionController(SectionController sectionController) {
+    public void setSectionController(SectionControllerGraficoJavaFX sectionController) {
         this.sectionController = sectionController;
     }
 
-    public void setViewQuestionController(ViewQuestionController viewQuestionController) {
+    public void setViewQuestionController(ViewSingleQuestionControllerGraficoJavaFX viewQuestionController) {
         this.viewQuestionController = viewQuestionController;
     }
 
     @FXML
     public void clickLogin(ActionEvent event) {
-        /*since the activation of the same use case needs a new instance of application controller I create a new instance everytime
-        I want to log*/
         LoginControllerAppl logctl = new LoginControllerAppl();
         try{
             logctl.login(usernameField.getText(), passwordField.getText());
 
+            //serve per tornare alla schermata di partenza quando clicco login
             switch (nextWindow) {
                 case "profileView" -> goToProfile(event);
                 case "DoNewModeratorRequest" -> clickBecomeModerator(event);
                 case "DoNewQuestion" -> this.sectionController.doNewQuestion(event);
-                case "DoNewResponse" -> {//this.viewQuestionController.replyToQuestion(event);
-                    FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
+                case "DoNewResponse" -> {
+                    FXMLLoader loader = new FXMLLoader(TitleCourseControllerGraficoJavaFX.class.getResource("viewQuestion.fxml"));
                     Parent root = loader.load();
 
-                    ViewQuestionController viewQuestionController = loader.getController();
+                    ViewSingleQuestionControllerGraficoJavaFX viewQuestionController = loader.getController();
                     QuestionBean q = this.viewQuestionController.currentQuestion;
                     viewQuestionController.setCurrentQuestion(q);
+                    q.attach(viewQuestionController);
                     viewQuestionController.setQuestionLabel(q.getText());
                     viewQuestionController.setUsernameLabel(q.getUsername());
                     viewQuestionController.initialize(q.getText(), q.getUsername());
                     viewQuestionController.setResponseText(this.viewQuestionController.getResponseText());
 
-                    SectionController.displayQuestion(root, viewQuestionController, q, (Node)event.getSource());
+                    SectionControllerGraficoJavaFX.displayQuestion(root, viewQuestionController, q, (Node)event.getSource());
 
                     viewQuestionController.replyToQuestion(event);
                 }
@@ -94,6 +87,21 @@ public class LoginControllerGrafico extends EmptyScreen {
         }
 
 
+    }
+
+    @FXML
+    void loginGoogle(ActionEvent event) {
+        errorLabel.setText("NOT IMPLEMENTED");
+    }
+
+    @FXML
+    void loginMicrosoft(ActionEvent event) {
+        errorLabel.setText("NOT IMPLEMENTED");
+    }
+
+    @FXML
+    void register(ActionEvent event) {
+        errorLabel.setText("NOT IMPLEMENTED");
     }
 
 

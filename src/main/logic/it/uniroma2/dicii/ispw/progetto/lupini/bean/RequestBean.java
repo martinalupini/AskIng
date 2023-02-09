@@ -1,8 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.engineering.CheckTextLenght;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
-
-import java.util.StringTokenizer;
 
 public class RequestBean {
     private String username = "";
@@ -14,12 +13,23 @@ public class RequestBean {
     private String email;
     private String text = "";
 
-    public RequestBean(String text, String user, String email, int points, int badBehaviour){
+    public RequestBean(String user, String email, int points, int badBehaviour){
         this.username = user;
-        this.text = text;
         this.points = points;
         this.badBehaviour = badBehaviour;
         this.email = email;
+    }
+
+    public RequestBean(String text, String user, String email, int points, int badBehaviour){
+        this.username = user;
+        this.points = points;
+        this.badBehaviour = badBehaviour;
+        this.email = email;
+        this.text = text;
+    }
+    public void setText(String text) throws TextException {
+        CheckTextLenght.checkTextLength(text);
+        this.text = text;
     }
 
     public String getUsername() {
@@ -40,23 +50,6 @@ public class RequestBean {
         return badBehaviour;
     }
 
-    public void  checkText() throws TextException{
-        StringTokenizer strTok = new StringTokenizer(text, " ");
-        if(text.isEmpty()){
-            throw new TextException("Inserire il testo");
-        }
-
-        int wordCount = strTok.countTokens();
-
-        if(wordCount > 1000){
-            throw new TextException("Il numero massimo di parole inseribili è 1000");
-        }
-
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public void setUsername(String username) {
         this.username = username;

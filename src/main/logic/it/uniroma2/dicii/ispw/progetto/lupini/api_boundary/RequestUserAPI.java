@@ -23,18 +23,20 @@ public class RequestUserAPI {
         this.userControllerGrafico = userControllerGrafico;
     }
 
+    //chiamata dal controller grafico per inviare la richiesta.
+    // Il metodo chiama la rispettiva operazione del controller applicativo
     public void sendRequest(RequestBean request) throws PersistanceLayerNotAvailable, RequestAlreadyDone, ItemNotFound {
-        //prima istanzio il controller applicativo (essendo che il caso d'uso è stato appena inizializzato l'attributo rispettivo avrà valore null)
         this.requestControllerAppl=  new RequestControllerAppl();
         this.requestControllerAppl.setRegularUserBoundary(this);
-        //poi chiamo il metodo del controller applicativo per processare la richiesta
         this.requestControllerAppl.processRequest(request);
     }
 
+    //chiamata dal controller applicativo per indicare che la richiesta è stata salvata correttamente
     public void updateStatus() {
         this.userControllerGrafico.updateStatus();
     }
 
+    //chiamata dal controller applicativo per notificare all'utente l'esito della sua richiesta
     public void notifyUser(String username, String status) {
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
         Notification notification = new Notification();

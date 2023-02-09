@@ -1,23 +1,20 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 
-import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ResponseItemController {
-
+public class QuestionItemControllerGraficoJavaFX {
     @FXML
     private Label textLabel;
 
     @FXML
     private Label userLabel;
 
-
-
-
-    public void setResponse(ResponseBean res){
+    public void setQuestion(QuestionBean res){
         userLabel.setText(res.getUsername());
         textLabel.setText(res.getText());
     }
+
 
 }

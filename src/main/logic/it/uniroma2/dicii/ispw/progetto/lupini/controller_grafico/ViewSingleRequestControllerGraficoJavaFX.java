@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class ViewRequestController extends  EmptyScreen implements ManageRequestsContrGrafInterface {
+public class ViewSingleRequestControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX implements ManageRequestsContrGrafInterface {
 
     @FXML
     private Label behaviourLabel;
@@ -37,6 +37,7 @@ public class ViewRequestController extends  EmptyScreen implements ManageRequest
     private Button declineButton;
 
 
+    //mostra i dati dell'autore della domanda
     public void displayUserRequestData(String username, String email, int point, int behaviour, String text){
         this.usernameLabel.setText(username);
         this.emailLabel.setText(email);
@@ -70,6 +71,7 @@ public class ViewRequestController extends  EmptyScreen implements ManageRequest
         }
     }
 
+    //mostra al moderatore se la sua operazione è andata a buon fine
     @Override
     public void updateStatus(String s){
 

@@ -4,7 +4,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class TitleCourseController{
+public class TitleCourseControllerGraficoJavaFX {
     @FXML
     private Button title;
 

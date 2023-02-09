@@ -1,10 +1,8 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.engineering.CheckTextLenght;
-import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
-import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 
 
 import java.util.ArrayList;
@@ -43,28 +41,6 @@ public class QuestionBean extends SubjectQuestionBean {
     }
 
 
-    //The syntax check of user inserted data is in charge of the bean class
-    private void checkKeywords( List<String> keywords)  throws KeywordsException{
-        if(keywords.isEmpty()){
-            throw new KeywordsException("Inserire almeno una keyword");
-        }
-        if(keywords.size()>3){
-            throw new KeywordsException("Il numero massimo di keywords è 3");
-        }
-    }
-
-
-    public void setKeywords(String listKeywords) throws  KeywordsException{
-            List<String> keywordsList = parseListKeywords(listKeywords);
-            checkKeywords(keywordsList);
-            this.keywords = keywordsList;
-    }
-
-    public void setText(String text) throws TextException {
-        CheckTextLenght.checkTextLength(text);
-        this.text = text;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -81,14 +57,18 @@ public class QuestionBean extends SubjectQuestionBean {
         return id;
     }
 
+    public void setResponses(List<ResponseBean> responses) {
+        this.responses = responses;
+    }
+
+    //la funzione serve a scomporre la stringa passata in keywords usando come token lo spazio vuoto
     private List<String> parseListKeywords(String text) {
         int i;
 
         List<String> list = new ArrayList<>();
         String[] words  = text.split(" ");
 
-        //Simply check to verify that double blank space or punctuation characters are not
-        //considered as a word
+        //Legge più spazi vuoti come un unico spazio
         for(i=0; i< words.length; i++){
             if(words[i].matches("^[\\s\\p{P}]*$")){
                 continue;
@@ -100,7 +80,26 @@ public class QuestionBean extends SubjectQuestionBean {
 
     }
 
-    public void setResponses(List<ResponseBean> responses) {
-        this.responses = responses;
+    //controlla che il numero di keywords sia corretto altrimenti lancia un'eccezione
+    private void checkKeywords( List<String> keywords)  throws KeywordsException{
+        if(keywords.isEmpty()){
+            throw new KeywordsException("Inserire almeno una keyword");
+        }
+        if(keywords.size()>3){
+            throw new KeywordsException("Il numero massimo di keywords è 3");
+        }
+    }
+
+
+    public void setKeywords(String listKeywords) throws  KeywordsException{
+        List<String> keywordsList = parseListKeywords(listKeywords);
+        checkKeywords(keywordsList);
+        this.keywords = keywordsList;
+    }
+
+    //controlla che il numero di parole sia corretto altrimenti lancia un'eccezione
+    public void setText(String text) throws TextException {
+        CheckTextLenght.checkTextLength(text);
+        this.text = text;
     }
 }

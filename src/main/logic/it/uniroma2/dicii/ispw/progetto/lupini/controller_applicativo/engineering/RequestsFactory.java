@@ -25,15 +25,19 @@ public class RequestsFactory {
         return instance;
     }
 
+    /*
+    Questa classe ha lo scopo di recuperare dallo strato di persistenza le richieste che sono state fatte.
+    */
+
     public List<RequestBean> getRequestsBean() throws PersistanceLayerNotAvailable {
 
         List<RequestBean> req = new ArrayList<>();
 
-
+        //si recuperano le richieste utilizzando il DAO
         RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
         requests =  requestDAOJDBC.retrieveRequests();
 
-
+        //si convertono in bean
         for (Request r : requests) {
 
             req.add(convertRequest(r));

@@ -14,7 +14,7 @@ import java.util.List;
 
 /*
     Questa classe ha lo scopo di recuperare dallo strato di persistenza le classi richieste dall'applicazione, ovvero
-    le sezioni e le domande che contengono e le risposte delle domande.
+    le sezioni e le domande contenute e le risposte delle domande.
 */
 public class QuestionOfSectionFactory {
 
@@ -36,7 +36,7 @@ public class QuestionOfSectionFactory {
 
     /*
     Questo metodo viene invocato dai controller grafici e chiama a sua volta altri due metodi. retrieveQuestionOfSection
-    restituisci le domande della sezione cercata. convertQuestion si occupa della conversione da model a bean.
+    restituisce le domande della sezione cercata. convertQuestion si occupa della conversione da model a bean.
      */
     public List<QuestionBean> returnQuestionBeanOfSection(String sectionName) throws PersistanceLayerNotAvailable {
 
@@ -81,7 +81,7 @@ public class QuestionOfSectionFactory {
     }
 
     /*
-    Questi metodi hanno un funzionamento analogo al precedente.
+    Questi metodi hanno un funzionamento analogo al precedente ma sono utilizzati per recuperare le risposte ad una domanda
      */
 
     public List<ResponseBean>  retrieveResponsesBeanFromQuestion(int idQuestion) throws PersistanceLayerNotAvailable {
@@ -96,8 +96,6 @@ public class QuestionOfSectionFactory {
 
 
     }
-
-
 
     private List<Response>  retrieveResponsesFromQuestion(int idQuestion){
         for( ForumSection f: this.sections){
@@ -142,6 +140,8 @@ public class QuestionOfSectionFactory {
     }
 
 
+    //metodo utilizzato per aggiornare il ruolo dell'utente di cui è stata accettata la richiesta in tutte le domande
+    // o risposte di cui è autore
     public void changeRoleOfUser(String username){
         for( ForumSection f: this.sections){
             for(Question q: f.getQuestions()){

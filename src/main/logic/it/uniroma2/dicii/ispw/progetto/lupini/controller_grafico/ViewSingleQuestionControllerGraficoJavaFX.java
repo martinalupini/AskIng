@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface, ObserverOfQuestionBean {
+public class ViewSingleQuestionControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX implements NewResponseControllerInterface, ObserverOfQuestionBean {
 
     QuestionBean currentQuestion;
 
@@ -106,7 +106,7 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
         nextView = "DoNewResponse";
         CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
 
-        //first I check if the user is logged
+        //prima controlla se l'utente è loggato
         if (!currUser.isLogged()) {
             UserNotLogged userNotLogged = new UserNotLogged();
             userNotLogged.setViewQuestionController(this);
@@ -114,16 +114,19 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
             return;
         }
 
+        //prende l'username dell'utente corrente (autore della domanda)
         String author = CurrentUserProfileBean.getProfileInstance().getUsername();
-
         ResponseBean responseBean = new ResponseBean(author);
 
         try {
+            //la bean effettua il controllo sintattico sulla lunghezza del testo
             responseBean.setText(responseText.getText());
 
+            //si chiama il metodo del caso d'uso
             PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl();
             postResponseControllerAppl.setControllerGrafico(this);
             postResponseControllerAppl.checkAndProcessResponse(responseBean, currentQuestion);
+
         } catch (TextException e) {
             errorLabel.setText(e.getMessage());
         }catch(PersistanceLayerNotAvailable e){
@@ -134,6 +137,7 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
     }
 
 
+    //metodo per il caricamento della schermata
     public void initialize(String text, String username) {
         this.currentQuestion.setResponses(getResponsesOfQuestion());
         for(ResponseBean r : this.currentQuestion.getResponses()){
@@ -174,22 +178,21 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
         errorLabel.setText("Sono state rilevate delle parole non adeguate nella tua risposta. Il tuo punteggio BadBehaviour è stato aumentato.");
     }
 
-
-
-
+    //utilizzato per implementare il pattern observer
     @Override
     public void update(){
 
         showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
     }
 
+    //per mostrare la nuova domanda aggiunta
     private void showResponse(ResponseBean r){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("responseItem.fxml"));
 
         try{
             VBox vbox = fxmlLoader.load();
-            ResponseItemController resContr = fxmlLoader.getController();
+            ResponseItemControllerGraficoJavaFX resContr = fxmlLoader.getController();
             resContr.setResponse( r);
             responseLayout.getChildren().add(vbox);
 

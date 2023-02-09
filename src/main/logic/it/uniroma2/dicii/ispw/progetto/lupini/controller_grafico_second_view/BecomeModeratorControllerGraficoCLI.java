@@ -8,6 +8,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewR
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.BecomeModeratorFormView;
 
 public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGraficoCLI implements NewRequestControllerGraficoInterface {
@@ -18,12 +19,14 @@ public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGr
         this.view = view;
     }
 
-    public void sendRequest(String text) throws PersistanceLayerNotAvailable, RequestAlreadyDone {
+    //per mandare la richiesta
+    public void sendRequest(String text) throws PersistanceLayerNotAvailable, RequestAlreadyDone, TextException {
 
-        UserProfileBean user = CurrentUserProfileBean.getProfileInstance().getUser();
-        RequestBean requestBean = new RequestBean(text, user.getUsername(), user.getEmail(), user.getPoints(), user.getBadBehaviour());
+        try{
+            UserProfileBean user = CurrentUserProfileBean.getProfileInstance().getUser();
+            RequestBean requestBean = new RequestBean(user.getUsername(), user.getEmail(), user.getPoints(), user.getBadBehaviour());
+            requestBean.setText(text);
 
-        try {
             RequestUserAPI requestUserAPI = new RequestUserAPI();
             requestUserAPI.setUserControllerGrafico(this);
             requestUserAPI.sendRequest(requestBean);
@@ -35,6 +38,7 @@ public class BecomeModeratorControllerGraficoCLI extends EmptyScreenControllerGr
 
     }
 
+    //aggiorna l'utente se la richiesta è stata inviata
     @Override
     public void updateStatus() {
         this.view.requestSuccessful();

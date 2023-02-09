@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 
-public class ProfileController extends EmptyScreen{
+public class ProfileControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX {
 
     @FXML
     private Label badBehaviourLabel;
@@ -26,6 +26,7 @@ public class ProfileController extends EmptyScreen{
     }
 
 
+    //caricamento dati (Utente Regolare)
     public void loadData(String username, String email, int points, int badBehaviour){
         usernameLabel.setText(username);
         emailLabel.setText(email);
@@ -34,6 +35,7 @@ public class ProfileController extends EmptyScreen{
 
     }
 
+    //caricamento dati (Moderatore)
     public void loadData(String username, String email){
         usernameLabel.setText(username);
         emailLabel.setText(email);

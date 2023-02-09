@@ -44,8 +44,6 @@ public class PostQuestionControllerAppl {
                 IncreaseUserPoints.increaseUserPoints();
             }
 
-
-
             //ora bisogna informare l'utente che l'operazione è andata a buon fine
             this.controllerGrafico.publicationSuccessful();
 

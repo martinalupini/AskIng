@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomepageController extends EmptyScreen{
+public class HomepageControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX {
 
         @FXML
         private Label logoutLabel;
@@ -20,7 +20,7 @@ public class HomepageController extends EmptyScreen{
         @FXML
         private Label errorLabel;
 
-
+        //visualizza tutte le richieste in sospeso
         @FXML
         void visualizeRequests(ActionEvent event) {
 
@@ -44,6 +44,7 @@ public class HomepageController extends EmptyScreen{
                 //This method is empty because is not needed to change screen
         }
 
+        //per indicare che il logout è andato a buon fine
         public void setLogoutLabel(String logoutLabel) {
                 this.logoutLabel.setText(logoutLabel);
         }

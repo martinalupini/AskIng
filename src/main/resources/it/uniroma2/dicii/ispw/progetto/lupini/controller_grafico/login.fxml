@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.LoginControllerGrafico">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="335.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.LoginControllerGraficoJavaFX">
    <children>
       <Pane prefHeight="105.0" prefWidth="335.0" style="-fx-background-color: #24b7ed;">
          <children>
@@ -83,18 +83,18 @@
       </AnchorPane>
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="176.0" prefHeight="18.0" prefWidth="270.0" textFill="RED" />
       <PasswordField fx:id="passwordField" layoutX="35.0" layoutY="319.0" prefHeight="35.0" prefWidth="270.0" promptText="Inserire qui la propria password..." />
-      <Button layoutX="104.0" layoutY="497.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON GOOGLE">
+      <Button layoutX="104.0" layoutY="497.0" mnemonicParsing="false" onAction="#loginGoogle" prefHeight="26.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON GOOGLE">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Button>
-      <Button layoutX="92.0" layoutY="459.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON MICROSOFT">
+      <Button layoutX="92.0" layoutY="459.0" mnemonicParsing="false" onAction="#loginMicrosoft" prefHeight="26.0" prefWidth="149.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="ENTRA CON MICROSOFT">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Button>
       <Label layoutX="148.0" layoutY="430.0" text="oppure" />
-      <Button layoutX="125.0" layoutY="535.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="86.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="REGISTRATI">
+      <Button layoutX="125.0" layoutY="535.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="86.0" style="-fx-background-radius: 20; -fx-background-color: #92d6f0;" text="REGISTRATI">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>

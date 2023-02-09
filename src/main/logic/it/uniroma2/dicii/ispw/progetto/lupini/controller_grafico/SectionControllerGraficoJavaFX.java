@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SectionController extends EmptyScreen {
+public class SectionControllerGraficoJavaFX extends EmptyScreenControllerGraficoJavaFX {
 
     @FXML
     private VBox questionLayout;
@@ -45,6 +45,7 @@ public class SectionController extends EmptyScreen {
     }
 
 
+    //carica la pagina da visualizzare
     public void initialize(String sectionName) {
 
         List<QuestionBean> sectionQuestions = this.getQuestionOfSection(sectionName);
@@ -56,7 +57,7 @@ public class SectionController extends EmptyScreen {
 
             try{
                 VBox vbox = fxmlLoader.load();
-                QuestionItemController questContr = fxmlLoader.getController();
+                QuestionItemControllerGraficoJavaFX questContr = fxmlLoader.getController();
                 questContr.setQuestion(q);
 
                 vbox.setOnMouseClicked(mouseEvent -> {
@@ -98,7 +99,8 @@ public class SectionController extends EmptyScreen {
 
     }
 
-    static void displayQuestion(Parent root, ViewQuestionController viewQuestionController, QuestionBean q, Node source) {
+    //metodo statico definito per evitare duplicazioni nel codice
+    static void displayQuestion(Parent root, ViewSingleQuestionControllerGraficoJavaFX viewQuestionController, QuestionBean q, Node source) {
         List<String> keywords = q.getKeywords();
         viewQuestionController.setKeyword1(keywords.get(0));
         if(keywords.size() == 1){
@@ -120,11 +122,12 @@ public class SectionController extends EmptyScreen {
         stage.show();
     }
 
+    //metodo statico definito per evitare duplicazioni nel codice
     public static void  goToViewQuestion(Node source, QuestionBean quest) throws IOException {
-        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
+        FXMLLoader loader = new FXMLLoader(TitleCourseControllerGraficoJavaFX.class.getResource("viewQuestion.fxml"));
         Parent root = loader.load();
 
-        ViewQuestionController viewQuestionController = loader.getController();
+        ViewSingleQuestionControllerGraficoJavaFX viewQuestionController = loader.getController();
         viewQuestionController.setCurrentQuestion(quest);
         quest.attach(viewQuestionController);
         viewQuestionController.setQuestionLabel(quest.getText());
@@ -135,13 +138,14 @@ public class SectionController extends EmptyScreen {
     }
 
 
+
     @FXML
     public void doNewQuestion(ActionEvent event) {
 
         nextView = "DoNewQuestion";
         CurrentUserProfileBean currUser = CurrentUserProfileBean.getProfileInstance();
 
-        //first I check if the user is logged
+        //prima controllo se l'utente è loggato
         if (!currUser.isLogged()) {
             UserNotLogged userNotLogged = new UserNotLogged();
             userNotLogged.setSectionController(this);
@@ -149,12 +153,13 @@ public class SectionController extends EmptyScreen {
             return;
         }
 
+        //dopodichè si carica il form per fare la domanda
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("questionForm.fxml"));
             Parent root = loader.load();
 
-            QuestionFormController questionFormController = loader.getController();
+            QuestionFormControllerGraficoJavaFX questionFormController = loader.getController();
             questionFormController.setSection(this.sectionName.getText());
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
