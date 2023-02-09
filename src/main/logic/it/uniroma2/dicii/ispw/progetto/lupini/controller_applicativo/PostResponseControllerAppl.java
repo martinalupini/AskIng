@@ -18,8 +18,6 @@ public class PostResponseControllerAppl {
 
     private NewResponseControllerInterface controllerGrafico;
 
-    public PostResponseControllerAppl(){}
-
     public void setControllerGrafico(NewResponseControllerInterface controllerGrafico) {
         this.controllerGrafico = controllerGrafico;
     }
