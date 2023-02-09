@@ -10,7 +10,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionBean {
+public class QuestionBean extends SubjectQuestionBean {
     String username;
     String text;
 
@@ -35,6 +35,7 @@ public class QuestionBean {
 
     public void addResponse(ResponseBean r){
         responses.add(r);
+        notifyObservers();
     }
 
     public List<ResponseBean> getResponses() {
@@ -99,6 +100,7 @@ public class QuestionBean {
 
     }
 
-
-
+    public void setResponses(List<ResponseBean> responses) {
+        this.responses = responses;
+    }
 }

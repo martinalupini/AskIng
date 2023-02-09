@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.CheckBannedWords;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.IncreaseUserPoints;
@@ -22,7 +23,7 @@ public class PostResponseControllerAppl {
         this.controllerGrafico = controllerGrafico;
     }
 
-    public void checkAndProcessResponse(ResponseBean responseBean, int id) throws PersistanceLayerNotAvailable {
+    public void checkAndProcessResponse(ResponseBean responseBean, QuestionBean questionBean) throws PersistanceLayerNotAvailable {
 
         try {
             CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
@@ -33,18 +34,18 @@ public class PostResponseControllerAppl {
             //se no procedo con il salvataggio della risposta in memoria
             Response res = new Response(responseBean.getText(), currentUserProfile.getCurrentUser());
             ResponseDAOJDBC responseDAOJDBC = new ResponseDAOJDBC();
-            responseDAOJDBC.saveNewResponse(res, id);
+            responseDAOJDBC.saveNewResponse(res, questionBean.getId());
 
             //aggiungo la risposta alla relativa domanda
-            QuestionOfSectionFactory.getCurrentInstance().addResponseToQuestion(id, res);
+            QuestionOfSectionFactory.getCurrentInstance().addResponseToQuestion(questionBean.getId(), res);
 
             //aggiurno il punteggio dell'utente
             if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {
                 IncreaseUserPoints.increaseUserPoints();
             }
 
-            //avviso l'utente che l'operazione è andata a buon fine
-            this.controllerGrafico.responseSuccessful(responseBean);
+            //aggiungo la risposta
+            questionBean.addResponse(responseBean);
 
         } catch (BannedWordFoundException e) {
             this.controllerGrafico.bannedWordPresent();

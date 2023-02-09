@@ -29,7 +29,7 @@ public class NewQuestionView {
                 
                 ------------------------------------------NUOVA DOMANDA------------------------------------------
 
-                Inserire "h" se si vuole tornare all'homepage: 
+                Inserire "h" se si vuole tornare all'homepage oppure premere invio per continuare: 
 
                 """);
 
@@ -51,6 +51,7 @@ public class NewQuestionView {
                 return;
             } catch (KeywordsException | TextException | PersistanceLayerNotAvailable e) {
                 System.out.println(e.getMessage());
+                this.controller.goToHomepage();
             }
 
         }
@@ -64,5 +65,6 @@ public class NewQuestionView {
 
     public void bannedWordInText(){
         System.err.println("Sono state rilevate delle parole non adeguate nel testo della domanda. Il tuo punteggio BadBehaviour è stato aumentato.");
+        this.controller.goToHomepage();
     }
 }

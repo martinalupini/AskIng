@@ -4,6 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.PostQuestionControllerAppl;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewQuestionControllerInterface;
+import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
@@ -31,6 +32,8 @@ public class NewQuestionViewControllerGraficoCLI extends EmptyScreenControllerGr
             controllerAppl.checkAndProcessQuestion(questionBean, section);
         }catch(PersistanceLayerNotAvailable e){
             throw new PersistanceLayerNotAvailable("Si sono verificati dei problemi tecnici. Riprovare più tardi.");
+        } catch (BannedWordFoundException e) {
+            bannedWordPresent();
         }
     }
 

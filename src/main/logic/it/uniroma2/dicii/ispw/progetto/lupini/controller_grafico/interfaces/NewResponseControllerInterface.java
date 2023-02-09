@@ -5,5 +5,4 @@ import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 public interface NewResponseControllerInterface {
 
     public void bannedWordPresent();
-    public void responseSuccessful(ResponseBean r);
 }

@@ -2,6 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.second_view.LoginView;
@@ -30,9 +31,12 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
 
     }
 
-    public void goToQuestion(int index){
+    public void goToQuestion(int index) throws PersistanceLayerNotAvailable {
 
-        QuestionView questionView = new QuestionView(this.questions.get(index-1));
+        QuestionBean questionBean = this.questions.get(index-1);
+        QuestionView questionView = new QuestionView(questionBean);
+        questionBean.attach(questionView);
+        questionBean.setResponses(getResponsesOfQuestion(questionBean.getId()));
         questionView.displayQuestion();
 
     }
@@ -44,5 +48,13 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
         }
         NewQuestionView newQuestionView = new NewQuestionView(this.sectionName);
         newQuestionView.displayForm();
+    }
+
+
+    public List<ResponseBean> getResponsesOfQuestion(int id) throws PersistanceLayerNotAvailable {
+
+        QuestionOfSectionFactory factory = QuestionOfSectionFactory.getCurrentInstance();
+        return factory.retrieveResponsesBeanFromQuestion(id);
+
     }
 }

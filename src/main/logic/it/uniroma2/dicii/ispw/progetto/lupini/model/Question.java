@@ -1,5 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.model;
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.SubjectQuestionBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Question {
         this.id = id;
         this.responses = new ArrayList<>();
         for(Response r: responses){
-            this.responses.add(r.clone());
+            this.responses.add(r.cloneResponse());
         }
     }
 
@@ -38,13 +40,13 @@ public class Question {
     public List<Response> getResponses(){
         List<Response>  copyResponses = new ArrayList<>();
         for(Response r: this.responses){
-            copyResponses.add(r.clone());
+            copyResponses.add(r.cloneResponse());
         }
         return copyResponses;
     }
 
     public void addResponse(Response r){
-        responses.add(r.clone());
+        responses.add(r.cloneResponse());
     }
 
     public UserProfile getAuthor() {
@@ -63,7 +65,7 @@ public class Question {
         return id;
     }
 
-    public Question clone(){
+    public Question cloneQuestion(){
         return new Question(this.questionText, this.keywords, this.author, this.id, this.responses);
     }
 }

@@ -126,6 +126,7 @@ public class SectionController extends EmptyScreen {
 
         ViewQuestionController viewQuestionController = loader.getController();
         viewQuestionController.setCurrentQuestion(quest);
+        quest.attach(viewQuestionController);
         viewQuestionController.setQuestionLabel(quest.getText());
         viewQuestionController.setUsernameLabel(quest.getUsername());
         viewQuestionController.initialize(quest.getText(), quest.getUsername());

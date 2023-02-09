@@ -1,6 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 
 
+import it.uniroma2.dicii.ispw.progetto.lupini.bean.ObserverOfQuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.QuestionControllerGraficoCLI;
@@ -10,7 +11,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
 import java.util.List;
 import java.util.Scanner;
 
-public class QuestionView {
+public class QuestionView implements ObserverOfQuestionBean {
 
     private QuestionBean question;
     private QuestionControllerGraficoCLI controller;
@@ -35,19 +36,12 @@ public class QuestionView {
 
         System.out.println("RISPOSTE");
 
-        try {
-            this.responses = this.controller.getResponsesOfQuestion(this.question.getId());
 
-            for (ResponseBean r : this.question.getResponses()) {
-                System.out.println(i + ") " + r.getUsername() + "\n" + r.getText() + "\n");
-                i++;
-            }
 
-        } catch (PersistanceLayerNotAvailable e) {
-            System.err.println("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
+        for (ResponseBean r : this.question.getResponses()) {
+            System.out.println(i + ") " + r.getUsername() + "\n" + r.getText() + "\n");
+            i++;
         }
-
-
 
 
 
@@ -84,4 +78,8 @@ public class QuestionView {
     }
 
 
+    @Override
+    public void update() {
+        displayQuestion();
+    }
 }

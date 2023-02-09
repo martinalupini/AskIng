@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface {
+public class ViewQuestionController extends EmptyScreen implements NewResponseControllerInterface, ObserverOfQuestionBean {
 
     QuestionBean currentQuestion;
 
@@ -123,7 +123,7 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
 
             PostResponseControllerAppl postResponseControllerAppl = new PostResponseControllerAppl();
             postResponseControllerAppl.setControllerGrafico(this);
-            postResponseControllerAppl.checkAndProcessResponse(responseBean, currentQuestion.getId());
+            postResponseControllerAppl.checkAndProcessResponse(responseBean, currentQuestion);
         } catch (TextException e) {
             errorLabel.setText(e.getMessage());
         }catch(PersistanceLayerNotAvailable e){
@@ -135,8 +135,8 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
 
 
     public void initialize(String text, String username) {
-        List<ResponseBean> responses = getResponsesOfQuestion();
-        for(ResponseBean r : responses){
+        this.currentQuestion.setResponses(getResponsesOfQuestion());
+        for(ResponseBean r : this.currentQuestion.getResponses()){
 
             showResponse(r);
         }
@@ -176,10 +176,11 @@ public class ViewQuestionController extends EmptyScreen implements NewResponseCo
 
 
 
-    @Override
-    public void responseSuccessful(ResponseBean r) {
-        showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
 
+    @Override
+    public void update(){
+
+        showResponse(currentQuestion.getResponses().get(currentQuestion.getResponses().size()-1));
     }
 
     private void showResponse(ResponseBean r){
