@@ -1,5 +1,6 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.second_view;
 
+
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.QuestionBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.ResponseBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico_second_view.QuestionControllerGraficoCLI;
@@ -19,7 +20,6 @@ public class QuestionView {
 
         this.question = question;
         this.controller = new QuestionControllerGraficoCLI(question, this);
-        this.question.attach(this.controller);
     }
 
 
@@ -38,7 +38,7 @@ public class QuestionView {
         try {
             this.responses = this.controller.getResponsesOfQuestion(this.question.getId());
 
-            for (ResponseBean r : this.responses) {
+            for (ResponseBean r : this.question.getResponses()) {
                 System.out.println(i + ") " + r.getUsername() + "\n" + r.getText() + "\n");
                 i++;
             }
@@ -47,10 +47,14 @@ public class QuestionView {
             System.err.println("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
         }
 
-        System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Aggiungere una risposta\nb) Tornare all'homepage\n" +
-                "Inserire qui la propria scelta: ");
+
+
+
+
 
         while (true) {
+            System.out.println("Selezionare l'operazione che si vuole svolgere:\na) Aggiungere una risposta\nb) Tornare all'homepage\n" +
+                    "Inserire qui la propria scelta: ");
             line = reader.nextLine();
             if (line.equalsIgnoreCase("a")) {
                 try {
@@ -76,6 +80,8 @@ public class QuestionView {
 
     public void bannedWordPresent(){
         System.out.println("Sono state rilevate delle parole non adeguate nel testo della domanda. Il tuo punteggio BadBehaviour è stato aumentato.");
+        this.controller.goToHomepage();
     }
+
 
 }
