@@ -9,7 +9,6 @@ import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvai
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleStartGUI;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.engineering.UserNotLogged;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,17 +62,8 @@ public class SectionController extends EmptyScreen {
                 vbox.setOnMouseClicked(mouseEvent -> {
 
                     try {
-                        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
-                        Parent root = loader.load();
 
-                        ViewQuestionController viewQuestionController = loader.getController();
-                        viewQuestionController.setCurrentQuestion(q);
-                        q.attach(viewQuestionController);
-                        viewQuestionController.setQuestionLabel(q.getText());
-                        viewQuestionController.setUsernameLabel(q.getUsername());
-                        viewQuestionController.initialize(q.getText(), q.getUsername());
-
-                        displayQuestion(root, viewQuestionController, q, (Node) mouseEvent.getSource());
+                        goToViewQuestion((Node) mouseEvent.getSource(), q);
 
                     } catch (IOException e) {
                         throw new ImpossibleStartGUI( "Errore on starting the GUI");
@@ -121,6 +110,7 @@ public class SectionController extends EmptyScreen {
             viewQuestionController.setInvisible3();
         }
         if(keywords.size() == 3){
+            viewQuestionController.setKeyword2(keywords.get(1));
             viewQuestionController.setKeyword3(keywords.get(2));
         }
 
@@ -128,6 +118,19 @@ public class SectionController extends EmptyScreen {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void  goToViewQuestion(Node source, QuestionBean quest) throws IOException {
+        FXMLLoader loader = new FXMLLoader(TitleCourseController.class.getResource("viewQuestion.fxml"));
+        Parent root = loader.load();
+
+        ViewQuestionController viewQuestionController = loader.getController();
+        viewQuestionController.setCurrentQuestion(quest);
+        viewQuestionController.setQuestionLabel(quest.getText());
+        viewQuestionController.setUsernameLabel(quest.getUsername());
+        viewQuestionController.initialize(quest.getText(), quest.getUsername());
+
+        displayQuestion(root, viewQuestionController, quest, source);
     }
 
 
