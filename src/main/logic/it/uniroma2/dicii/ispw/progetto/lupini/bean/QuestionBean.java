@@ -1,14 +1,16 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.bean;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.engineering.CheckTextLenght;
+import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionOfSectionFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.KeywordsException;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
+import it.uniroma2.dicii.ispw.progetto.lupini.model.Question;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionBean extends  SubjectQuestionBean{
+public class QuestionBean {
     String username;
     String text;
 
@@ -33,7 +35,6 @@ public class QuestionBean extends  SubjectQuestionBean{
 
     public void addResponse(ResponseBean r){
         responses.add(r);
-        notifyObservers();
     }
 
     public List<ResponseBean> getResponses() {
@@ -50,7 +51,6 @@ public class QuestionBean extends  SubjectQuestionBean{
             throw new KeywordsException("Il numero massimo di keywords è 3");
         }
     }
-
 
 
     public void setKeywords(String listKeywords) throws  KeywordsException{
@@ -98,6 +98,7 @@ public class QuestionBean extends  SubjectQuestionBean{
         return list;
 
     }
+
 
 
 }

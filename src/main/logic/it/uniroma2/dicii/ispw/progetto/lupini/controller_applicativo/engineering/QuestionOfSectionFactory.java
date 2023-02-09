@@ -55,6 +55,7 @@ public class QuestionOfSectionFactory {
 
     }
 
+
     private List<Question> retrieveQuestionsFromSection(String sectionName) throws PersistanceLayerNotAvailable {
 
         //per prima cosa controllo se la sezione è già stata recuperata in precedenza
@@ -98,7 +99,7 @@ public class QuestionOfSectionFactory {
 
 
 
-    private List<Response>  retrieveResponsesFromQuestion(int idQuestion) throws PersistanceLayerNotAvailable {
+    private List<Response>  retrieveResponsesFromQuestion(int idQuestion){
         for( ForumSection f: this.sections){
             for(Question q: f.getQuestions()){
                 if(q.getId() == idQuestion){
@@ -110,7 +111,7 @@ public class QuestionOfSectionFactory {
     }
 
 
-    private ResponseBean convertResponse( Response response){
+    public static ResponseBean convertResponse( Response response){
         String username = response.getAuthor().getUsername();
         String text = response.getResponseText();
 
@@ -121,11 +122,8 @@ public class QuestionOfSectionFactory {
 
     //metodi per l'aggiunta di una domanda e di una risposta
     public void addQuestionToSection(String section, Question q){
-        System.out.println("oioooo");
         for( ForumSection f: this.sections){
-            System.out.println(f.getSectionName());
             if(f.getSectionName().equalsIgnoreCase(section)){
-                System.out.println("trovata");
                 f.addQuestion(q);
                 return;
             }
@@ -136,7 +134,7 @@ public class QuestionOfSectionFactory {
         for( ForumSection f: this.sections){
             for(Question q: f.getQuestions()){
                 if(q.getId() == idQuestion){
-                    q.addResponse(r);
+                    f.addResponseToQuestion(idQuestion, r);
                     return;
                 }
             }
