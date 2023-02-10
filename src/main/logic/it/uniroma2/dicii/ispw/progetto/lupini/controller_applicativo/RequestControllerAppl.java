@@ -37,7 +37,7 @@ public class RequestControllerAppl {
             requestDAOJDBC.registerNewRequest(request);
 
             //aggiorno l'utente che l'invio della richiesta è andata a buon fine
-            regularUserBoundary.updateStatus();
+            regularUserBoundary.requestSaved();
 
             //mando notifica al moderatore
             this.moderatorBoundary = new RequestModeratorAPI();
@@ -61,9 +61,9 @@ public class RequestControllerAppl {
             userProfileDAOCSV.changeRoleOfUser(username);
 
             //informo il moderatore che l'operazione è andata a buon fine
-                this.moderatorBoundary.updateStatus("ACCETTATA");
+                this.moderatorBoundary.requestStateUpdatedCorrectly("ACCETTATA");
             }else{
-                this.moderatorBoundary.updateStatus("RIFIUTATA");
+                this.moderatorBoundary.requestStateUpdatedCorrectly("RIFIUTATA");
             }
 
             //notifico l'utente che il suo ruolo è stato cambiato

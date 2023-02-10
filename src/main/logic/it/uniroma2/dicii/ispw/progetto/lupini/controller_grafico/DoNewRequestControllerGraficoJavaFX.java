@@ -3,7 +3,6 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_grafico.interfaces.NewRequestControllerGraficoInterface;
-import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.RequestAlreadyDone;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.TextException;
@@ -71,7 +70,7 @@ public class DoNewRequestControllerGraficoJavaFX extends EmptyScreenControllerGr
             requestAPI.sendRequest(requestBean);
 
 
-        } catch (PersistanceLayerNotAvailable | ItemNotFound e) {
+        } catch (PersistanceLayerNotAvailable e) {
             descriptionLabel.setTextFill(Paint.valueOf("red"));
             descriptionLabel.setText("Spiacenti la richiesta non può essere registrata per motivi tecnici. Riprovare più tardi.");
         } catch (RequestAlreadyDone e) {
@@ -84,7 +83,7 @@ public class DoNewRequestControllerGraficoJavaFX extends EmptyScreenControllerGr
     }
 
     //serve a comunicare all'utente che la richiesta è stata salvata e registrata
-    public void updateStatus(){
+    public void requestSaved(){
 
         explainingLabel.setVisible(false);
         sendButton.setVisible(false);

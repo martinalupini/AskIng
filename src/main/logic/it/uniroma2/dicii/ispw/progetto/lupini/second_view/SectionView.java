@@ -50,11 +50,7 @@ public class SectionView {
             if(line.equalsIgnoreCase("a")){
                 Print.print("Inserire il numero della domanda che si vuole consultare: ");
                 i = reader.nextInt();
-                try {
-                    this.controller.goToQuestion(i);
-                }  catch (PersistanceLayerNotAvailable e) {
-                    Print.printError("Spiacenti, si sono verificati degli errori interni. Riprovare più tardi.");
-            }
+                this.controller.goToQuestion(i);
                 return;
             }else if(line.equalsIgnoreCase("b")){
                 this.controller.doNewQuestion();

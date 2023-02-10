@@ -73,7 +73,7 @@ public class ViewSingleRequestControllerGraficoJavaFX extends EmptyScreenControl
 
     //mostra al moderatore se la sua operazione è andata a buon fine
     @Override
-    public void updateStatus(String s){
+    public void requestStateUpdatedCorrectly(String s){
 
         acceptButton.setVisible(false);
         declineButton.setVisible(false);

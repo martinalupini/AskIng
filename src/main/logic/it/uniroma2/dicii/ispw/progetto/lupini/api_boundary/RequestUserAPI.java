@@ -31,8 +31,8 @@ public class RequestUserAPI {
     }
 
     //chiamata dal controller applicativo per indicare che la richiesta è stata salvata correttamente
-    public void updateStatus() {
-        this.userControllerGrafico.updateStatus();
+    public void requestSaved() {
+        this.userControllerGrafico.requestSaved();
     }
 
     //chiamata dal controller applicativo per notificare all'utente l'esito della sua richiesta

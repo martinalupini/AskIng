@@ -89,7 +89,7 @@
       <Label fx:id="emailLabel" layoutX="135.0" layoutY="173.0" prefHeight="18.0" prefWidth="183.0" />
       <Label fx:id="pointsLabel" layoutX="135.0" layoutY="199.0" prefHeight="18.0" prefWidth="183.0" />
       <Label fx:id="behaviourLabel" layoutX="135.0" layoutY="230.0" prefHeight="18.0" prefWidth="183.0" />
-      <Label fx:id="requestText" alignment="TOP_LEFT" layoutX="24.0" layoutY="293.0" prefHeight="157.0" prefWidth="286.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15;">
+      <Label fx:id="requestText" alignment="TOP_LEFT" layoutX="24.0" layoutY="293.0" prefHeight="157.0" prefWidth="286.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15;" wrapText="true">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

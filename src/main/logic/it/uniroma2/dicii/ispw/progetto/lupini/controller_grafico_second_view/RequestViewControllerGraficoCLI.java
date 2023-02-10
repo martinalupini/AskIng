@@ -33,7 +33,7 @@ public class RequestViewControllerGraficoCLI extends EmptyScreenControllerGrafic
 
     //aggiorna il moderatore che la richiesta è andata a buon fine
     @Override
-    public void updateStatus(String status) {
+    public void requestStateUpdatedCorrectly(String status) {
         this.view.updateStatusRequest(status);
         goToHomepage();
 

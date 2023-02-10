@@ -30,8 +30,8 @@ public class RequestModeratorAPI {
 
     //invocata dal controller applicativo per aggiornare il moderatore se l'operazione
     //di accettazione o rifiuto è andata a buon fine
-    public void updateStatus(String status){
-        this.moderatorControllerGrafico.updateStatus(status);
+    public void requestStateUpdatedCorrectly(String status){
+        this.moderatorControllerGrafico.requestStateUpdatedCorrectly(status);
     }
 
 

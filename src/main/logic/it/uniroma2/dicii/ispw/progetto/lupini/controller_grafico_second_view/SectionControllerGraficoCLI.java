@@ -28,7 +28,7 @@ public class SectionControllerGraficoCLI extends EmptyScreenControllerGraficoCLI
     }
 
     //metodo chiamato quando l'utente vuole vedere una specifica domanda (identificata dal suo id)
-    public void goToQuestion(int index) throws PersistanceLayerNotAvailable {
+    public void goToQuestion(int index) {
 
         QuestionBean questionBean = this.questions.get(index-1);
         QuestionView questionView = new QuestionView(questionBean);

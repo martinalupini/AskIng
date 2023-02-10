@@ -152,21 +152,9 @@ public class ViewSingleQuestionControllerGraficoJavaFX extends EmptyScreenContro
         List<ResponseBean> list = new ArrayList<>();
         QuestionsAndResponsesFactory factory = QuestionsAndResponsesFactory.getCurrentInstance();
 
-        try{
+
         list = factory.retrieveResponsesBeanFromQuestion(currentQuestion.getId());
 
-        } catch (PersistanceLayerNotAvailable e) {
-            questionLabel.setVisible(false);
-            responseLayout.setVisible(false);
-            responseText.setVisible(false);
-            risposteText.setVisible(false);
-            usernameLabel.setVisible(false);
-            keyword1.setVisible(false);
-            keyword2.setVisible(false);
-            keyword3.setVisible(false);
-            sendButton.setVisible(false);
-            errorLabel.setText(e.getMessage());
-        }
 
         return list;
 
