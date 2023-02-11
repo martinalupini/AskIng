@@ -5,15 +5,15 @@ import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.UserProfileDAOJDBC;
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 
-public class DAOFactory {
+public class UserProfileDAOFactory {
 
-    private DAOFactory(){}
+    private UserProfileDAOFactory(){}
 
-    private static DAOFactory instance = null;
+    private static UserProfileDAOFactory instance = null;
 
-    public static DAOFactory getInstance() {
+    public static UserProfileDAOFactory getInstance() {
         if(instance ==null){
-            instance = new DAOFactory();
+            instance = new UserProfileDAOFactory();
         }
         return instance;
     }

@@ -18,7 +18,7 @@ public class ProfileView {
         String line;
 
         Print.print("\n\n------------------------------------------IL TUO PROFILO------------------------------------------\n\n" +
-                "Username: "+user.getUsername()+"\nEmail: "+user.getEmail());
+                "\nUsername: "+user.getUsername()+"\nEmail: "+user.getEmail());
 
         if(user.getRole().equals("regular user")){
             Print.print("\nPoints: "+user.getPoints()+"\nBad Behaviour: "+user.getBadBehaviour());

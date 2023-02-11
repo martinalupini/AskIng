@@ -36,4 +36,5 @@ public class TestUserProfileDAOCSV {
         assertEquals(nextBadBehaviour, previousBadBehaviour+1);
     }
 
+
 }

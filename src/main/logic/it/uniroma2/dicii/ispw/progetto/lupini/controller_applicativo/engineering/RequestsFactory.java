@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RequestsFactory {
 
-    private List<RequestBean> requests = new ArrayList<>();
+    private List<Request> requests;
 
     private static RequestsFactory instance = null;
 
@@ -31,22 +31,19 @@ public class RequestsFactory {
 
     public List<RequestBean> getRequestsBean() throws PersistanceLayerNotAvailable {
 
-        if(requests.isEmpty()) {
-            List<Request> req;
+        List<RequestBean> req = new ArrayList<>();
 
-            //si recuperano le richieste utilizzando il DAO
-            RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
-            req = requestDAOJDBC.retrieveRequests();
+        //si recuperano le richieste utilizzando il DAO
+        RequestDAOJDBC requestDAOJDBC = new RequestDAOJDBC();
+        requests =  requestDAOJDBC.retrieveRequests();
 
+        //si convertono in bean
+        for (Request r : requests) {
 
-            //si convertono in bean
-            for (Request r : req) {
-
-                requests.add(convertRequest(r));
-            }
+            req.add(convertRequest(r));
         }
 
-        return requests;
+        return req;
     }
 
     private RequestBean  convertRequest(Request req ){

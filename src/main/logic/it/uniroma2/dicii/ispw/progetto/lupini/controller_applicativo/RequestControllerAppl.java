@@ -4,7 +4,7 @@ import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestModeratorAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.api_boundary.RequestUserAPI;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.RequestBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering.QuestionsAndResponsesFactory;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAOFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.jdbc.RequestDAOJDBC;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
@@ -54,10 +54,10 @@ public class RequestControllerAppl {
 
             if (state.equals("accepted")){
             //cambio il ruolo dell'utente sia su filesystem che su DBMS
-            UserProfileDAO userProfileDAOJDBC = DAOFactory.getInstance().createUserDAOJDBC();
+            UserProfileDAO userProfileDAOJDBC = UserProfileDAOFactory.getInstance().createUserDAOJDBC();
             userProfileDAOJDBC.changeRoleOfUser(username);
 
-            UserProfileDAO userProfileDAOCSV = DAOFactory.getInstance().createUserDAOCSV();
+            UserProfileDAO userProfileDAOCSV = UserProfileDAOFactory.getInstance().createUserDAOCSV();
             userProfileDAOCSV.changeRoleOfUser(username);
 
             //informo il moderatore che l'operazione è andata a buon fine

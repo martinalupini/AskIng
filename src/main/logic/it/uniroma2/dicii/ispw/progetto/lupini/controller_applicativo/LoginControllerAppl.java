@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.UserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAOFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ItemNotFound;
@@ -16,7 +16,7 @@ public class LoginControllerAppl {
     public void login(String username, String password) throws PersistanceLayerNotAvailable, ItemNotFound {
 
         //chiediamo alla factory del DAO di creare un'istanza di DAO randomicamente
-        UserProfileDAO userDAO = DAOFactory.getInstance().createUserDAO();
+        UserProfileDAO userDAO = UserProfileDAOFactory.getInstance().createUserDAO();
 
         UserProfile user;
         UserProfileBean userBean;

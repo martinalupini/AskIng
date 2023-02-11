@@ -2,7 +2,7 @@ package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineerin
 
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAOFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.filesystem.BannedWordsDAOCSV;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.BannedWordFoundException;
@@ -41,10 +41,10 @@ public class CheckBannedWords {
                     String username = currentUserProfile.getUsername();
 
                     if(currentUserProfile.getCurrentUser().getRoleName().equals("regular user")) {
-                        UserProfileDAO userProfileDAOJDBC = DAOFactory.getInstance().createUserDAOJDBC();
+                        UserProfileDAO userProfileDAOJDBC = UserProfileDAOFactory.getInstance().createUserDAOJDBC();
                         userProfileDAOJDBC.increaseBadBehaviourUser(username);
 
-                        UserProfileDAO userProfileDAOCSV = DAOFactory.getInstance().createUserDAOCSV();
+                        UserProfileDAO userProfileDAOCSV = UserProfileDAOFactory.getInstance().createUserDAOCSV();
                         userProfileDAOCSV.increaseBadBehaviourUser(username);
                     }
 

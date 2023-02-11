@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.progetto.lupini.controller_applicativo.engineering;
 
 import it.uniroma2.dicii.ispw.progetto.lupini.bean.CurrentUserProfileBean;
-import it.uniroma2.dicii.ispw.progetto.lupini.dao.DAOFactory;
+import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAOFactory;
 import it.uniroma2.dicii.ispw.progetto.lupini.dao.UserProfileDAO;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.ImpossibleToUpdate;
 import it.uniroma2.dicii.ispw.progetto.lupini.exceptions.PersistanceLayerNotAvailable;
@@ -23,10 +23,10 @@ public class IncreaseUserPoints {
 
         //incremento il punteggio dell'utente su entrambi gli strati di persistenza
         try {
-            UserProfileDAO userProfileDAOJDBC = DAOFactory.getInstance().createUserDAOJDBC();
+            UserProfileDAO userProfileDAOJDBC = UserProfileDAOFactory.getInstance().createUserDAOJDBC();
             userProfileDAOJDBC.increaseUserPoints(username);
 
-            UserProfileDAO userProfileDAOCSV = DAOFactory.getInstance().createUserDAOCSV();
+            UserProfileDAO userProfileDAOCSV = UserProfileDAOFactory.getInstance().createUserDAOCSV();
             userProfileDAOCSV.increaseUserPoints(username);
         } catch (ImpossibleToUpdate e) {
             throw new PersistanceLayerNotAvailable("error in persistance layer");
