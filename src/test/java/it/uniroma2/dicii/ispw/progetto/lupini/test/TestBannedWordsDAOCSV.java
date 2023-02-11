@@ -26,7 +26,7 @@ public class TestBannedWordsDAOCSV {
             throw new RuntimeException(e);
         }
 
-        assertEquals(found, true);
+        assertEquals(true, found);
     }
 
 }
