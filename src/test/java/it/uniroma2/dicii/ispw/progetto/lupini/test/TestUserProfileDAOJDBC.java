@@ -12,9 +12,9 @@ public class TestUserProfileDAOJDBC {
     @Test
     public void TestRetrieveUserFromUsernameAndPassword(){
         String usernameToFind = "martinalupini";
-        UserProfileDAOJDBC userProfileDAOCSV = new UserProfileDAOJDBC();
+        UserProfileDAOJDBC userProfileDAOJDBC = new UserProfileDAOJDBC();
         try {
-            UserProfile user = userProfileDAOCSV.retrieveUserFromUsernameAndPassword(usernameToFind, "1234");
+            UserProfile user = userProfileDAOJDBC.retrieveUserFromUsernameAndPassword(usernameToFind, "1234");
 
             assertEquals(user.getUsername(), usernameToFind);
         }catch(Exception e){

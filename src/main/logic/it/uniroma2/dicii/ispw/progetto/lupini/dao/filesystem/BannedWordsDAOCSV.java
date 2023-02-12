@@ -28,6 +28,8 @@ public class BannedWordsDAOCSV {
                 list.add(line);
             }
 
+            reader.close();
+
         }catch (IOException e) {
             throw new PersistanceLayerNotAvailable("Error in opening or reading file");
         }

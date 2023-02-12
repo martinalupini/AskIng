@@ -34,8 +34,10 @@ public class UserProfileDAOCSV implements UserProfileDAO {
                 }
             }
 
+            reader.close();
             //if all the file is read and a match between username and password is not found then the username or password is not correct
             throw new ItemNotFound("Item not found");
+
         }catch (IOException e) {
                 throw new PersistanceLayerNotAvailable("Error in opening or reading file");
         }
@@ -61,6 +63,8 @@ public class UserProfileDAOCSV implements UserProfileDAO {
 
             }
         }
+
+        reader.close();
 
         //if all the file is read and a match between username and password is not found then the username or password is not correct
         throw new ItemNotFound("Item not found");
