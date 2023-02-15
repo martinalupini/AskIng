@@ -12,6 +12,8 @@ public class LogoutControllerAppl {
         CurrentUserProfile currentUserProfile = CurrentUserProfile.getCurrentUserInstance();
         currentUserProfile.unsetCurrentUser();
 
+        int a;
+
     }
 
 }
